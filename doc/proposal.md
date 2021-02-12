@@ -1,3 +1,0 @@
-# Proposal
-
-Write proposal here
