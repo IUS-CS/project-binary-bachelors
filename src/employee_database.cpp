@@ -10,11 +10,11 @@ int main() {
 
   std::ifstream employees_file_stream(employees_file);
 
-  // Employee names
+  // Employee names.
   std::string employee;
   std::vector<std::string> employees;
 
-  // Read in the employee names
+  // Read in the employee names.
   while (std::getline(employees_file_stream, employee)) {
     employees.push_back(employee);
   }
@@ -26,6 +26,7 @@ int main() {
   std::cin >> user_input;
   std::cout << std::endl;
 
+  // Only valid login at this time is admin.
   if (user_input != admin) {
     std::cout << "Unknown user: " << user_input << std::endl;
     return -1;
@@ -38,6 +39,7 @@ int main() {
   std::cin >> user_input;
   std::cout << std::endl;
 
+  // Only valid input is 1 (prints out employees).
   if (user_input != "1") {
     std::cout << "Unrecognized input!" << std::endl;
     return -1;
