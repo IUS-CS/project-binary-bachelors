@@ -3,6 +3,7 @@
 #include <istream>
 #include <string>
 #include <vector>
+#include <sstream>
 
 int main() {
   const std::string employees_file = "employees.txt";
@@ -36,18 +37,38 @@ int main() {
   std::cout << std::endl;
   std::cout << "Choose an option:" << std::endl;
   std::cout << "  1. List employees" << std::endl;
+  std::cout << "  2. Add employee" << std::endl;
   std::cin >> user_input;
   std::cout << std::endl;
+  
+  std::stringstream input_number(user_input);
+  int input_number_as_int;
+  
+  input_number >> input_number_as_int;
 
-  // Only valid input is 1 (prints out employees).
-  if (user_input != "1") {
-    std::cout << "Unrecognized input!" << std::endl;
-    return -1;
-  }
-
+  switch(input_number_as_int){
+	case 1: 
   for (const auto &e : employees) {
     std::cout << e << std::endl;
+  }break;
+	case 2:
+  std::cout << "Enter new employee name." << std::endl; 
+  std::cin >> user_input;  
+  employees.push_back(user_input);
+  break;
+	default:
+  std::cout << "Invalid input" << std::endl;
+  return -1;
   }
+  	
+  std::ofstream employees_file_ostream;
+  employees_file_ostream.open(employees_file);
+  for (const auto &e : employees) {
+    	employees_file_ostream << e << std::endl;
+  }
+  employees_file_ostream.close();
+
 
   return 0;
 }
+
