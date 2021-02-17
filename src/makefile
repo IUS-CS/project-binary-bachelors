@@ -1,12 +1,11 @@
-OBJS = main.o
+OBJS = employee_database.o
 CFLAGS = -std=c++17
-LIBS = 
 CC = g++
 
-all: database.out
+all: employee_database.out
 
-database.out: ${OBJS}
-	      ${CC} ${CFLAGS} ${OBJS} ${LIBS} -o $@
+employee_database.out: ${OBJS}
+	      ${CC} ${CFLAGS} ${OBJS} -o $@
 
 .cpp.o:
 	${CC} ${CFLAGS} -c $<
