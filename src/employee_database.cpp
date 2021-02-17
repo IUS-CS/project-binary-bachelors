@@ -15,7 +15,7 @@ void AddEmployee() {
   std::cout << "Enter new employee's first name:" << std::endl;
   std::cin >> fullname;
   fullname += " ";
-  std::cout << "Enter new employee's second name:" << std::endl;
+  std::cout << "Enter new employee's last name:" << std::endl;
   std::cin >> user_input;
   fullname.append(user_input);
   employees.push_back(fullname);
