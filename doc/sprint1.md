@@ -28,9 +28,6 @@ This sprint, we completed:
  * Created an employee struct that will be stored in vectors.-
  * Updated code to reflect the planned architecture.
   
-  Here are screenshots of what we did:
-  
-  ![Thing](/docs/images/screenshot1.png?raw=true)
   
   ## Retro
   
@@ -41,8 +38,7 @@ This sprint, we completed:
   
   ### Bad
   
-  * Meetings aren't happening all that often due to scheduling conflicts. 
-  * 
+  * Meetings aren't happening all that often due to scheduling conflicts and lack of notifications. 
   
   ### Actionable Commitments
   
