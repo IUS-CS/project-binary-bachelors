@@ -1,9 +1,9 @@
-#include "EmployeeRecord.h"
+#include "user_interface.h"
 #include <bits/stdc++.h>
 #include <fstream>
-#include <iostream>
 #include <vector>
 
+UserInterface interactions = UserInterface();
 vector<EmployeeRecord> EmployeeData;
 string filename = "employees.txt";
 
@@ -33,7 +33,7 @@ void doInputEmployeeDataFromFile(vector<EmployeeRecord> &A) {
     } // end for
     infile.close();
   } // end if
-} // doInputAirportDataFromFile>
+} // doInputEmployeeDataFromFile>
 
 void doOutputEmployeeDataToFile(vector<EmployeeRecord> &A) {
   ofstream ofile;
@@ -48,50 +48,43 @@ void doOutputEmployeeDataToFile(vector<EmployeeRecord> &A) {
   ofile.close();
 }
 
-void outputEmployeeSequence(vector<EmployeeRecord> &A) {
-  for (int i = 0; i < A.size(); i++) {
-    cout << '\t' << A[i] << endl;
-  } // for
-  cout << endl;
-} // outputAirportSequence
-
 void AddEmployee(vector<EmployeeRecord> &A) {
-  EmployeeRecord newRecord;
+  EmployeeRecord new_record;
   string stringWriter;
   int intWriter;
 
   // EmployeeID is incremented by 1
-  newRecord.employeeId = A[A.size() - 1].employeeId + 1;
+  new_record.employeeId = A[A.size() - 1].employeeId + 1;
 
   std::cout << "Enter new employee first name: " << std::endl;
   cin >> stringWriter;
-  newRecord.firstName = stringWriter;
+  new_record.firstName = stringWriter;
 
   std::cout << "Enter new employee last name: " << std::endl;
   cin >> stringWriter;
-  newRecord.lastName = stringWriter;
+  new_record.lastName = stringWriter;
 
   std::cout << "Enter new employee job title: " << std::endl;
   cin >> stringWriter;
-  newRecord.jobTitle = stringWriter;
+  new_record.jobTitle = stringWriter;
 
   std::cout << "Enter new employee manager: " << std::endl;
   cin >> stringWriter;
-  newRecord.manager = stringWriter;
+  new_record.manager = stringWriter;
 
   std::cout << "Enter new employee department number: " << std::endl;
   cin >> intWriter;
-  newRecord.departmentNumber = intWriter;
+  new_record.departmentNumber = intWriter;
 
   std::cout << "Enter new employee pay rate: " << std::endl;
   cin >> intWriter;
-  newRecord.payRate = intWriter;
+  new_record.payRate = intWriter;
 
   std::cout << "Is new employee salaried?: " << std::endl;
   cin >> stringWriter;
-  newRecord.salaried = stringWriter;
+  new_record.salaried = stringWriter;
 
-  A.push_back(newRecord);
+  A.push_back(new_record);
 }
 
 void makeSelection() {
@@ -111,7 +104,7 @@ void makeSelection() {
 
   switch (input_number_as_int) {
   case 1:
-    outputEmployeeSequence(EmployeeData);
+    interactions.outputEmployeeData(EmployeeData);
     break;
   case 2:
     AddEmployee(EmployeeData);
