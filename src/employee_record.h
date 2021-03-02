@@ -33,19 +33,6 @@ public:
     salaried = "false";
   } // clear
 
-  EmployeeRecord &operator=(EmployeeRecord &rhs) {
-    employeeId = rhs.employeeId;
-    firstName = rhs.firstName;
-    lastName = rhs.lastName;
-    jobTitle = rhs.jobTitle;
-    manager = rhs.manager;
-    departmentNumber = rhs.departmentNumber;
-    payRate = rhs.payRate;
-    salaried = rhs.salaried;
-
-    return *this;
-  } // operator =
-
   void transferFrom(EmployeeRecord &source) {
     employeeId = source.employeeId;
     firstName = source.firstName;

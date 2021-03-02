@@ -9,5 +9,6 @@ public:
   UserInterface();
   ~UserInterface();
   void outputEmployeeData(vector<EmployeeRecord> &A);
+  EmployeeRecord DeleteEmployee(vector<EmployeeRecord> &A, int id);
 };
 #endif

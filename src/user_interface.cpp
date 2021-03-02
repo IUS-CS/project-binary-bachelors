@@ -1,4 +1,5 @@
 #include "user_interface.h"
+#include <fstream>
 
 UserInterface::UserInterface() {}
 
@@ -11,3 +12,19 @@ void UserInterface::outputEmployeeData(vector<EmployeeRecord> &A) {
   cout << endl;
 } // outputEmployeeSequence
 
+EmployeeRecord UserInterface::DeleteEmployee(vector<EmployeeRecord> &A,
+                                             int id) {
+  EmployeeRecord deleted_employee;
+  for (int i = 0; i < A.size(); i++) {
+    if (A[i].employeeId == id) {
+      deleted_employee = A[i];
+      ofstream ofile("id.txt", std::ios::app);
+      ofile << A[i].employeeId << std::endl;
+      ofile.close();
+      A.erase(A.begin() + i);
+      return deleted_employee;
+    }
+  }
+  std::cout << "Not a valid input." << std::endl;
+  return deleted_employee;
+}
