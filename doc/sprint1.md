@@ -1,13 +1,13 @@
 # Sprint Ceremony Minutes
   
-Date: 2020-09-21
+Date: 2021-02-25
 
 Members present:
 
-* Chris Sexton
-* Bones Sexton
-* Parsnip Sexton
-* Schnitzel Sexton
+* Christopher Pruett
+* Joshua Carrier
+* Jonathan Hasty
+* Dylan Eversman
   
   ## Demo
   
@@ -23,17 +23,17 @@ Members present:
   
   ## Retro
   
-  [What is a Sprint Retrospective](https://www.scrum.org/resources/what-is-a-sprint-retrospective)
+ 
   
   ### Good
   
-  * Sexton is amazing
-  * I love working on X
+  * Good things
+  
   
   ### Bad
   
   * This thing went poorly because X
-  * So and so is mean
+  *
   
   ### Actionable Commitments
   
