@@ -21,7 +21,7 @@ Members present:
 
 This sprint, we completed:
 
-#Sprint 2
+ #Sprint 2
 
  * Documents including architecture.md and sprint1.md.
  * Default unit testing (no testable code yet).
