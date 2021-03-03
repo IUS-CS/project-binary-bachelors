@@ -9,4 +9,4 @@ Content will include personal information that falls under HIPPA and PII for man
 #Distributed vs. non-Distrubuted System
 Initial stages of the project will use a non-distrubted system with one database being accessed to test everything with low traffic. 
 
-![Thing](/images/schema.png?raw=true)
+![Schema Diagram](/images/Schema.png?raw=true)
