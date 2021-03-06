@@ -3,6 +3,8 @@
 
 #include "component.h"
 
+// This component is just the coordinates of where the game object is on the
+// screen.
 class LocationComponent : public Component {
 public:
   int x_ = 0;

@@ -9,7 +9,9 @@ class Game {
 public:
   Game();
   ~Game();
+
+  // This function is the game. While in this function, the game is running.
+  // When you leave this function, the game is closed.
   void Run();
-  void PreloadTextures();
 };
 #endif

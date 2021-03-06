@@ -18,8 +18,8 @@ void Game::Run() {
   GraphicsEngine graphics_engine;
   SpriteComponent sprite;
   LocationComponent location;
-  // lonk.AddComponent(location);
-  // lonk.AddComponent(sprite);
+  // This is a temporary loop. There is currently no way to close the window so
+  // this loop just opens the window until i = 300. Then the program ends.
   for (int i = 0; i < 300; i++) {
     graphics_engine.AddSprite(sprite, location);
     graphics_engine.DrawNextFrame();
