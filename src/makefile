@@ -1,11 +1,12 @@
-OBJS = employee_database.o user_interface.o
+OBJS = main.o game.o graphics_component.o game_object.o graphics_engine.o
 TEST_OBJS = catch_amalgamated.o unit_tests.o
-CFLAGS = -std=c++17
+CFLAGS = -Wall -g -std=c++17
+LIBS = `sdl2-config --cflags --libs` -lSDL2_image
 CC = g++
 
-.PHONY: all clean
+.PHONY: all clean test
 
-all: employee_database.out test
+all: zordo.out test
 
 unit_tests.out: ${TEST_OBJS}
 	      ${CC} ${CFLAGS} ${TEST_OBJS} -o $@
@@ -13,8 +14,8 @@ unit_tests.out: ${TEST_OBJS}
 test: unit_tests.out
 	 ./unit_tests.out
 
-employee_database.out: ${OBJS}
-	      ${CC} ${CFLAGS} ${OBJS} -o $@
+zordo.out: ${OBJS}
+	      ${CC} ${CFLAGS} ${OBJS} ${LIBS} -o $@
 
 .cpp.o:
 	${CC} ${CFLAGS} -c $<
