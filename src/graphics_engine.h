@@ -9,10 +9,10 @@ public:
   GraphicsEngine();
   ~GraphicsEngine();
 
-  void CreateWindow();
-
+  // This function displays what is in the renderer on the screen.
   void DrawNextFrame();
 
+  // This function adds an image/sprite to the renderer.
   void AddSprite(const SpriteComponent &sprite,
                  const LocationComponent &location);
 };
