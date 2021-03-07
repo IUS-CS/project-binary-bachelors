@@ -27,8 +27,8 @@ void GraphicsEngine::AddSprite(const SpriteComponent &sprite,
   // This rect is where we want to display the source image on the renderer.
   // Sidenote: The width and height are multiplied by 2 to scale the image,
   // making it double its original size.
-  const SDL_Rect destination = {.x = location.x_,
-                                .y = location.y_,
+  const SDL_Rect destination = {.x = location.location.x,
+                                .y = location.location.y,
                                 .w = sprite.sprite_rect.w * 2,
                                 .h = sprite.sprite_rect.h * 2};
 

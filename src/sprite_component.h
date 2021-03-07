@@ -10,6 +10,8 @@
 // Lonk (the knockoff of Link) will be the picture of his character.
 class SpriteComponent : public Component {
 public:
+  SpriteComponent() { type = ComponentType::kSprite; }
+  // type = ComponentType::kSprite;
   // This is the string of the name of the spritesheet where this image exists.
   // These spritesheets are stored in the assets/ folder.
   std::string sprite_sheet_name = "lonk_sprite";

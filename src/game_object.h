@@ -14,6 +14,6 @@ public:
   void AddComponent(Component component);
 
   // This is a vector containing all of the components that this GameObject has.
-  std::vector<Component> component_list_;
+  std::vector<Component> component_list;
 };
 #endif
