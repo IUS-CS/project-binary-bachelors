@@ -13,12 +13,12 @@ void InputEngine::KeyDownEvent(SDL_Event &event) {
   InputComponent::Get().pressed_keys[event.key.keysym.scancode] = true;
   InputComponent::Get().held_keys[event.key.keysym.scancode] = true;
 }
-void InputEngine::CheckForInput() {
+int InputEngine::CheckForInput() {
   SDL_Event event;
   if (SDL_PollEvent(&event)) {
     switch (event.type) {
     case SDL_QUIT:
-      // Terminate program
+      return 1;
       break;
     case SDL_KEYDOWN:
       if (event.key.repeat == 0) {
@@ -32,24 +32,28 @@ void InputEngine::CheckForInput() {
       break;
     }
   }
+  return 0;
 }
-void InputEngine::Update(LocationComponent &location) {
+int InputEngine::Update(LocationComponent &location) {
   BeginNewFrame();
-  CheckForInput();
+  if (CheckForInput() == 1) {
+    return 1;
+  }
+  if (InputComponent::Get().pressed_keys[SDL_SCANCODE_ESCAPE] == true) {
+    return 1;
+  }
   if (InputComponent::Get().pressed_keys[SDL_SCANCODE_D] == true ||
       InputComponent::Get().held_keys[SDL_SCANCODE_D] == true) {
     location.location.x += 4;
-  }
-  if (InputComponent::Get().pressed_keys[SDL_SCANCODE_A] == true ||
-      InputComponent::Get().held_keys[SDL_SCANCODE_A] == true) {
+  } else if (InputComponent::Get().pressed_keys[SDL_SCANCODE_A] == true ||
+             InputComponent::Get().held_keys[SDL_SCANCODE_A] == true) {
     location.location.x -= 4;
-  }
-  if (InputComponent::Get().pressed_keys[SDL_SCANCODE_S] == true ||
-      InputComponent::Get().held_keys[SDL_SCANCODE_S] == true) {
+  } else if (InputComponent::Get().pressed_keys[SDL_SCANCODE_S] == true ||
+             InputComponent::Get().held_keys[SDL_SCANCODE_S] == true) {
     location.location.y += 4;
-  }
-  if (InputComponent::Get().pressed_keys[SDL_SCANCODE_W] == true ||
-      InputComponent::Get().held_keys[SDL_SCANCODE_W] == true) {
+  } else if (InputComponent::Get().pressed_keys[SDL_SCANCODE_W] == true ||
+             InputComponent::Get().held_keys[SDL_SCANCODE_W] == true) {
     location.location.y -= 4;
   }
+  return 0;
 }

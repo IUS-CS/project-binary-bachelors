@@ -18,7 +18,9 @@ zordo.out: ${OBJS}
 	      ${CC} ${CFLAGS} ${OBJS} ${LIBS} -o $@
 
 .cpp.o:
-	${CC} ${CFLAGS} -c $<
+	${CC} ${CFLAGS} -c -MMD $<
 
 clean:
 	rm *.out *.o
+
+-include *.d
