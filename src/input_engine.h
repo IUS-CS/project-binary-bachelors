@@ -10,7 +10,7 @@ public:
   void BeginNewFrame();
   void KeyUpEvent(SDL_Event &event);
   void KeyDownEvent(SDL_Event &event);
-  void CheckForInput();
-  void Update(LocationComponent &location);
+  int CheckForInput();
+  int Update(LocationComponent &location);
 };
 #endif
