@@ -1,19 +1,15 @@
 #ifndef GAME_OBJECT_H
 #define GAME_OBJECT_H
 
-#include "component.h"
-#include <vector>
+#include <optional>
+
+#include "location_component.h"
+#include "sprite_component.h"
 
 // A GameObject is anything that exists inside the game.
-class GameObject {
+struct GameObject {
 public:
-  GameObject();
-  ~GameObject();
-
-  // This will add a component to the component list for this GameObject.
-  void AddComponent(Component component);
-
-  // This is a vector containing all of the components that this GameObject has.
-  std::vector<Component> component_list;
+  std::optional<SpriteComponent> sprite = std::nullopt;
+  std::optional<LocationComponent> location = std::nullopt;
 };
 #endif

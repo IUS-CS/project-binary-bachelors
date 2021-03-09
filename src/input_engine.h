@@ -3,7 +3,7 @@
 
 #include <SDL2/SDL.h>
 
-#include "location_component.h"
+#include "game_object.h"
 
 class InputEngine {
 public:
@@ -18,6 +18,6 @@ public:
   // event.
   int CheckForInput();
   // This function will determine which key pressed has the highest priority.
-  int Update(LocationComponent &location);
+  int Run(GameObject &object);
 };
 #endif
