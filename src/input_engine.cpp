@@ -17,6 +17,7 @@ int InputEngine::CheckForInput() {
   SDL_Event event;
   if (SDL_PollEvent(&event)) {
     switch (event.type) {
+      // If the x button on the window was clicked.
     case SDL_QUIT:
       return 1;
       break;
@@ -36,9 +37,11 @@ int InputEngine::CheckForInput() {
 }
 int InputEngine::Update(LocationComponent &location) {
   BeginNewFrame();
+  // IF the x button on the window was clicked.
   if (CheckForInput() == 1) {
     return 1;
   }
+  // If escape was clicked, it closes the window.
   if (InputComponent::Get().pressed_keys[SDL_SCANCODE_ESCAPE] == true) {
     return 1;
   }

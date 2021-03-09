@@ -21,6 +21,6 @@ zordo.out: ${OBJS}
 	${CC} ${CFLAGS} -c -MMD $<
 
 clean:
-	rm *.out *.o
+	rm *.out *.o *.d
 
 -include *.d

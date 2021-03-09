@@ -3,6 +3,7 @@
 InputComponent *InputComponent::instance_ = nullptr;
 
 InputComponent &InputComponent::Get() {
+  // If the singleton has not been created yet
   if (!instance_) {
     std::unordered_map<SDL_Scancode, bool> pressed_keys;
     std::unordered_map<SDL_Scancode, bool> held_keys;
