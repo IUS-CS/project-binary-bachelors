@@ -5,8 +5,7 @@
 
 // This component is just the coordinates of where the game object is on the
 // screen.
-class LocationComponent {
-public:
+struct LocationComponent {
   LocationComponent() {
     coordinates.x = 0;
     coordinates.y = 0;

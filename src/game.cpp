@@ -1,3 +1,5 @@
+#include <vector>
+
 #include "game.h"
 #include "game_object.h"
 #include "graphics_component.h"
@@ -12,19 +14,28 @@ Game::~Game() {}
 
 void Game::Run() {
   GameObject lonk;
-  GraphicsEngine graphics_engine;
-  InputEngine input_engine;
-  MovementEngine movement_engine;
+  lonk.is_player = true;
   lonk.location = LocationComponent(0, 100);
   lonk.sprite =
       SpriteComponent("lonk_sprite", {.x = 0, .y = 68, .w = 24, .h = 35});
+  GameObject rupee;
+  rupee.location = LocationComponent(200, 500);
+  rupee.sprite =
+      SpriteComponent("item_sprite", {.x = 15, .y = 86, .w = 11, .h = 14});
+  std::vector<GameObject> objects = {rupee, lonk};
+  GraphicsEngine graphics_engine;
+  InputEngine input_engine;
+  MovementEngine movement_engine;
   while (true) {
     frame_start_time_ms = SDL_GetTicks();
-    graphics_engine.Run(lonk);
-    if (input_engine.Run() == 1) {
-      return;
+    for (auto &object : objects) {
+      graphics_engine.Run(object);
+      input_engine.Run();
+      if (InputComponent::Get().quit) {
+        return;
+      }
+      movement_engine.Run(object);
     }
-    movement_engine.Run(lonk);
     graphics_engine.DrawNextFrame();
     LimitFrameRate();
   }

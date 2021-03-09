@@ -6,8 +6,7 @@
 
 // A SpriteComponent is the image of a GameObject. Ex: The SpriteComponent for
 // Lonk (the knockoff of Link) will be the picture of his character.
-class SpriteComponent {
-public:
+struct SpriteComponent {
   SpriteComponent() {}
   SpriteComponent(std::string ssname, SDL_Rect rect) {
     sprite_sheet_name = ssname;

@@ -17,9 +17,10 @@ public:
   void KeyDownEvent(SDL_Event &event);
   // This function checks to see if there has been a KeyUp, KeyDown, or Quit
   // event.
-  int CheckForInput();
-  // This function will determine which key pressed has the highest priority.
-  int Run();
+  void CheckForInput();
+  // This function will set all of the pressed keys to true in the
+  // input_component..
+  void Run();
 
   // Map that holds all of the current held keys.
   std::unordered_map<SDL_Scancode, bool> held_keys;
