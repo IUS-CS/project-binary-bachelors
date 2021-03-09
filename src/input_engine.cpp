@@ -2,16 +2,21 @@
 #include "input_component.h"
 
 void InputEngine::BeginNewFrame() {
-  InputComponent::Get().pressed_keys.clear();
-  InputComponent::Get().released_keys.clear();
+  auto &ic = InputComponent::Get();
+  ic.left = false;
+  ic.right = false;
+  ic.up = false;
+  ic.down = false;
+  pressed_keys.clear();
+  released_keys.clear();
 }
 void InputEngine::KeyUpEvent(SDL_Event &event) {
-  InputComponent::Get().released_keys[event.key.keysym.scancode] = true;
-  InputComponent::Get().held_keys[event.key.keysym.scancode] = false;
+  released_keys[event.key.keysym.scancode] = true;
+  held_keys[event.key.keysym.scancode] = false;
 }
 void InputEngine::KeyDownEvent(SDL_Event &event) {
-  InputComponent::Get().pressed_keys[event.key.keysym.scancode] = true;
-  InputComponent::Get().held_keys[event.key.keysym.scancode] = true;
+  pressed_keys[event.key.keysym.scancode] = true;
+  held_keys[event.key.keysym.scancode] = true;
 }
 int InputEngine::CheckForInput() {
   SDL_Event event;
@@ -36,28 +41,31 @@ int InputEngine::CheckForInput() {
   return 0;
 }
 
-int InputEngine::Run(GameObject &object) {
+int InputEngine::Run() {
   BeginNewFrame();
   // IF the x button on the window was clicked.
   if (CheckForInput() == 1) {
     return 1;
   }
   // If escape was clicked, it closes the window.
-  if (InputComponent::Get().pressed_keys[SDL_SCANCODE_ESCAPE] == true) {
+  if (pressed_keys[SDL_SCANCODE_ESCAPE] == true) {
     return 1;
   }
-  if (InputComponent::Get().pressed_keys[SDL_SCANCODE_D] == true ||
-      InputComponent::Get().held_keys[SDL_SCANCODE_D] == true) {
-    object.location->coordinates.x += 4;
-  } else if (InputComponent::Get().pressed_keys[SDL_SCANCODE_A] == true ||
-             InputComponent::Get().held_keys[SDL_SCANCODE_A] == true) {
-    object.location->coordinates.x -= 4;
-  } else if (InputComponent::Get().pressed_keys[SDL_SCANCODE_S] == true ||
-             InputComponent::Get().held_keys[SDL_SCANCODE_S] == true) {
-    object.location->coordinates.y += 4;
-  } else if (InputComponent::Get().pressed_keys[SDL_SCANCODE_W] == true ||
-             InputComponent::Get().held_keys[SDL_SCANCODE_W] == true) {
-    object.location->coordinates.y -= 4;
+  if (pressed_keys[SDL_SCANCODE_D] == true ||
+      held_keys[SDL_SCANCODE_D] == true) {
+    InputComponent::Get().right = true;
+  }
+  if (pressed_keys[SDL_SCANCODE_A] == true ||
+      held_keys[SDL_SCANCODE_A] == true) {
+    InputComponent::Get().left = true;
+  }
+  if (pressed_keys[SDL_SCANCODE_S] == true ||
+      held_keys[SDL_SCANCODE_S] == true) {
+    InputComponent::Get().down = true;
+  }
+  if (pressed_keys[SDL_SCANCODE_W] == true ||
+      held_keys[SDL_SCANCODE_W] == true) {
+    InputComponent::Get().up = true;
   }
   return 0;
 }
