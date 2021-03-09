@@ -4,6 +4,7 @@
 #include "graphics_engine.h"
 #include "input_component.h"
 #include "input_engine.h"
+#include "movement_engine.h"
 
 Game::Game() {}
 
@@ -13,15 +14,17 @@ void Game::Run() {
   GameObject lonk;
   GraphicsEngine graphics_engine;
   InputEngine input_engine;
+  MovementEngine movement_engine;
   lonk.location = LocationComponent(0, 100);
   lonk.sprite =
       SpriteComponent("lonk_sprite", {.x = 0, .y = 68, .w = 24, .h = 35});
   while (true) {
     frame_start_time_ms = SDL_GetTicks();
     graphics_engine.Run(lonk);
-    if (input_engine.Run(lonk) == 1) {
+    if (input_engine.Run() == 1) {
       return;
     }
+    movement_engine.Run(lonk);
     graphics_engine.DrawNextFrame();
     LimitFrameRate();
   }

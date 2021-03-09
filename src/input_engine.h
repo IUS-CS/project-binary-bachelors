@@ -2,6 +2,7 @@
 #define INPUT_ENGINE_H
 
 #include <SDL2/SDL.h>
+#include <unordered_map>
 
 #include "game_object.h"
 
@@ -18,6 +19,13 @@ public:
   // event.
   int CheckForInput();
   // This function will determine which key pressed has the highest priority.
-  int Run(GameObject &object);
+  int Run();
+
+  // Map that holds all of the current held keys.
+  std::unordered_map<SDL_Scancode, bool> held_keys;
+  // Map that holds all of the keys that were just pressed.
+  std::unordered_map<SDL_Scancode, bool> pressed_keys;
+  // Holds all of the keys that have been released.
+  std::unordered_map<SDL_Scancode, bool> released_keys;
 };
 #endif
