@@ -4,8 +4,6 @@
 #include "graphics_engine.h"
 #include "input_component.h"
 #include "input_engine.h"
-#include "location_component.h"
-#include "sprite_component.h"
 
 Game::Game() {}
 
@@ -15,17 +13,13 @@ void Game::Run() {
   GameObject lonk;
   GraphicsEngine graphics_engine;
   InputEngine input_engine;
-  SpriteComponent sprite;
-  // Right now, the components are hard coded into the program and are not
-  // retrieved from the GameObject class. This is temporary and will be resolved
-  // soon.
-  LocationComponent location;
-  lonk.AddComponent(sprite);
-  lonk.AddComponent(location);
+  lonk.location = LocationComponent(0, 100);
+  lonk.sprite =
+      SpriteComponent("lonk_sprite", {.x = 0, .y = 68, .w = 24, .h = 35});
   while (true) {
     frame_start_time_ms = SDL_GetTicks();
-    graphics_engine.AddSprite(sprite, location);
-    if (input_engine.Update(location) == 1) {
+    graphics_engine.Run(lonk);
+    if (input_engine.Run(lonk) == 1) {
       return;
     }
     graphics_engine.DrawNextFrame();

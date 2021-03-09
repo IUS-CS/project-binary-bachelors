@@ -35,7 +35,8 @@ int InputEngine::CheckForInput() {
   }
   return 0;
 }
-int InputEngine::Update(LocationComponent &location) {
+
+int InputEngine::Run(GameObject &object) {
   BeginNewFrame();
   // IF the x button on the window was clicked.
   if (CheckForInput() == 1) {
@@ -47,16 +48,16 @@ int InputEngine::Update(LocationComponent &location) {
   }
   if (InputComponent::Get().pressed_keys[SDL_SCANCODE_D] == true ||
       InputComponent::Get().held_keys[SDL_SCANCODE_D] == true) {
-    location.location.x += 4;
+    object.location->coordinates.x += 4;
   } else if (InputComponent::Get().pressed_keys[SDL_SCANCODE_A] == true ||
              InputComponent::Get().held_keys[SDL_SCANCODE_A] == true) {
-    location.location.x -= 4;
+    object.location->coordinates.x -= 4;
   } else if (InputComponent::Get().pressed_keys[SDL_SCANCODE_S] == true ||
              InputComponent::Get().held_keys[SDL_SCANCODE_S] == true) {
-    location.location.y += 4;
+    object.location->coordinates.y += 4;
   } else if (InputComponent::Get().pressed_keys[SDL_SCANCODE_W] == true ||
              InputComponent::Get().held_keys[SDL_SCANCODE_W] == true) {
-    location.location.y -= 4;
+    object.location->coordinates.y -= 4;
   }
   return 0;
 }

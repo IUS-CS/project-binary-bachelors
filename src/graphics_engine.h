@@ -1,8 +1,7 @@
 #ifndef GRAPHICS_ENGINE_H
 #define GRAPHICS_ENGINE_H
 
-#include "location_component.h"
-#include "sprite_component.h"
+#include "game_object.h"
 
 class GraphicsEngine {
 public:
@@ -13,7 +12,6 @@ public:
   void DrawNextFrame();
 
   // This function adds an image/sprite to the renderer.
-  void AddSprite(const SpriteComponent &sprite,
-                 const LocationComponent &location);
+  void Run(GameObject &object);
 };
 #endif
