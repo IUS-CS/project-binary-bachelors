@@ -12,6 +12,7 @@ struct InputComponent {
   bool right;
   bool up;
   bool down;
+  bool quit;
 
 private:
   // This is the one instance of this object.

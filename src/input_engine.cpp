@@ -18,13 +18,13 @@ void InputEngine::KeyDownEvent(SDL_Event &event) {
   pressed_keys[event.key.keysym.scancode] = true;
   held_keys[event.key.keysym.scancode] = true;
 }
-int InputEngine::CheckForInput() {
+void InputEngine::CheckForInput() {
   SDL_Event event;
   if (SDL_PollEvent(&event)) {
     switch (event.type) {
       // If the x button on the window was clicked.
     case SDL_QUIT:
-      return 1;
+      InputComponent::Get().quit = true;
       break;
     case SDL_KEYDOWN:
       if (event.key.repeat == 0) {
@@ -38,18 +38,13 @@ int InputEngine::CheckForInput() {
       break;
     }
   }
-  return 0;
 }
 
-int InputEngine::Run() {
+void InputEngine::Run() {
   BeginNewFrame();
-  // IF the x button on the window was clicked.
-  if (CheckForInput() == 1) {
-    return 1;
-  }
-  // If escape was clicked, it closes the window.
+  CheckForInput();
   if (pressed_keys[SDL_SCANCODE_ESCAPE] == true) {
-    return 1;
+    InputComponent::Get().quit = true;
   }
   if (pressed_keys[SDL_SCANCODE_D] == true ||
       held_keys[SDL_SCANCODE_D] == true) {
@@ -67,5 +62,4 @@ int InputEngine::Run() {
       held_keys[SDL_SCANCODE_W] == true) {
     InputComponent::Get().up = true;
   }
-  return 0;
 }

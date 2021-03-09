@@ -11,5 +11,7 @@ struct GameObject {
 public:
   std::optional<SpriteComponent> sprite = std::nullopt;
   std::optional<LocationComponent> location = std::nullopt;
+
+  bool is_player = false;
 };
 #endif
