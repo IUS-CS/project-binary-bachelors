@@ -6,6 +6,7 @@
 #include "graphics_engine.h"
 #include "input_component.h"
 #include "input_engine.h"
+#include "map_engine.h"
 #include "movement_engine.h"
 
 Game::Game() {}
@@ -13,6 +14,52 @@ Game::Game() {}
 Game::~Game() {}
 
 void Game::Run() {
+  GameObject map;
+  map.is_map = true;
+  int lvl1[20][31] = {{0, 3, 1, 2, 0, 2, 3, 1, 0, 0, 2, 1, 0, 3, 0, 1,
+                       2, 3, 1, 3, 2, 0, 2, 0, 3, 0, 1, 2, 1, 0, 3},
+                      {3, 2, 3, 0, 1, 3, 3, 2, 0, 1, 3, 1, 0, 2, 0, 1,
+                       3, 1, 2, 1, 0, 3, 2, 1, 2, 3, 0, 1, 3, 0, 2},
+                      {2, 1, 1, 3, 0, 2, 1, 3, 2, 0, 1, 0, 3, 1, 2, 0,
+                       3, 1, 0, 0, 2, 3, 0, 1, 0, 2, 1, 3, 0, 2, 3},
+                      {2, 1, 0, 2, 3, 2, 0, 3, 1, 2, 0, 1, 3, 0, 2, 3,
+                       0, 2, 2, 0, 1, 3, 2, 1, 2, 0, 1, 3, 0, 0, 1},
+                      {0, 3, 1, 2, 0, 2, 3, 1, 0, 0, 2, 1, 0, 3, 0, 1,
+                       2, 3, 1, 3, 2, 0, 2, 0, 3, 0, 1, 2, 1, 0, 3},
+                      {3, 2, 3, 0, 1, 3, 3, 2, 0, 1, 3, 1, 0, 2, 0, 1,
+                       3, 1, 2, 1, 0, 3, 2, 1, 2, 3, 0, 1, 3, 0, 2},
+                      {2, 1, 1, 3, 0, 2, 1, 3, 2, 0, 1, 0, 3, 1, 2, 0,
+                       3, 1, 0, 0, 2, 3, 0, 1, 0, 2, 1, 3, 0, 2, 3},
+                      {2, 1, 0, 2, 3, 2, 0, 3, 1, 2, 0, 1, 3, 0, 2, 3,
+                       0, 2, 2, 0, 1, 3, 2, 1, 2, 0, 1, 3, 0, 0, 1},
+                      {0, 3, 1, 2, 0, 2, 3, 1, 0, 0, 2, 1, 0, 3, 0, 1,
+                       2, 3, 1, 3, 2, 0, 2, 0, 3, 0, 1, 2, 1, 0, 3},
+                      {3, 2, 3, 0, 1, 3, 3, 2, 0, 1, 3, 1, 0, 2, 0, 1,
+                       3, 1, 2, 1, 0, 3, 2, 1, 2, 3, 0, 1, 3, 0, 2},
+                      {2, 1, 1, 3, 0, 2, 1, 3, 2, 0, 1, 0, 3, 1, 2, 0,
+                       3, 1, 0, 0, 2, 3, 0, 1, 0, 2, 1, 3, 0, 2, 3},
+                      {2, 1, 0, 2, 3, 2, 0, 3, 1, 2, 0, 1, 3, 0, 2, 3,
+                       0, 2, 2, 0, 1, 3, 2, 1, 2, 0, 1, 3, 0, 0, 1},
+                      {0, 3, 1, 2, 0, 2, 3, 1, 0, 0, 2, 1, 0, 3, 0, 1,
+                       2, 3, 1, 3, 2, 0, 2, 0, 3, 0, 1, 2, 1, 0, 3},
+                      {3, 2, 3, 0, 1, 3, 3, 2, 0, 1, 3, 1, 0, 2, 0, 1,
+                       3, 1, 2, 1, 0, 3, 2, 1, 2, 3, 0, 1, 3, 0, 2},
+                      {2, 1, 1, 3, 0, 2, 1, 3, 2, 0, 1, 0, 3, 1, 2, 0,
+                       3, 1, 0, 0, 2, 3, 0, 1, 0, 2, 1, 3, 0, 2, 3},
+                      {2, 1, 0, 2, 3, 2, 0, 3, 1, 2, 0, 1, 3, 0, 2, 3,
+                       0, 2, 2, 0, 1, 3, 2, 1, 2, 0, 1, 3, 0, 0, 1},
+                      {0, 3, 1, 2, 0, 2, 3, 1, 0, 0, 2, 1, 0, 3, 0, 1,
+                       2, 3, 1, 3, 2, 0, 2, 0, 3, 0, 1, 2, 1, 0, 3},
+                      {3, 2, 3, 0, 1, 3, 3, 2, 0, 1, 3, 1, 0, 2, 0, 1,
+                       3, 1, 2, 1, 0, 3, 2, 1, 2, 3, 0, 1, 3, 0, 2},
+                      {2, 1, 1, 3, 0, 2, 1, 3, 2, 0, 1, 0, 3, 1, 2, 0,
+                       3, 1, 0, 0, 2, 3, 0, 1, 0, 2, 1, 3, 0, 2, 3},
+                      {2, 1, 0, 2, 3, 2, 0, 3, 1, 2, 0, 1, 3, 0, 2, 3,
+                       0, 2, 2, 0, 1, 3, 2, 1, 2, 0, 1, 3, 0, 0, 1}};
+  map.map = MapComponent(lvl1);
+  map.sprite =
+      SpriteComponent("tile_map", {.x = 0, .y = 0, .w = 16, .h = 16}, 2);
+  map.location = LocationComponent(0, 0);
   GameObject lonk;
   lonk.is_player = true;
   lonk.location = LocationComponent(0, 100);
@@ -21,15 +68,20 @@ void Game::Run() {
   GameObject rupee;
   rupee.location = LocationComponent(200, 500);
   rupee.sprite =
-      SpriteComponent("item_sprite", {.x = 15, .y = 86, .w = 11, .h = 14}, 2);
-  std::vector<GameObject> objects = {rupee, lonk};
+      SpriteComponent("item_sprite", {.x = 15, .y = 86, .w = 11, .h = 15}, 2);
+  std::vector<GameObject> objects = {map, rupee, lonk};
   GraphicsEngine graphics_engine;
   InputEngine input_engine;
+  MapEngine map_engine;
   MovementEngine movement_engine;
   while (true) {
     frame_start_time_ms = SDL_GetTicks();
     for (auto &object : objects) {
-      graphics_engine.Run(object);
+      if (object.is_map) {
+        map_engine.Run(object, graphics_engine);
+      } else {
+        graphics_engine.Run(object);
+      }
       input_engine.Run();
       if (InputComponent::Get().quit) {
         return;

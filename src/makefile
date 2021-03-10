@@ -1,4 +1,4 @@
-OBJS = main.o game.o graphics_component.o graphics_engine.o vector2.o input_engine.o input_component.o movement_engine.o
+OBJS = main.o game.o graphics_component.o graphics_engine.o vector2.o input_engine.o input_component.o movement_engine.o map_engine.o
 TEST_OBJS = catch_amalgamated.o unit_tests.o movement_engine.o input_component.o vector2.o
 CFLAGS = -Wall -g -std=c++17
 LIBS = `sdl2-config --cflags --libs` -lSDL2_image
