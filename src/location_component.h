@@ -5,6 +5,7 @@
 
 // This component is just the coordinates of where the game object is on the
 // screen.
+enum class Facing { kUp, kDown, kLeft, kRight };
 struct LocationComponent {
   LocationComponent() {
     coordinates.x = 0;
@@ -14,6 +15,7 @@ struct LocationComponent {
     coordinates.x = x;
     coordinates.y = y;
   }
+  Facing direction_faced = Facing::kRight;
   Vector2 coordinates;
 };
 #endif

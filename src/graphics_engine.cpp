@@ -36,9 +36,16 @@ void GraphicsEngine::Run(GameObject &object) {
 
     // This is the SDL function that adds the source sprite to the destination
     // rect on the renderer.
-    SDL_RenderCopy(
-        GraphicsComponent::Get().renderer,
-        GraphicsComponent::Get().textures.at(object.sprite->sprite_sheet_name),
-        &source, &destination);
+    if (object.location->direction_faced == Facing::kLeft) {
+      SDL_RenderCopyEx(GraphicsComponent::Get().renderer,
+                       GraphicsComponent::Get().textures.at(
+                           object.sprite->sprite_sheet_name),
+                       &source, &destination, 0, NULL, SDL_FLIP_HORIZONTAL);
+    } else {
+      SDL_RenderCopy(GraphicsComponent::Get().renderer,
+                     GraphicsComponent::Get().textures.at(
+                         object.sprite->sprite_sheet_name),
+                     &source, &destination);
+    }
   }
 }
