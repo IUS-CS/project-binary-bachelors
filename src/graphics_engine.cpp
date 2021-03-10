@@ -27,10 +27,11 @@ void GraphicsEngine::Run(GameObject &object) {
     // This rect is where we want to display the source image on the renderer.
     // Sidenote: The width and height are multiplied by 2 to scale the image,
     // making it double its original size.
-    const SDL_Rect destination = {.x = object.location->coordinates.x,
-                                  .y = object.location->coordinates.y,
-                                  .w = object.sprite->sprite_rect.w * 2,
-                                  .h = object.sprite->sprite_rect.h * 2};
+    const SDL_Rect destination = {
+        .x = object.location->coordinates.x,
+        .y = object.location->coordinates.y,
+        .w = object.sprite->sprite_rect.w * object.sprite->scale,
+        .h = object.sprite->sprite_rect.h * object.sprite->scale};
 
     // This is the SDL function that adds the source sprite to the destination
     // rect on the renderer.

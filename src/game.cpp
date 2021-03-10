@@ -17,11 +17,11 @@ void Game::Run() {
   lonk.is_player = true;
   lonk.location = LocationComponent(0, 100);
   lonk.sprite =
-      SpriteComponent("lonk_sprite", {.x = 0, .y = 68, .w = 24, .h = 35});
+      SpriteComponent("lonk_sprite", {.x = 0, .y = 0, .w = 48, .h = 48}, 3);
   GameObject rupee;
   rupee.location = LocationComponent(200, 500);
   rupee.sprite =
-      SpriteComponent("item_sprite", {.x = 15, .y = 86, .w = 11, .h = 14});
+      SpriteComponent("item_sprite", {.x = 15, .y = 86, .w = 11, .h = 14}, 2);
   std::vector<GameObject> objects = {rupee, lonk};
   GraphicsEngine graphics_engine;
   InputEngine input_engine;
