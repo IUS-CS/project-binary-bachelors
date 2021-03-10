@@ -7,6 +7,8 @@
 #include "map_component.h"
 #include "sprite_component.h"
 
+enum struct ObjectType { kPlayer, kMap, kDefault };
+
 // A GameObject is anything that exists inside the game.
 struct GameObject {
 public:
@@ -14,7 +16,6 @@ public:
   std::optional<LocationComponent> location = std::nullopt;
   std::optional<MapComponent> map = std::nullopt;
 
-  bool is_map = false;
-  bool is_player = false;
+  ObjectType type = ObjectType::kDefault;
 };
 #endif

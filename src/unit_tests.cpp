@@ -7,8 +7,7 @@
 TEST_CASE("Lonk moves to the right", "[move_right]") {
   GameObject rupee;
   GameObject lonk;
-  rupee.is_player = false;
-  lonk.is_player = true;
+  lonk.type = ObjectType::kPlayer;
   rupee.location = LocationComponent(200, 200);
   lonk.location = LocationComponent(100, 100);
   MovementEngine movement_engine;
@@ -24,8 +23,7 @@ TEST_CASE("Lonk moves to the right", "[move_right]") {
 TEST_CASE("Lonk moves to the left", "[move_left]") {
   GameObject rupee;
   GameObject lonk;
-  rupee.is_player = false;
-  lonk.is_player = true;
+  lonk.type = ObjectType::kPlayer;
   rupee.location = LocationComponent(200, 200);
   lonk.location = LocationComponent(100, 100);
   MovementEngine movement_engine;
@@ -41,8 +39,7 @@ TEST_CASE("Lonk moves to the left", "[move_left]") {
 TEST_CASE("Lonk moves up", "[move_up]") {
   GameObject rupee;
   GameObject lonk;
-  rupee.is_player = false;
-  lonk.is_player = true;
+  lonk.type = ObjectType::kPlayer;
   rupee.location = LocationComponent(200, 200);
   lonk.location = LocationComponent(100, 100);
   MovementEngine movement_engine;
@@ -58,8 +55,7 @@ TEST_CASE("Lonk moves up", "[move_up]") {
 TEST_CASE("Lonk moves down", "[move_down]") {
   GameObject rupee;
   GameObject lonk;
-  rupee.is_player = false;
-  lonk.is_player = true;
+  lonk.type = ObjectType::kPlayer;
   rupee.location = LocationComponent(200, 200);
   lonk.location = LocationComponent(100, 100);
   MovementEngine movement_engine;

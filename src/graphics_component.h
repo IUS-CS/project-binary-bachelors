@@ -2,6 +2,7 @@
 #define GRAPHICS_COMPONENT_H
 
 #include <SDL2/SDL.h>
+#include <string>
 #include <unordered_map>
 
 // GraphicsComponent.h

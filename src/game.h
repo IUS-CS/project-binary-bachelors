@@ -1,9 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "game_object.h"
-
-#include <vector>
+#include "data/game_objects_list.h"
 
 class Game {
 public:
@@ -19,5 +17,8 @@ public:
 
   // This variable helps limit the frame rate.
   int frame_start_time_ms;
+
+  GameObjectsList list = GameObjectsList();
+  std::vector<GameObject> object_list = list.objects;
 };
 #endif
