@@ -14,7 +14,7 @@ GraphicsComponent &GraphicsComponent::Get() {
     SDL_Window *window;
     SDL_Renderer *renderer;
     // SDL function to create a window.
-    SDL_CreateWindowAndRenderer(1000, 596, 0, &window, &renderer);
+    SDL_CreateWindowAndRenderer(992, 640, 0, &window, &renderer);
     // SDL function to add a title at the top of the window.
     SDL_SetWindowTitle(window, "Legend of Zordo");
     std::unordered_map<std::string, SDL_Texture *> textures;
