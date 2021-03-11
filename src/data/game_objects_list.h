@@ -10,6 +10,7 @@ struct GameObjectsList {
   GameObject map;
   GameObject lonk;
   GameObject rupee;
+  GameObject rupee2;
 
   // Vector that will hold all of the objects.
   std::vector<GameObject> objects;
@@ -64,17 +65,26 @@ struct GameObjectsList {
 
     // Rupee
     rupee.sprite =
-        SpriteComponent("item_sprite", {.x = 15, .y = 86, .w = 11, .h = 15}, 2);
+        SpriteComponent("item_sprite", {.x = 18, .y = 87, .w = 8, .h = 14}, 2);
     rupee.location = LocationComponent(200, 500);
+    rupee.hit_box = HitBoxComponent();
+    rupee.hit_box->type = HitBoxType::kRupee;
+
+    // Rupee2
+    rupee2.sprite =
+        SpriteComponent("item_sprite", {.x = 18, .y = 87, .w = 8, .h = 14}, 2);
+    rupee2.location = LocationComponent(600, 500);
+    rupee2.hit_box = HitBoxComponent();
 
     // Lonk
     lonk.type = ObjectType::kPlayer;
     lonk.sprite =
-        SpriteComponent("lonk_sprite", {.x = 0, .y = 0, .w = 48, .h = 48}, 3);
+        SpriteComponent("lonk_sprite", {.x = 16, .y = 16, .w = 16, .h = 16}, 3);
     lonk.location = LocationComponent(0, 100);
+    lonk.hit_box = HitBoxComponent();
 
     // Creating object vector
-    objects = {map, rupee, lonk};
+    objects = {map, rupee, rupee2, lonk};
   }
 };
 #endif

@@ -3,6 +3,7 @@
 
 #include <optional>
 
+#include "hit_box_component.h"
 #include "location_component.h"
 #include "map_component.h"
 #include "sprite_component.h"
@@ -15,6 +16,7 @@ public:
   std::optional<SpriteComponent> sprite = std::nullopt;
   std::optional<LocationComponent> location = std::nullopt;
   std::optional<MapComponent> map = std::nullopt;
+  std::optional<HitBoxComponent> hit_box = std::nullopt;
 
   ObjectType type = ObjectType::kDefault;
 };
