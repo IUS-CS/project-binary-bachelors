@@ -1,9 +1,9 @@
 #include <vector>
 
+#include "collision_detection_engine.h"
 #include "game.h"
 #include "graphics_component.h"
 #include "graphics_engine.h"
-#include "hit_box_engine.h"
 #include "input_component.h"
 #include "input_engine.h"
 #include "map_engine.h"
@@ -16,7 +16,7 @@ Game::Game() {}
 Game::~Game() {}
 
 void Game::Run() {
-  HitBoxEngine hit_box_engine;
+  CollisionDetectionEngine collision_detection_engine;
   GraphicsEngine graphics_engine;
   InputEngine input_engine;
   MapEngine map_engine;
@@ -24,19 +24,19 @@ void Game::Run() {
   while (true) {
     frame_start_time_ms = SDL_GetTicks();
     for (auto &object : object_list) {
-      if (object.type == ObjectType::kPlayer) {
-        hit_box_engine.Run(object, object_list);
+      if (object.is_active) {
+        collision_detection_engine.Run(object, object_list);
+        if (object.type == ObjectType::kMap) {
+          map_engine.Run(object, graphics_engine);
+        } else {
+          graphics_engine.Run(object);
+        }
+        input_engine.Run();
+        if (InputComponent::Get().quit) {
+          return;
+        }
+        movement_engine.Run(object);
       }
-      if (object.type == ObjectType::kMap) {
-        map_engine.Run(object, graphics_engine);
-      } else {
-        graphics_engine.Run(object);
-      }
-      input_engine.Run();
-      if (InputComponent::Get().quit) {
-        return;
-      }
-      movement_engine.Run(object);
     }
     graphics_engine.DrawNextFrame();
     LimitFrameRate();
