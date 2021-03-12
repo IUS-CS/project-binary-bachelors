@@ -18,6 +18,8 @@ public:
   std::optional<MapComponent> map = std::nullopt;
   std::optional<HitBoxComponent> hit_box = std::nullopt;
 
+  bool is_active = false;
+  int id_num;
   ObjectType type = ObjectType::kDefault;
 };
 #endif

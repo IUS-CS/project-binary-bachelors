@@ -3,7 +3,7 @@
 
 #include <SDL2/SDL.h>
 
-enum class HitBoxType { kPlayer, kRupee, kWall, kDefault };
+enum class HitBoxType { kPlayer, kGreenRupee, kBlueRupee, kWall, kDefault };
 
 struct HitBoxComponent {
   HitBoxComponent() {}
