@@ -7,6 +7,7 @@
 #include "location_component.h"
 #include "map_component.h"
 #include "sprite_component.h"
+#include "health_component.h"
 
 enum struct ObjectType { kPlayer, kMap, kDefault };
 
@@ -17,6 +18,8 @@ public:
   std::optional<LocationComponent> location = std::nullopt;
   std::optional<MapComponent> map = std::nullopt;
   std::optional<HitBoxComponent> hit_box = std::nullopt;
+  std::optional<HealthComponent> health = std::nullopt;
+  
 
   bool is_active = false;
   int id_num;

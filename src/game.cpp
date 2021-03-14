@@ -8,6 +8,7 @@
 #include "input_engine.h"
 #include "map_engine.h"
 #include "movement_engine.h"
+#include "health_engine.h"
 
 #include <iostream>
 
@@ -21,11 +22,14 @@ void Game::Run() {
   InputEngine input_engine;
   MapEngine map_engine;
   MovementEngine movement_engine;
+  HealthEngine health_engine;
+
   while (true) {
     frame_start_time_ms = SDL_GetTicks();
     for (auto &object : object_list) {
       if (object.is_active) {
         collision_detection_engine.Run(object, object_list);
+        health_engine.Run(object);
         if (object.type == ObjectType::kMap) {
           map_engine.Run(object, graphics_engine);
         } else {

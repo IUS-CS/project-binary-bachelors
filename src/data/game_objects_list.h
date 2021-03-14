@@ -11,6 +11,13 @@ struct GameObjectsList {
   GameObject lonk;
   GameObject rupee;
   GameObject rupee2;
+  GameObject monster;
+
+  /*
+  GameObject health;
+  GameObject health2;
+  GameObject health3;
+  */
 
   // Vector that will hold all of the objects.
   std::vector<GameObject> objects;
@@ -89,9 +96,38 @@ struct GameObjectsList {
     lonk.hit_box = HitBoxComponent();
     lonk.hit_box->type = HitBoxType::kPlayer;
     lonk.is_active = true;
+    lonk.health = HealthComponent(50);
+    
+    // Monster
+    monster.sprite =
+        SpriteComponent("monster_sprite", {.x = 0, .y = 0, .w = 90, .h = 110}, 1);
+    monster.location = LocationComponent(500, 100);
+    monster.hit_box = HitBoxComponent();
+    monster.hit_box->type = HitBoxType::kMonster;
+    monster.is_active = true;
+
+    /*
+    // health
+    health.sprite = 
+        SpriteComponent("item_sprite", {.x = 118, .y = 87, .w = 24, .h = 14}, 2);
+    health.location = LocationComponent(10, 10);
+    health.is_active = true;
+
+    // health2
+    health2.sprite = 
+        SpriteComponent("item_sprite", {.x = 118, .y = 87, .w = 24, .h = 14}, 2);
+    health2.location = LocationComponent(40, 10);
+    health2.is_active = true;
+
+    // health3
+    health3.sprite = 
+        SpriteComponent("item_sprite", {.x = 118, .y = 87, .w = 24, .h = 14}, 2);
+    health3.location = LocationComponent(70, 10);
+    health3.is_active = true; 
+    */
 
     // Creating object vector
-    objects = {map, rupee, rupee2, lonk};
+    objects = {map, rupee, rupee2, lonk, monster};
     for (unsigned int i = 0; i < objects.size(); i++) {
       objects[i].id_num = i;
     }

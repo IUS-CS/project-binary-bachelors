@@ -7,7 +7,7 @@ CollisionDetectionEngine::CollisionDetectionEngine() {}
 
 CollisionDetectionEngine::~CollisionDetectionEngine() {}
 
-void CollisionDetectionEngine::Run(GameObject object,
+void CollisionDetectionEngine::Run(GameObject &object,
                                    std::vector<GameObject> &objects_list) {
   // A BoundingBox is a struct that holds the values of the edges of a box.
   // GetBoundingBox is a helper function to return these values. I added this to
@@ -23,23 +23,7 @@ void CollisionDetectionEngine::Run(GameObject object,
               (object_bb.right > obstacle_bb.left) &&
               (object_bb.top < obstacle_bb.bottom) &&
               (object_bb.bottom > obstacle_bb.top)) {
-            if (obstacle.hit_box->type == HitBoxType::kGreenRupee &&
-                object.hit_box->type == HitBoxType::kPlayer) {
-              std::cout << "Collected 1 rupee!" << std::endl;
-              obstacle.is_active = false;
-            }
-            if (obstacle.hit_box->type == HitBoxType::kBlueRupee &&
-                object.hit_box->type == HitBoxType::kPlayer) {
-              std::cout << "Collected 5 rupees!" << std::endl;
-              obstacle.is_active = false;
-            }
-            if (obstacle.hit_box->type == HitBoxType::kPlayer &&
-                object.hit_box->type == HitBoxType::kDefault) {
-              std::cout << "Something touched the Player!" << std::endl;
-            }
-            if (obstacle.hit_box->type == HitBoxType::kDefault) {
-              std::cout << "Hit!" << std::endl;
-            }
+            object.hit_box->objects_hit.push_back(obstacle.hit_box->type);
           }
         }
       }

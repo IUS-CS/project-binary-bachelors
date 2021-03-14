@@ -10,6 +10,6 @@ class CollisionDetectionEngine {
 public:
   CollisionDetectionEngine();
   ~CollisionDetectionEngine();
-  void Run(GameObject object, std::vector<GameObject> &objects_list);
+  void Run(GameObject &object, std::vector<GameObject> &objects_list);
 };
 #endif
