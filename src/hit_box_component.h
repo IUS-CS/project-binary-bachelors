@@ -10,6 +10,8 @@ struct HitBoxComponent {
   HitBoxComponent() {}
   ~HitBoxComponent() {}
 
+  bool is_invincible = false;
+  int time_since_last_hit_ms;
   HitBoxType type = HitBoxType::kDefault;
   std::vector<HitBoxType> objects_hit;
 };
