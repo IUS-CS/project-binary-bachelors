@@ -97,10 +97,10 @@ struct GameObjectsList {
     lonk.hit_box->type = HitBoxType::kPlayer;
     lonk.is_active = true;
     lonk.health = HealthComponent();
-    
+
     // Monster
-    monster.sprite =
-        SpriteComponent("monster_sprite", {.x = 8, .y = 0, .w = 73, .h = 109}, 1);
+    monster.sprite = SpriteComponent("monster_sprite",
+                                     {.x = 16, .y = 13, .w = 16, .h = 19}, 3);
     monster.location = LocationComponent(500, 100);
     monster.hit_box = HitBoxComponent();
     monster.hit_box->type = HitBoxType::kMonster;
@@ -108,22 +108,19 @@ struct GameObjectsList {
 
     /*
     // health
-    health.sprite = 
-        SpriteComponent("item_sprite", {.x = 118, .y = 87, .w = 24, .h = 14}, 2);
-    health.location = LocationComponent(10, 10);
-    health.is_active = true;
+    health.sprite =
+        SpriteComponent("item_sprite", {.x = 118, .y = 87, .w = 24, .h = 14},
+    2); health.location = LocationComponent(10, 10); health.is_active = true;
 
     // health2
-    health2.sprite = 
-        SpriteComponent("item_sprite", {.x = 118, .y = 87, .w = 24, .h = 14}, 2);
-    health2.location = LocationComponent(40, 10);
-    health2.is_active = true;
+    health2.sprite =
+        SpriteComponent("item_sprite", {.x = 118, .y = 87, .w = 24, .h = 14},
+    2); health2.location = LocationComponent(40, 10); health2.is_active = true;
 
     // health3
-    health3.sprite = 
-        SpriteComponent("item_sprite", {.x = 118, .y = 87, .w = 24, .h = 14}, 2);
-    health3.location = LocationComponent(70, 10);
-    health3.is_active = true; 
+    health3.sprite =
+        SpriteComponent("item_sprite", {.x = 118, .y = 87, .w = 24, .h = 14},
+    2); health3.location = LocationComponent(70, 10); health3.is_active = true;
     */
 
     // Creating object vector
