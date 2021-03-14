@@ -100,7 +100,7 @@ struct GameObjectsList {
     
     // Monster
     monster.sprite =
-        SpriteComponent("monster_sprite", {.x = 0, .y = 0, .w = 90, .h = 110}, 1);
+        SpriteComponent("monster_sprite", {.x = 8, .y = 0, .w = 73, .h = 109}, 1);
     monster.location = LocationComponent(500, 100);
     monster.hit_box = HitBoxComponent();
     monster.hit_box->type = HitBoxType::kMonster;
