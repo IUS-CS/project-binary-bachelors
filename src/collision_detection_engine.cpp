@@ -12,6 +12,7 @@ void CollisionDetectionEngine::Run(GameObject &object,
   // A BoundingBox is a struct that holds the values of the edges of a box.
   // GetBoundingBox is a helper function to return these values. I added this to
   // make the hit box detection if statement a lot easier to read..
+  object.hit_box->objects_hit.clear();
   if (object.location && object.hit_box) {
     BoundingBox object_bb = GetBoundingBox(object);
     for (auto &obstacle : objects_list) {
