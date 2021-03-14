@@ -96,7 +96,7 @@ struct GameObjectsList {
     lonk.hit_box = HitBoxComponent();
     lonk.hit_box->type = HitBoxType::kPlayer;
     lonk.is_active = true;
-    lonk.health = HealthComponent(50);
+    lonk.health = HealthComponent();
     
     // Monster
     monster.sprite =

@@ -7,5 +7,6 @@ public:
   HealthEngine();
   ~HealthEngine();
   void Run(GameObject &object);
+  void CheckInvincibility(GameObject &object);
 };
 #endif
