@@ -1,10 +1,12 @@
-# Blockbuster Employee Management Project
+# The Legend of Zordo Project
 
 ## Description
-> This project will store, edit, and manage employee information for blockbuster video and include login for current employees and handle registration for new employees. The employee could do things like manage their information or accounts, apply for promotions, or give their two week's notice. It will include employee details like allergy info, hire date, PTO, etc. The higher up the ladder the more the employee can do.
+> This project is a virtual game in which you take control of a character and use this character to solve a maze of randomly generated rooms and fight enemies along the way. The floor you play on will have a random layout of preselected rooms. Each time you start a new instance of the game it will be separate from the one you played before, ensuring the challenges will always remain fresh and intriguing.
+> 
 
 ## Installation Instructions
-> Download the zip file (yet to be committed), which includes the necessary code and wxWidget files (gui) for building the project. Load the project into your favorite IDE, setup the wxWidget files in the IDE (more instructions on this to come), and build it. 
+> Download SDL2, SDL 2 Image, and the folder which includes the necessary game textures for building the project. Load the project into your favorite IDE, setup the SDL2, and SDL 2 Image in the IDE (more instructions on this to come), and build it.
+> 
 
 ## Project Vision
-> The vision of this project is for it to work as a legitimate and fully functional employee management system for Blockbuster Video (or any other video/game rental store). This system should be one that will be implemented into a website or can easily be implemented in this way from the code available. By "fully functional", we mean that the system should closely follow the project description above, be easily updatable, 
+> The vision of this project is for it to work as a fully functional game with all the various elements we wish to include, such as enemies, various room layouts, and most importantly, random floor pattern generation. By "fully functional", we mean that the game should closely follow the project description above, be easily updatable, and work without any game altering bugs. This game should be able to be loaded and build in any IDE with the necessary downloads and setup listed previously.
