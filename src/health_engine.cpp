@@ -7,20 +7,24 @@ HealthEngine::~HealthEngine() {}
 
 void HealthEngine::Run(GameObject &object) {
   if (object.health) {
-    for (auto &hit_object : object.hit_box->objects_hit) {
+    for (auto &hit_object : object.objects_hit) {
       if (object.is_active) {
         CheckInvincibility(object);
         // Checks that player is alive and not invincible on monster collision.
-        if (hit_object == HitBoxType::kMonster && object.health->health > 0 &&
+        if (hit_object->type == ObjectType::kEnemy &&
+            object.type == ObjectType::kPlayer &&
             !object.hit_box->is_invincible) {
-          std::cout << "Got hit!" << std::endl;
-          object.health->health = object.health->health - 1;
-          object.hit_box->is_invincible = true;
-          object.hit_box->time_since_last_hit_ms = SDL_GetTicks();
-        }
-        if (object.health->health == 0) {
-          std::cout << "You are dead." << std::endl;
-          object.is_active = false;
+          /*
+                    std::cout << "Got hit!" << std::endl;
+                    object.health->health = object.health->health - 1;
+          */
+          if (object.health->health == 0) {
+            std::cout << "You are dead." << std::endl;
+            object.is_active = false;
+          } else {
+            object.hit_box->is_invincible = true;
+            object.hit_box->time_since_last_hit_ms = SDL_GetTicks();
+          }
         }
       }
     }

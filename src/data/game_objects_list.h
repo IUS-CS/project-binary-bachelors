@@ -9,9 +9,10 @@ struct GameObjectsList {
   // Create Objects.
   GameObject map;
   GameObject lonk;
-  GameObject rupee;
-  GameObject rupee2;
+  // GameObject rupee;
+  // GameObject rupee2;
   GameObject monster;
+  GameObject monster2;
 
   /*
   GameObject health;
@@ -72,21 +73,19 @@ struct GameObjectsList {
     map.map = MapComponent(lvl1);
     map.is_active = true;
 
-    // Rupee
-    rupee.sprite =
-        SpriteComponent("item_sprite", {.x = 18, .y = 87, .w = 8, .h = 14}, 2);
-    rupee.location = LocationComponent(200, 500);
-    rupee.hit_box = HitBoxComponent();
-    rupee.hit_box->type = HitBoxType::kGreenRupee;
-    rupee.is_active = true;
+    /*
+        // Rupee
+        rupee.sprite =
+            SpriteComponent("item_sprite", {.x = 18, .y = 87, .w = 8, .h = 14},
+       2); rupee.location = LocationComponent(200, 500); rupee.hit_box =
+        rupee.is_active = true;
 
-    // Rupee2
-    rupee2.sprite =
-        SpriteComponent("item_sprite", {.x = 55, .y = 87, .w = 8, .h = 14}, 2);
-    rupee2.location = LocationComponent(600, 500);
-    rupee2.hit_box = HitBoxComponent();
-    rupee2.hit_box->type = HitBoxType::kBlueRupee;
-    rupee2.is_active = true;
+        // Rupee2
+        rupee2.sprite =
+            SpriteComponent("item_sprite", {.x = 55, .y = 87, .w = 8, .h = 14},
+       2); rupee2.location = LocationComponent(600, 500); rupee2.hit_box =
+        rupee2.is_active = true;
+    */
 
     // Lonk
     lonk.type = ObjectType::kPlayer;
@@ -94,17 +93,29 @@ struct GameObjectsList {
         SpriteComponent("lonk_sprite", {.x = 16, .y = 16, .w = 16, .h = 16}, 3);
     lonk.location = LocationComponent(0, 100);
     lonk.hit_box = HitBoxComponent();
-    lonk.hit_box->type = HitBoxType::kPlayer;
     lonk.is_active = true;
     lonk.health = HealthComponent();
+    lonk.movement = MovementComponent(4);
 
     // Monster
+    monster.type = ObjectType::kEnemy;
+    monster.ai = AIComponent();
     monster.sprite = SpriteComponent("monster_sprite",
                                      {.x = 16, .y = 13, .w = 16, .h = 19}, 3);
     monster.location = LocationComponent(500, 100);
     monster.hit_box = HitBoxComponent();
-    monster.hit_box->type = HitBoxType::kMonster;
     monster.is_active = true;
+    monster.movement = MovementComponent(3);
+
+    // Monster2
+    monster2.type = ObjectType::kEnemy;
+    monster2.ai = AIComponent();
+    monster2.sprite = SpriteComponent("monster_sprite",
+                                      {.x = 16, .y = 13, .w = 16, .h = 19}, 3);
+    monster2.location = LocationComponent(300, 400);
+    monster2.hit_box = HitBoxComponent();
+    monster2.is_active = true;
+    monster2.movement = MovementComponent(3);
 
     /*
     // health
@@ -124,7 +135,7 @@ struct GameObjectsList {
     */
 
     // Creating object vector
-    objects = {map, rupee, rupee2, lonk, monster};
+    objects = {map, monster, monster2, lonk};
     for (unsigned int i = 0; i < objects.size(); i++) {
       objects[i].id_num = i;
     }

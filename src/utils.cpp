@@ -11,3 +11,11 @@ BoundingBox GetBoundingBox(const GameObject &object) {
   return {left, right, top, bottom};
 }
 
+GameObject &GetPlayer(std::vector<GameObject> &objects) {
+  for (auto &object : objects) {
+    if (object.type == ObjectType::kPlayer) {
+      return object;
+    }
+  }
+}
+

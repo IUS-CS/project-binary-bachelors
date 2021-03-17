@@ -3,6 +3,8 @@
 
 #include "game_object.h"
 
+#include <vector>
+
 class MovementEngine {
 public:
   MovementEngine();

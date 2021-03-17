@@ -3,6 +3,7 @@
 #include "game_object.h"
 #include "input_component.h"
 #include "movement_engine.h"
+#include "utils.h"
 
 TEST_CASE("Lonk moves to the right", "[move_right]") {
   GameObject rupee;
@@ -10,6 +11,7 @@ TEST_CASE("Lonk moves to the right", "[move_right]") {
   lonk.type = ObjectType::kPlayer;
   rupee.location = LocationComponent(200, 200);
   lonk.location = LocationComponent(100, 100);
+  lonk.movement = MovementComponent(4);
   MovementEngine movement_engine;
   InputComponent::Get().right = true;
   movement_engine.Run(lonk);
@@ -26,6 +28,7 @@ TEST_CASE("Lonk moves to the left", "[move_left]") {
   lonk.type = ObjectType::kPlayer;
   rupee.location = LocationComponent(200, 200);
   lonk.location = LocationComponent(100, 100);
+  lonk.movement = MovementComponent(4);
   MovementEngine movement_engine;
   InputComponent::Get().left = true;
   movement_engine.Run(lonk);
@@ -42,6 +45,7 @@ TEST_CASE("Lonk moves up", "[move_up]") {
   lonk.type = ObjectType::kPlayer;
   rupee.location = LocationComponent(200, 200);
   lonk.location = LocationComponent(100, 100);
+  lonk.movement = MovementComponent(4);
   MovementEngine movement_engine;
   InputComponent::Get().up = true;
   movement_engine.Run(lonk);
@@ -58,6 +62,7 @@ TEST_CASE("Lonk moves down", "[move_down]") {
   lonk.type = ObjectType::kPlayer;
   rupee.location = LocationComponent(200, 200);
   lonk.location = LocationComponent(100, 100);
+  lonk.movement = MovementComponent(4);
   MovementEngine movement_engine;
   InputComponent::Get().down = true;
   movement_engine.Run(lonk);
