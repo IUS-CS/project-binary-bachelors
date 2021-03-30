@@ -1,5 +1,5 @@
-OBJS = main.o game.o graphics_component.o graphics_engine.o vector2.o input_engine.o input_component.o movement_engine.o map_engine.o collision_detection_engine.o utils.o health_engine.o ai_engine.o
-TEST_OBJS = catch_amalgamated.o unit_tests.o movement_engine.o input_component.o vector2.o utils.o
+OBJS = main.o game.o graphics_component.o graphics_engine.o vector2.o input_engine.o input_component.o movement_engine.o map_engine.o collision_detection_engine.o utils.o health_engine.o ai_engine.o hud_engine.cpp
+TEST_OBJS = catch_amalgamated.o unit_tests.o movement_engine.o input_component.o vector2.o utils.o health_engine.o collision_detection_engine.o
 CFLAGS = -Wall -g -std=c++17
 LIBS = `sdl2-config --cflags --libs` -lSDL2_image
 CC = g++
@@ -9,7 +9,7 @@ CC = g++
 all: zordo.out test
 
 unit_tests.out: ${TEST_OBJS}
-	      ${CC} ${CFLAGS} ${TEST_OBJS} -o $@
+	      ${CC} ${CFLAGS} ${TEST_OBJS} ${LIBS} -o $@
 
 test: unit_tests.out
 	 ./unit_tests.out
