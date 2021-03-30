@@ -7,6 +7,7 @@
 #include "graphics_component.h"
 #include "graphics_engine.h"
 #include "health_engine.h"
+#include "hud_engine.h"
 #include "input_component.h"
 #include "input_engine.h"
 #include "map_engine.h"
@@ -25,6 +26,7 @@ void Game::Run() {
   MapEngine map_engine;
   MovementEngine movement_engine;
   HealthEngine health_engine;
+  HudEngine hud_engine;
 
   GameObject &player = GetPlayer(object_list);
 
@@ -47,6 +49,8 @@ void Game::Run() {
         // Then we draw the game object to the renderer.
         if (object.type == ObjectType::kMap) {
           map_engine.Run(object, graphics_engine);
+        } else if (object.type == ObjectType::kHud) {
+          hud_engine.Run(object, graphics_engine, player);
         } else {
           graphics_engine.Run(object);
         }

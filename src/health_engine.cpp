@@ -1,5 +1,4 @@
 #include "health_engine.h"
-#include <iostream>
 
 HealthEngine::HealthEngine() {}
 
@@ -14,12 +13,8 @@ void HealthEngine::Run(GameObject &object) {
         if (hit_object->type == ObjectType::kEnemy &&
             object.type == ObjectType::kPlayer &&
             !object.hit_box->is_invincible) {
-          /*
-                    std::cout << "Got hit!" << std::endl;
-                    object.health->health = object.health->health - 1;
-          */
+          object.health->health = object.health->health - 1;
           if (object.health->health == 0) {
-            std::cout << "You are dead." << std::endl;
             object.is_active = false;
           } else {
             object.hit_box->is_invincible = true;
