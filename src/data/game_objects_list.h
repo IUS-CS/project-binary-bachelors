@@ -9,10 +9,12 @@ struct GameObjectsList {
   // Create Objects.
   GameObject map;
   GameObject lonk;
+  GameObject attack;
   // GameObject rupee;
   // GameObject rupee2;
   GameObject monster;
   GameObject monster2;
+  GameObject hud;
 
   /*
   GameObject health;
@@ -94,7 +96,7 @@ struct GameObjectsList {
     lonk.location = LocationComponent(0, 100);
     lonk.hit_box = HitBoxComponent();
     lonk.is_active = true;
-    lonk.health = HealthComponent();
+    lonk.health = HealthComponent(6);
     lonk.movement = MovementComponent(4);
 
     // Monster
@@ -105,11 +107,13 @@ struct GameObjectsList {
     monster.location = LocationComponent(500, 100);
     monster.hit_box = HitBoxComponent();
     monster.is_active = true;
+    monster.ai->time_of_last_decision_ms = -6000;
     monster.movement = MovementComponent(3);
 
     // Monster2
     monster2.type = ObjectType::kEnemy;
     monster2.ai = AIComponent();
+    monster2.ai->time_of_last_decision_ms = -6000;
     monster2.sprite = SpriteComponent("monster_sprite",
                                       {.x = 16, .y = 13, .w = 16, .h = 19}, 3);
     monster2.location = LocationComponent(300, 400);
@@ -117,25 +121,22 @@ struct GameObjectsList {
     monster2.is_active = true;
     monster2.movement = MovementComponent(3);
 
-    /*
-    // health
-    health.sprite =
-        SpriteComponent("item_sprite", {.x = 118, .y = 87, .w = 24, .h = 14},
-    2); health.location = LocationComponent(10, 10); health.is_active = true;
+    // Hud
+    hud.type = ObjectType::kHud;
+    hud.is_active = true;
+    hud.sprite = SpriteComponent("item_sprite",
+                                 {.x = 124, .y = 87, .w = 16, .h = 16}, 3);
+    hud.location = LocationComponent(16, 16);
+    hud.hud = HudComponent({.x = 124, .y = 87, .w = 16, .h = 16},
+                           {.x = 0, .y = 0, .w = 0, .h = 0});
 
-    // health2
-    health2.sprite =
-        SpriteComponent("item_sprite", {.x = 118, .y = 87, .w = 24, .h = 14},
-    2); health2.location = LocationComponent(40, 10); health2.is_active = true;
-
-    // health3
-    health3.sprite =
-        SpriteComponent("item_sprite", {.x = 118, .y = 87, .w = 24, .h = 14},
-    2); health3.location = LocationComponent(70, 10); health3.is_active = true;
-    */
-
+    // Attack
+    attack.type = ObjectType::kAttack;
+    attack.sprite =
+        SpriteComponent("attack_box", {.x = 0, .y = 0, .w = 1, .h = 1}, 1);
+    attack.location = LocationComponent();
     // Creating object vector
-    objects = {map, monster, monster2, lonk};
+    objects = {map, monster, monster2, lonk, hud, attack};
     for (unsigned int i = 0; i < objects.size(); i++) {
       objects[i].id_num = i;
     }

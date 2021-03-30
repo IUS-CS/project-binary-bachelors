@@ -9,8 +9,8 @@ public:
   ~HealthEngine();
   void Run(GameObject &object);
 
-  // This CheckInvincibility function is required; otherwise, an unintended amount of
-  // health will be immediately depleted upon collision. 
+  // This CheckInvincibility function is required; otherwise, an unintended
+  // amount of health will be immediately depleted upon collision.
   void CheckInvincibility(GameObject &object);
 };
 #endif
