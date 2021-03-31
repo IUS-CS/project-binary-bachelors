@@ -1,4 +1,6 @@
 #define CATCH_CONFIG_MAIN
+#include "ai_component.h"
+#include "ai_engine.h"
 #include "catch_amalgamated.hpp"
 #include "collision_detection_engine.h"
 #include "game_object.h"
@@ -6,8 +8,29 @@
 #include "input_component.h"
 #include "movement_engine.h"
 #include "utils.h"
-
+#include <iostream>
 #include <vector>
+
+TEST_CASE("Test Collision Detection", "[collision_detection]") {
+  GameObject lonk;
+  GameObject enemy; 
+  MovementEngine movement_engine;
+  lonk.type = ObjectType::kPlayer;
+  enemy.type = ObjectType::kEnemy;
+  enemy.is_active = true;
+  lonk.sprite =
+      SpriteComponent("lonk_sprite", {.x = 16, .y = 16, .w = 16, .h = 16}, 3);
+  enemy.sprite = 
+      SpriteComponent("monster_sprite", {.x = 16, .y = 13, .w = 16, .h = 19}, 3);
+  lonk.location = LocationComponent(200, 200);
+  enemy.location = LocationComponent(200, 200);
+  lonk.hit_box = HitBoxComponent();
+  enemy.hit_box = HitBoxComponent();
+  std::vector<GameObject> objects = {lonk, enemy};
+  CollisionDetectionEngine collision_detection_engine;
+  collision_detection_engine.Run(lonk, objects);
+  REQUIRE(lonk.objects_hit.size() == 1);
+}
 
 TEST_CASE("Lonk moves to the right", "[move_right]") {
   GameObject rupee;
@@ -77,6 +100,92 @@ TEST_CASE("Lonk moves down", "[move_down]") {
   InputComponent::Get().down = false;
 }
 
+TEST_CASE("AI move left", "[ai_left]") {
+  GameObject lonk;
+  GameObject enemy;
+  AIEngine ai_engine;
+  MovementEngine movement_engine;
+  lonk.type = ObjectType::kPlayer;
+  enemy.type = ObjectType::kEnemy;
+  enemy.is_active = true;
+  lonk.sprite =
+      SpriteComponent("lonk_sprite", {.x = 16, .y = 16, .w = 16, .h = 16}, 3);
+  enemy.sprite = 
+      SpriteComponent("monster_sprite", {.x = 16, .y = 13, .w = 16, .h = 19}, 3);
+  lonk.location = LocationComponent(200, 200);
+  enemy.location = LocationComponent(300, 200);
+  enemy.ai = AIComponent();
+  enemy.movement = MovementComponent(5);
+  ai_engine.ChasePlayer(enemy, lonk);
+  movement_engine.Run(enemy);
+  REQUIRE(enemy.location->coordinates.x < 300);
+}
+
+
+TEST_CASE("AI move right", "[ai_right]") {
+  GameObject lonk;
+  GameObject enemy;
+  AIEngine ai_engine;
+  MovementEngine movement_engine;
+  lonk.type = ObjectType::kPlayer;
+  enemy.type = ObjectType::kEnemy;
+  enemy.is_active = true;
+  lonk.sprite =
+        SpriteComponent("lonk_sprite", {.x = 16, .y = 16, .w = 16, .h = 16}, 3);
+  enemy.sprite = SpriteComponent("monster_sprite",
+                                     {.x = 16, .y = 13, .w = 16, .h = 19}, 3);
+  lonk.location = LocationComponent(200, 200);
+  enemy.location = LocationComponent(100, 200);
+  enemy.ai = AIComponent();
+  enemy.movement = MovementComponent(5);
+  ai_engine.ChasePlayer(enemy, lonk);
+  movement_engine.Run(enemy);
+  REQUIRE(enemy.location->coordinates.x > 100);
+}
+
+TEST_CASE("AI move up", "[ai_up]") {
+  GameObject lonk;
+  GameObject enemy;
+  AIEngine ai_engine;
+  MovementEngine movement_engine;
+  lonk.type = ObjectType::kPlayer;
+  enemy.type = ObjectType::kEnemy;
+  enemy.is_active = true;
+  lonk.sprite =
+        SpriteComponent("lonk_sprite", {.x = 16, .y = 16, .w = 16, .h = 16}, 3);
+  enemy.sprite = SpriteComponent("monster_sprite",
+                                     {.x = 16, .y = 13, .w = 16, .h = 19}, 3);
+  lonk.location = LocationComponent(200, 200);
+  enemy.location = LocationComponent(200, 100);
+  enemy.ai = AIComponent();
+  enemy.movement = MovementComponent(5);
+  ai_engine.ChasePlayer(enemy, lonk);
+  movement_engine.Run(enemy);
+  REQUIRE(enemy.location->coordinates.y > 100);
+}
+
+TEST_CASE("AI move down", "[ai_down]") {
+  GameObject lonk;
+  GameObject enemy;
+  AIEngine ai_engine;
+  MovementEngine movement_engine;
+  lonk.type = ObjectType::kPlayer;
+  enemy.type = ObjectType::kEnemy;
+  enemy.is_active = true;
+  lonk.sprite =
+        SpriteComponent("lonk_sprite", {.x = 16, .y = 16, .w = 16, .h = 16}, 3);
+  enemy.sprite = SpriteComponent("monster_sprite",
+                                     {.x = 16, .y = 13, .w = 16, .h = 19}, 3);
+  lonk.location = LocationComponent(200, 200);
+  enemy.location = LocationComponent(200, 300);
+  enemy.ai = AIComponent();
+  enemy.movement = MovementComponent(5);
+  ai_engine.ChasePlayer(enemy, lonk);
+  movement_engine.Run(enemy);
+  REQUIRE(enemy.location->coordinates.y < 300);
+}
+
+
 TEST_CASE("Lonk loses heart", "[lose_heart]") {
   GameObject lonk;
   GameObject enemy;
@@ -84,8 +193,8 @@ TEST_CASE("Lonk loses heart", "[lose_heart]") {
   enemy.type = ObjectType::kEnemy;
   lonk.sprite =
       SpriteComponent("lonk_sprite", {.x = 16, .y = 16, .w = 16, .h = 16}, 3);
-  enemy.sprite = SpriteComponent("monster_sprite",
-                                 {.x = 16, .y = 13, .w = 16, .h = 19}, 3);
+  enemy.sprite = 
+      SpriteComponent("monster_sprite", {.x = 16, .y = 13, .w = 16, .h = 19}, 3);
   lonk.hit_box = HitBoxComponent();
   enemy.hit_box = HitBoxComponent();
   lonk.is_active = true;
@@ -101,3 +210,90 @@ TEST_CASE("Lonk loses heart", "[lose_heart]") {
   REQUIRE(lonk.health->health == 2);
 }
 
+TEST_CASE("AI move up_left", "[ai_up_left]") {
+  GameObject lonk;
+  GameObject enemy;
+  AIEngine ai_engine;
+  MovementEngine movement_engine;
+  lonk.type = ObjectType::kPlayer;
+  enemy.type = ObjectType::kEnemy;
+  enemy.is_active = true;
+  lonk.sprite =
+      SpriteComponent("lonk_sprite", {.x = 16, .y = 16, .w = 16, .h = 16}, 3);
+  enemy.sprite = 
+      SpriteComponent("monster_sprite", {.x = 16, .y = 13, .w = 16, .h = 19}, 3);
+  lonk.location = LocationComponent(200, 100);
+  enemy.location = LocationComponent(300, 200);
+  enemy.ai = AIComponent();
+  enemy.movement = MovementComponent(5);
+  ai_engine.ChasePlayer(enemy, lonk);
+  movement_engine.Run(enemy);
+  REQUIRE(enemy.location->coordinates.x < 300);
+  REQUIRE(enemy.location->coordinates.y < 200);
+}
+
+TEST_CASE("AI move down_left", "[ai_down_left]") {
+  GameObject lonk;
+  GameObject enemy;
+  AIEngine ai_engine;
+  MovementEngine movement_engine;
+  lonk.type = ObjectType::kPlayer;
+  enemy.type = ObjectType::kEnemy;
+  enemy.is_active = true;
+  lonk.sprite =
+      SpriteComponent("lonk_sprite", {.x = 16, .y = 16, .w = 16, .h = 16}, 3);
+  enemy.sprite = 
+      SpriteComponent("monster_sprite", {.x = 16, .y = 13, .w = 16, .h = 19}, 3);
+  lonk.location = LocationComponent(200, 300);
+  enemy.location = LocationComponent(300, 200);
+  enemy.ai = AIComponent();
+  enemy.movement = MovementComponent(5);
+  ai_engine.ChasePlayer(enemy, lonk);
+  movement_engine.Run(enemy);
+  REQUIRE(enemy.location->coordinates.x < 300);
+  REQUIRE(enemy.location->coordinates.y > 200);
+}
+
+TEST_CASE("AI move up_right", "[ai_up_right]") {
+  GameObject lonk;
+  GameObject enemy;
+  AIEngine ai_engine;
+  MovementEngine movement_engine;
+  lonk.type = ObjectType::kPlayer;
+  enemy.type = ObjectType::kEnemy;
+  enemy.is_active = true;
+  lonk.sprite =
+      SpriteComponent("lonk_sprite", {.x = 16, .y = 16, .w = 16, .h = 16}, 3);
+  enemy.sprite = 
+      SpriteComponent("monster_sprite", {.x = 16, .y = 13, .w = 16, .h = 19}, 3);
+  lonk.location = LocationComponent(400, 100);
+  enemy.location = LocationComponent(300, 200);
+  enemy.ai = AIComponent();
+  enemy.movement = MovementComponent(5);
+  ai_engine.ChasePlayer(enemy, lonk);
+  movement_engine.Run(enemy);
+  REQUIRE(enemy.location->coordinates.x > 300);
+  REQUIRE(enemy.location->coordinates.y < 200);
+}
+
+TEST_CASE("AI move down_right", "[ai_down_right]") {
+  GameObject lonk;
+  GameObject enemy;
+  AIEngine ai_engine;
+  MovementEngine movement_engine;
+  lonk.type = ObjectType::kPlayer;
+  enemy.type = ObjectType::kEnemy;
+  enemy.is_active = true;
+  lonk.sprite =
+      SpriteComponent("lonk_sprite", {.x = 16, .y = 16, .w = 16, .h = 16}, 3);
+  enemy.sprite = 
+      SpriteComponent("monster_sprite", {.x = 16, .y = 13, .w = 16, .h = 19}, 3);
+  lonk.location = LocationComponent(400, 300);
+  enemy.location = LocationComponent(300, 200);
+  enemy.ai = AIComponent();
+  enemy.movement = MovementComponent(5);
+  ai_engine.ChasePlayer(enemy, lonk);
+  movement_engine.Run(enemy);
+  REQUIRE(enemy.location->coordinates.x > 300);
+  REQUIRE(enemy.location->coordinates.y > 200);
+}
