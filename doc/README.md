@@ -4,9 +4,9 @@
 ## Description
 The Legend of Zordo is a 2d action-adventure game with exciting adventure, terrifying enemies, and rad magical and combo abilities. Level up your character Zordo and gain new moves to save the world from Emperor Gambledufus.The project is made in C++ with the SDL libraries.
 ## Maintained By:
--Johnathan Hasty
+-Jonathan Hasty
 -Christopher Pruett
--Dillon Eversman
+-Dylan Eversman
 -Joshua Carrier
 ## Visuals
 <img src="https://github.com/IUS-CS/project-binary-bachelors/blob/main/doc/images/Zordo.png?raw=true" alt="Zordo" style="height: 100px; width:100px;" />
