@@ -19,33 +19,35 @@ void MovementEngine::Run(GameObject &object) {
   for (auto &obstacle : object.objects_hit) {
     if (obstacle->type == ObjectType::kEnemy &&
         object.type == ObjectType::kEnemy) {
-      BoundingBox object_box = GetBoundingBox(object);
-      BoundingBox obstacle_box = GetBoundingBox(*obstacle);
-      if (object_box.left <
-              obstacle_box.right - (obstacle->sprite->sprite_rect.w *
-                                    obstacle->sprite->scale / 2) &&
-          object_box.left > obstacle_box.left) {
-        object.movement->lock_left = true;
-      }
-      if (object_box.right >
-              obstacle_box.left + (obstacle->sprite->sprite_rect.w *
-                                   obstacle->sprite->scale / 2) &&
-          object_box.right < obstacle_box.right) {
-        object.movement->lock_right = true;
-      }
-      if (!object.movement->lock_right && !object.movement->lock_left) {
-        if (object_box.bottom >
-                obstacle_box.top + (obstacle->sprite->sprite_rect.h *
-                                    obstacle->sprite->scale / 2) &&
-            object_box.bottom < obstacle_box.bottom) {
-          object.movement->lock_down = true;
+      if (obstacle->movement->current_direction != MovementDirection::kNone) {
+        BoundingBox object_box = GetBoundingBox(object);
+        BoundingBox obstacle_box = GetBoundingBox(*obstacle);
+        if (object_box.left <
+                obstacle_box.right - (obstacle->sprite->sprite_rect.w *
+                                      obstacle->sprite->scale / 2) &&
+            object_box.left > obstacle_box.left) {
+          object.movement->lock_left = true;
         }
-        if (object_box.top <
-                obstacle_box.bottom - (obstacle->sprite->sprite_rect.h *
-                                       obstacle->sprite->scale / 2) &&
-            object_box.top > obstacle_box.top) {
+        if (object_box.right >
+                obstacle_box.left + (obstacle->sprite->sprite_rect.w *
+                                     obstacle->sprite->scale / 2) &&
+            object_box.right < obstacle_box.right) {
+          object.movement->lock_right = true;
+        }
+        if (!object.movement->lock_right && !object.movement->lock_left) {
+          if (object_box.bottom >
+                  obstacle_box.top + (obstacle->sprite->sprite_rect.h *
+                                      obstacle->sprite->scale / 2) &&
+              object_box.bottom < obstacle_box.bottom) {
+            object.movement->lock_down = true;
+          }
+          if (object_box.top <
+                  obstacle_box.bottom - (obstacle->sprite->sprite_rect.h *
+                                         obstacle->sprite->scale / 2) &&
+              object_box.top > obstacle_box.top) {
 
-          object.movement->lock_up = true;
+            object.movement->lock_up = true;
+          }
         }
       }
     }
@@ -73,11 +75,6 @@ void MovementEngine::Run(GameObject &object) {
         } else if (ic.down) {
           object.movement->current_direction = MovementDirection::kDownLeft;
         }
-      }
-      if (object.movement->current_direction == MovementDirection::kRight ||
-          object.movement->current_direction == MovementDirection::kUpRight ||
-          object.movement->current_direction == MovementDirection::kDownRight) {
-        object.location->flip = false;
       }
       if (object.movement->current_direction == MovementDirection::kLeft ||
           object.movement->current_direction == MovementDirection::kUpLeft ||
@@ -150,17 +147,15 @@ void MovementEngine::Run(GameObject &object) {
             object.location->coordinates.y + object.movement->speed;
       }
     }
-    if (object.type == ObjectType::kEnemy) {
-      if (object.movement->current_direction == MovementDirection::kRight ||
-          object.movement->current_direction == MovementDirection::kUpRight ||
-          object.movement->current_direction == MovementDirection::kDownRight) {
-        object.location->flip = true;
-      }
-      if (object.movement->current_direction == MovementDirection::kLeft ||
-          object.movement->current_direction == MovementDirection::kUpLeft ||
-          object.movement->current_direction == MovementDirection::kDownLeft) {
-        object.location->flip = false;
-      }
+    if (object.movement->current_direction == MovementDirection::kRight ||
+        object.movement->current_direction == MovementDirection::kUpRight ||
+        object.movement->current_direction == MovementDirection::kDownRight) {
+      object.location->flip = false;
+    }
+    if (object.movement->current_direction == MovementDirection::kLeft ||
+        object.movement->current_direction == MovementDirection::kUpLeft ||
+        object.movement->current_direction == MovementDirection::kDownLeft) {
+      object.location->flip = true;
     }
   }
 }

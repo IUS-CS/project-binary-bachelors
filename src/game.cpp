@@ -2,6 +2,7 @@
 
 #include "ai_component.h"
 #include "ai_engine.h"
+#include "animation_engine.h"
 #include "collision_detection_engine.h"
 #include "game.h"
 #include "graphics_component.h"
@@ -20,6 +21,7 @@ Game::~Game() {}
 
 void Game::Run() {
   AIEngine ai_engine;
+  AnimationEngine animation_engine;
   CollisionDetectionEngine collision_detection_engine;
   GraphicsEngine graphics_engine;
   InputEngine input_engine;
@@ -45,7 +47,7 @@ void Game::Run() {
         collision_detection_engine.Run(object, object_list);
         health_engine.Run(object);
         movement_engine.Run(object);
-
+        animation_engine.Run(object);
         // Then we draw the game object to the renderer.
         if (object.type == ObjectType::kMap) {
           map_engine.Run(object, graphics_engine);

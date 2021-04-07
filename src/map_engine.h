@@ -8,6 +8,6 @@ class MapEngine {
 public:
   MapEngine();
   ~MapEngine();
-  void Run(GameObject &object, GraphicsEngine &graphics_engine);
+  void Run(GameObject &object, GraphicsEngine &graphics);
 };
 #endif

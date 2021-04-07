@@ -1,0 +1,223 @@
+[
+ {
+  "directory": "/home/jcarrier0026/dev/block_buster_employee_project/project-binary-bachelors/src",
+  "arguments": [
+   "g++",
+   "-Wall",
+   "-g",
+   "-std=c++17",
+   "-c",
+   "-MMD",
+   "main.cpp"
+  ],
+  "file": "main.cpp"
+ },
+ {
+  "directory": "/home/jcarrier0026/dev/block_buster_employee_project/project-binary-bachelors/src",
+  "arguments": [
+   "g++",
+   "-Wall",
+   "-g",
+   "-std=c++17",
+   "-c",
+   "-MMD",
+   "game.cpp"
+  ],
+  "file": "game.cpp"
+ },
+ {
+  "directory": "/home/jcarrier0026/dev/block_buster_employee_project/project-binary-bachelors/src",
+  "arguments": [
+   "g++",
+   "-Wall",
+   "-g",
+   "-std=c++17",
+   "-c",
+   "-MMD",
+   "graphics_component.cpp"
+  ],
+  "file": "graphics_component.cpp"
+ },
+ {
+  "directory": "/home/jcarrier0026/dev/block_buster_employee_project/project-binary-bachelors/src",
+  "arguments": [
+   "g++",
+   "-Wall",
+   "-g",
+   "-std=c++17",
+   "-c",
+   "-MMD",
+   "graphics_engine.cpp"
+  ],
+  "file": "graphics_engine.cpp"
+ },
+ {
+  "directory": "/home/jcarrier0026/dev/block_buster_employee_project/project-binary-bachelors/src",
+  "arguments": [
+   "g++",
+   "-Wall",
+   "-g",
+   "-std=c++17",
+   "-c",
+   "-MMD",
+   "vector2.cpp"
+  ],
+  "file": "vector2.cpp"
+ },
+ {
+  "directory": "/home/jcarrier0026/dev/block_buster_employee_project/project-binary-bachelors/src",
+  "arguments": [
+   "g++",
+   "-Wall",
+   "-g",
+   "-std=c++17",
+   "-c",
+   "-MMD",
+   "input_engine.cpp"
+  ],
+  "file": "input_engine.cpp"
+ },
+ {
+  "directory": "/home/jcarrier0026/dev/block_buster_employee_project/project-binary-bachelors/src",
+  "arguments": [
+   "g++",
+   "-Wall",
+   "-g",
+   "-std=c++17",
+   "-c",
+   "-MMD",
+   "input_component.cpp"
+  ],
+  "file": "input_component.cpp"
+ },
+ {
+  "directory": "/home/jcarrier0026/dev/block_buster_employee_project/project-binary-bachelors/src",
+  "arguments": [
+   "g++",
+   "-Wall",
+   "-g",
+   "-std=c++17",
+   "-c",
+   "-MMD",
+   "movement_engine.cpp"
+  ],
+  "file": "movement_engine.cpp"
+ },
+ {
+  "directory": "/home/jcarrier0026/dev/block_buster_employee_project/project-binary-bachelors/src",
+  "arguments": [
+   "g++",
+   "-Wall",
+   "-g",
+   "-std=c++17",
+   "-c",
+   "-MMD",
+   "map_engine.cpp"
+  ],
+  "file": "map_engine.cpp"
+ },
+ {
+  "directory": "/home/jcarrier0026/dev/block_buster_employee_project/project-binary-bachelors/src",
+  "arguments": [
+   "g++",
+   "-Wall",
+   "-g",
+   "-std=c++17",
+   "-c",
+   "-MMD",
+   "collision_detection_engine.cpp"
+  ],
+  "file": "collision_detection_engine.cpp"
+ },
+ {
+  "directory": "/home/jcarrier0026/dev/block_buster_employee_project/project-binary-bachelors/src",
+  "arguments": [
+   "g++",
+   "-Wall",
+   "-g",
+   "-std=c++17",
+   "-c",
+   "-MMD",
+   "utils.cpp"
+  ],
+  "file": "utils.cpp"
+ },
+ {
+  "directory": "/home/jcarrier0026/dev/block_buster_employee_project/project-binary-bachelors/src",
+  "arguments": [
+   "g++",
+   "-Wall",
+   "-g",
+   "-std=c++17",
+   "-c",
+   "-MMD",
+   "health_engine.cpp"
+  ],
+  "file": "health_engine.cpp"
+ },
+ {
+  "directory": "/home/jcarrier0026/dev/block_buster_employee_project/project-binary-bachelors/src",
+  "arguments": [
+   "g++",
+   "-Wall",
+   "-g",
+   "-std=c++17",
+   "-c",
+   "-MMD",
+   "ai_engine.cpp"
+  ],
+  "file": "ai_engine.cpp"
+ },
+ {
+  "directory": "/home/jcarrier0026/dev/block_buster_employee_project/project-binary-bachelors/src",
+  "arguments": [
+   "g++",
+   "-Wall",
+   "-g",
+   "-std=c++17",
+   "main.o",
+   "game.o",
+   "graphics_component.o",
+   "graphics_engine.o",
+   "vector2.o",
+   "input_engine.o",
+   "input_component.o",
+   "movement_engine.o",
+   "map_engine.o",
+   "collision_detection_engine.o",
+   "utils.o",
+   "health_engine.o",
+   "ai_engine.o",
+   "hud_engine.cpp",
+   "-I/usr/include/SDL2",
+   "-D_REENTRANT"
+  ],
+  "file": "hud_engine.cpp"
+ },
+ {
+  "directory": "/home/jcarrier0026/dev/block_buster_employee_project/project-binary-bachelors/src",
+  "arguments": [
+   "g++",
+   "-Wall",
+   "-g",
+   "-std=c++17",
+   "-c",
+   "-MMD",
+   "catch_amalgamated.cpp"
+  ],
+  "file": "catch_amalgamated.cpp"
+ },
+ {
+  "directory": "/home/jcarrier0026/dev/block_buster_employee_project/project-binary-bachelors/src",
+  "arguments": [
+   "g++",
+   "-Wall",
+   "-g",
+   "-std=c++17",
+   "-c",
+   "-MMD",
+   "unit_tests.cpp"
+  ],
+  "file": "unit_tests.cpp"
+ }
+]

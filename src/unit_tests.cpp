@@ -13,15 +13,17 @@
 
 TEST_CASE("Test Collision Detection", "[collision_detection]") {
   GameObject lonk;
-  GameObject enemy; 
-  MovementEngine movement_engine;
+  GameObject enemy;
   lonk.type = ObjectType::kPlayer;
   enemy.type = ObjectType::kEnemy;
+  lonk.id_num = 1;
+  enemy.id_num = 0;
+  lonk.is_active = true;
   enemy.is_active = true;
-  lonk.sprite =
-      SpriteComponent("lonk_sprite", {.x = 16, .y = 16, .w = 16, .h = 16}, 3);
-  enemy.sprite = 
-      SpriteComponent("monster_sprite", {.x = 16, .y = 13, .w = 16, .h = 19}, 3);
+  lonk.sprite = SpriteComponent(
+      "lonk_sprite", {.x = 16, .y = 16, .w = 16, .h = 16}, 3, {0, 0});
+  enemy.sprite = SpriteComponent(
+      "monster_sprite", {.x = 16, .y = 13, .w = 16, .h = 19}, 3, {0, 0});
   lonk.location = LocationComponent(200, 200);
   enemy.location = LocationComponent(200, 200);
   lonk.hit_box = HitBoxComponent();
@@ -108,10 +110,10 @@ TEST_CASE("AI move left", "[ai_left]") {
   lonk.type = ObjectType::kPlayer;
   enemy.type = ObjectType::kEnemy;
   enemy.is_active = true;
-  lonk.sprite =
-      SpriteComponent("lonk_sprite", {.x = 16, .y = 16, .w = 16, .h = 16}, 3);
-  enemy.sprite = 
-      SpriteComponent("monster_sprite", {.x = 16, .y = 13, .w = 16, .h = 19}, 3);
+  lonk.sprite = SpriteComponent(
+      "lonk_sprite", {.x = 16, .y = 16, .w = 16, .h = 16}, 3, {0, 0});
+  enemy.sprite = SpriteComponent(
+      "monster_sprite", {.x = 16, .y = 13, .w = 16, .h = 19}, 3, {0, 0});
   lonk.location = LocationComponent(200, 200);
   enemy.location = LocationComponent(300, 200);
   enemy.ai = AIComponent();
@@ -121,7 +123,6 @@ TEST_CASE("AI move left", "[ai_left]") {
   REQUIRE(enemy.location->coordinates.x < 300);
 }
 
-
 TEST_CASE("AI move right", "[ai_right]") {
   GameObject lonk;
   GameObject enemy;
@@ -130,10 +131,10 @@ TEST_CASE("AI move right", "[ai_right]") {
   lonk.type = ObjectType::kPlayer;
   enemy.type = ObjectType::kEnemy;
   enemy.is_active = true;
-  lonk.sprite =
-        SpriteComponent("lonk_sprite", {.x = 16, .y = 16, .w = 16, .h = 16}, 3);
-  enemy.sprite = SpriteComponent("monster_sprite",
-                                     {.x = 16, .y = 13, .w = 16, .h = 19}, 3);
+  lonk.sprite = SpriteComponent(
+      "lonk_sprite", {.x = 16, .y = 16, .w = 16, .h = 16}, 3, {0, 0});
+  enemy.sprite = SpriteComponent(
+      "monster_sprite", {.x = 16, .y = 13, .w = 16, .h = 19}, 3, {0, 0});
   lonk.location = LocationComponent(200, 200);
   enemy.location = LocationComponent(100, 200);
   enemy.ai = AIComponent();
@@ -151,10 +152,10 @@ TEST_CASE("AI move up", "[ai_up]") {
   lonk.type = ObjectType::kPlayer;
   enemy.type = ObjectType::kEnemy;
   enemy.is_active = true;
-  lonk.sprite =
-        SpriteComponent("lonk_sprite", {.x = 16, .y = 16, .w = 16, .h = 16}, 3);
-  enemy.sprite = SpriteComponent("monster_sprite",
-                                     {.x = 16, .y = 13, .w = 16, .h = 19}, 3);
+  lonk.sprite = SpriteComponent(
+      "lonk_sprite", {.x = 16, .y = 16, .w = 16, .h = 16}, 3, {0, 0});
+  enemy.sprite = SpriteComponent(
+      "monster_sprite", {.x = 16, .y = 13, .w = 16, .h = 19}, 3, {0, 0});
   lonk.location = LocationComponent(200, 200);
   enemy.location = LocationComponent(200, 100);
   enemy.ai = AIComponent();
@@ -172,10 +173,10 @@ TEST_CASE("AI move down", "[ai_down]") {
   lonk.type = ObjectType::kPlayer;
   enemy.type = ObjectType::kEnemy;
   enemy.is_active = true;
-  lonk.sprite =
-        SpriteComponent("lonk_sprite", {.x = 16, .y = 16, .w = 16, .h = 16}, 3);
-  enemy.sprite = SpriteComponent("monster_sprite",
-                                     {.x = 16, .y = 13, .w = 16, .h = 19}, 3);
+  lonk.sprite = SpriteComponent(
+      "lonk_sprite", {.x = 16, .y = 16, .w = 16, .h = 16}, 3, {0, 0});
+  enemy.sprite = SpriteComponent(
+      "monster_sprite", {.x = 16, .y = 13, .w = 16, .h = 19}, 3, {0, 0});
   lonk.location = LocationComponent(200, 200);
   enemy.location = LocationComponent(200, 300);
   enemy.ai = AIComponent();
@@ -185,16 +186,15 @@ TEST_CASE("AI move down", "[ai_down]") {
   REQUIRE(enemy.location->coordinates.y < 300);
 }
 
-
 TEST_CASE("Lonk loses heart", "[lose_heart]") {
   GameObject lonk;
   GameObject enemy;
   lonk.type = ObjectType::kPlayer;
   enemy.type = ObjectType::kEnemy;
-  lonk.sprite =
-      SpriteComponent("lonk_sprite", {.x = 16, .y = 16, .w = 16, .h = 16}, 3);
-  enemy.sprite = 
-      SpriteComponent("monster_sprite", {.x = 16, .y = 13, .w = 16, .h = 19}, 3);
+  lonk.sprite = SpriteComponent(
+      "lonk_sprite", {.x = 16, .y = 16, .w = 16, .h = 16}, 3, {0, 0});
+  enemy.sprite = SpriteComponent(
+      "monster_sprite", {.x = 16, .y = 13, .w = 16, .h = 19}, 3, {0, 0});
   lonk.hit_box = HitBoxComponent();
   enemy.hit_box = HitBoxComponent();
   lonk.is_active = true;
@@ -218,10 +218,10 @@ TEST_CASE("AI move up_left", "[ai_up_left]") {
   lonk.type = ObjectType::kPlayer;
   enemy.type = ObjectType::kEnemy;
   enemy.is_active = true;
-  lonk.sprite =
-      SpriteComponent("lonk_sprite", {.x = 16, .y = 16, .w = 16, .h = 16}, 3);
-  enemy.sprite = 
-      SpriteComponent("monster_sprite", {.x = 16, .y = 13, .w = 16, .h = 19}, 3);
+  lonk.sprite = SpriteComponent(
+      "lonk_sprite", {.x = 16, .y = 16, .w = 16, .h = 16}, 3, {0, 0});
+  enemy.sprite = SpriteComponent(
+      "monster_sprite", {.x = 16, .y = 13, .w = 16, .h = 19}, 3, {0, 0});
   lonk.location = LocationComponent(200, 100);
   enemy.location = LocationComponent(300, 200);
   enemy.ai = AIComponent();
@@ -240,10 +240,10 @@ TEST_CASE("AI move down_left", "[ai_down_left]") {
   lonk.type = ObjectType::kPlayer;
   enemy.type = ObjectType::kEnemy;
   enemy.is_active = true;
-  lonk.sprite =
-      SpriteComponent("lonk_sprite", {.x = 16, .y = 16, .w = 16, .h = 16}, 3);
-  enemy.sprite = 
-      SpriteComponent("monster_sprite", {.x = 16, .y = 13, .w = 16, .h = 19}, 3);
+  lonk.sprite = SpriteComponent(
+      "lonk_sprite", {.x = 16, .y = 16, .w = 16, .h = 16}, 3, {0, 0});
+  enemy.sprite = SpriteComponent(
+      "monster_sprite", {.x = 16, .y = 13, .w = 16, .h = 19}, 3, {0, 0});
   lonk.location = LocationComponent(200, 300);
   enemy.location = LocationComponent(300, 200);
   enemy.ai = AIComponent();
@@ -262,10 +262,10 @@ TEST_CASE("AI move up_right", "[ai_up_right]") {
   lonk.type = ObjectType::kPlayer;
   enemy.type = ObjectType::kEnemy;
   enemy.is_active = true;
-  lonk.sprite =
-      SpriteComponent("lonk_sprite", {.x = 16, .y = 16, .w = 16, .h = 16}, 3);
-  enemy.sprite = 
-      SpriteComponent("monster_sprite", {.x = 16, .y = 13, .w = 16, .h = 19}, 3);
+  lonk.sprite = SpriteComponent(
+      "lonk_sprite", {.x = 16, .y = 16, .w = 16, .h = 16}, 3, {0, 0});
+  enemy.sprite = SpriteComponent(
+      "monster_sprite", {.x = 16, .y = 13, .w = 16, .h = 19}, 3, {0, 0});
   lonk.location = LocationComponent(400, 100);
   enemy.location = LocationComponent(300, 200);
   enemy.ai = AIComponent();
@@ -284,10 +284,10 @@ TEST_CASE("AI move down_right", "[ai_down_right]") {
   lonk.type = ObjectType::kPlayer;
   enemy.type = ObjectType::kEnemy;
   enemy.is_active = true;
-  lonk.sprite =
-      SpriteComponent("lonk_sprite", {.x = 16, .y = 16, .w = 16, .h = 16}, 3);
-  enemy.sprite = 
-      SpriteComponent("monster_sprite", {.x = 16, .y = 13, .w = 16, .h = 19}, 3);
+  lonk.sprite = SpriteComponent(
+      "lonk_sprite", {.x = 16, .y = 16, .w = 16, .h = 16}, 3, {0, 0});
+  enemy.sprite = SpriteComponent(
+      "monster_sprite", {.x = 16, .y = 13, .w = 16, .h = 19}, 3, {0, 0});
   lonk.location = LocationComponent(400, 300);
   enemy.location = LocationComponent(300, 200);
   enemy.ai = AIComponent();
