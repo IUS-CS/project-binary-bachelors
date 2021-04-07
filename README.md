@@ -25,5 +25,5 @@ The Legend of Zordo is a 2d action-adventure game with exciting adventure, terri
 ## Support
 If you need any help or have any questions, the developers can be reached at their respective emails or on discord.
 
-##Contributing
+## Contributing
 Anyone who would like to contribute can clone the git repository, build the project, and then either use SDL libraries. Note that there are also very good libraries in SFML for networking if anybody would like to add online functionality to the game.
