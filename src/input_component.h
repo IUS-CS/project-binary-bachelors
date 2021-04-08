@@ -11,6 +11,7 @@ struct InputComponent {
   bool left;
   bool right;
   bool up;
+  bool attack;
   bool down;
   bool quit;
 

@@ -130,4 +130,10 @@ void AIEngine::NextMove(GameObject &object) {
   } else {
     object.ai->current_action = ActionType::kCutOffPlayer;
   }
+  random_number = rand() % 100;
+  if (random_number < 60) {
+    object.movement->speed = 2;
+  } else {
+    object.movement->speed = 3;
+  }
 }

@@ -18,4 +18,3 @@ GameObject &GetPlayer(std::vector<GameObject> &objects) {
     }
   }
 }
-

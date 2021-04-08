@@ -26,7 +26,8 @@ struct OrcAnimations {
                            Vector2(0, 0), 150);
     frames.push_back(frame);
 
-    Animation animation = Animation(AnimationType::kIdle, frames, 0);
+    Animation animation =
+        Animation(AnimationType::kIdle, frames, 0, true, true);
     animations.push_back(animation);
 
     frames.clear();
@@ -47,7 +48,7 @@ struct OrcAnimations {
                            Vector2(0, 0), 150);
     frames.push_back(frame);
 
-    animation = Animation(AnimationType::kWalkSide, frames, 0);
+    animation = Animation(AnimationType::kWalkSide, frames, 0, true, true);
 
     animations.push_back(animation);
 
@@ -69,7 +70,7 @@ struct OrcAnimations {
                            Vector2(0, 0), 150);
     frames.push_back(frame);
 
-    animation = Animation(AnimationType::kWalkUp, frames, 0);
+    animation = Animation(AnimationType::kWalkUp, frames, 0, true, true);
 
     animations.push_back(animation);
 
@@ -80,7 +81,7 @@ struct OrcAnimations {
                            Vector2(0, 0), 150);
     frames.push_back(frame);
 
-    animation = Animation(AnimationType::kIdle, frames, 0);
+    animation = Animation(AnimationType::kIdle, frames, 0, true, true);
 
     animations.push_back(animation);
 
@@ -91,7 +92,7 @@ struct OrcAnimations {
                            Vector2(0, 0), 150);
     frames.push_back(frame);
 
-    animation = Animation(AnimationType::kIdle, frames, 0);
+    animation = Animation(AnimationType::kIdle, frames, 0, true, true);
 
     animations.push_back(animation);
 
@@ -102,7 +103,7 @@ struct OrcAnimations {
                            Vector2(0, 0), 150);
     frames.push_back(frame);
 
-    animation = Animation(AnimationType::kIdle, frames, 0);
+    animation = Animation(AnimationType::kIdle, frames, 0, true, true);
 
     animations.push_back(animation);
 

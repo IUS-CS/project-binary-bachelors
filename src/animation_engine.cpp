@@ -1,104 +1,126 @@
 #include "animation_engine.h"
+#include "input_component.h"
+#include <iostream>
+
+namespace {
+int &GetAnimationId(GameObject &object) {
+  return object.animation->current_animation_id;
+}
+
+Animation &GetAnimation(GameObject &object) {
+  return object.animation->animation_list[GetAnimationId(object)];
+}
+
+int &GetFrameId(GameObject &object) {
+  Animation &animation = GetAnimation(object);
+  return animation.current_frame_id;
+}
+
+bool IsItTimeToChangeFrames(GameObject &object) {
+  auto &animation = GetAnimation(object);
+  auto &frame_id = GetFrameId(object);
+  int current_time_ms = SDL_GetTicks();
+  int elapsed_time_ms =
+      current_time_ms - object.animation->start_of_last_animation_frame_ms;
+
+  if (elapsed_time_ms >=
+      animation.animation_frames[frame_id].time_before_next_frame) {
+    return true;
+  }
+  return false;
+}
+
+void StartNewAnimation(GameObject &object, AnimationType type) {
+  auto &animation_id = GetAnimationId(object);
+  for (int i = 0; i < (int)object.animation->animation_list.size(); i++) {
+    if (object.animation->animation_list[i].type == type) {
+      animation_id = i;
+    }
+  }
+}
+
+void PickAnimation(GameObject &object) {
+  auto &animation = GetAnimation(object);
+  auto &animation_id = GetAnimationId(object);
+  auto &frame_id = GetFrameId(object);
+  auto &animation_list = object.animation->animation_list;
+  if (animation.cancel_on_key_release) {
+    if (InputComponent::Get().attack && object.type == ObjectType::kPlayer) {
+      animation_id = 6;
+    } else if (object.movement->current_direction != MovementDirection::kNone) {
+      switch (object.movement->current_direction) {
+      case MovementDirection::kUp:
+        if (animation.priority <= animation_list[2].priority) {
+          animation_id = 2;
+        }
+        break;
+      case MovementDirection::kDown:
+        if (animation_list[animation_id].priority <=
+            animation_list[2].priority) {
+          animation_id = 0;
+        }
+        break;
+      case MovementDirection::kDownLeft:
+      case MovementDirection::kDownRight:
+      case MovementDirection::kUpLeft:
+      case MovementDirection::kUpRight:
+      case MovementDirection::kRight:
+      case MovementDirection::kLeft:
+        if (animation_list[animation_id].priority <=
+            animation_list[2].priority) {
+          animation_id = 1;
+        }
+        break;
+      default:
+        break;
+      }
+    } else {
+      if (animation_id == 0 || animation_id == 6) {
+        animation_id = 3;
+      }
+      if (animation_id == 1) {
+        animation_id = 4;
+      }
+
+      if (animation_id == 2) {
+        animation_id = 5;
+      }
+    }
+    frame_id = 0;
+  }
+}
+} // namespace
 
 AnimationEngine::AnimationEngine() {}
 
 AnimationEngine::~AnimationEngine() {}
 
 void AnimationEngine::Run(GameObject &object) {
+  // std::cout << "In Animation Engine" << std::endl;
+  // std::cout << "Took address of object" << std::endl;
+  // std::cout << "animation_id set!" << std::endl;
+  // std::cout << *animation_id << std::endl;
   if (object.animation) {
+    auto &animation = GetAnimation(object);
+    // std::cout << "animation set!" << std::endl;
+    // Broken line:
+    auto &frame_id = GetFrameId(object);
+    // std::cout << &frame_id << std::endl;
+    // std::cout << "frame_id set!" << std::endl;
+    // std::cout << "Hitting first if" << std::endl;
     PickAnimation(object);
+    // std::cout << "Animation Picked!" << std::endl;
     if (IsItTimeToChangeFrames(object)) {
-      if (object.animation
-              ->animation_list[object.animation->current_animation_id]
-              .current_frame_id <
-          (int)object.animation
-                  ->animation_list[object.animation->current_animation_id]
-                  .animation_frames.size() -
-              1) {
-        object.animation->animation_list[object.animation->current_animation_id]
-            .current_frame_id += 1;
-        object.sprite->sprite_rect =
-            object.animation
-                ->animation_list[object.animation->current_animation_id]
-                .animation_frames
-                    [object.animation
-                         ->animation_list[object.animation
-                                              ->current_animation_id]
-                         .current_frame_id]
-                .source;
+      frame_id = (frame_id + 1) % animation.animation_frames.size();
+      if (!animation.loop && frame_id == 0) {
+        GetAnimationId(object) = 0;
+        // std::cout << "SAME OBJECT!!!!" << std::endl;
+        PickAnimation(object);
       } else {
-        object.animation->animation_list[object.animation->current_animation_id]
-            .current_frame_id = 0;
         object.sprite->sprite_rect =
-            object.animation
-                ->animation_list[object.animation->current_animation_id]
-                .animation_frames
-                    [object.animation
-                         ->animation_list[object.animation
-                                              ->current_animation_id]
-                         .current_frame_id]
-                .source;
+            animation.animation_frames[frame_id].source;
       }
       object.animation->start_of_last_animation_frame_ms = SDL_GetTicks();
     }
-  }
-}
-
-bool AnimationEngine::IsItTimeToChangeFrames(GameObject &object) {
-  int current_time_ms = SDL_GetTicks();
-  int elapsed_time_ms =
-      current_time_ms - object.animation->start_of_last_animation_frame_ms;
-
-  if (elapsed_time_ms >=
-      object.animation->animation_list[object.animation->current_animation_id]
-          .animation_frames
-              [object.animation
-                   ->animation_list[object.animation->current_animation_id]
-                   .current_frame_id]
-          .time_before_next_frame) {
-    return true;
-  }
-  return false;
-}
-
-void AnimationEngine::StartNewAnimation(GameObject &object,
-                                        AnimationType type) {
-  for (int i = 0; i < (int)object.animation->animation_list.size(); i++) {
-    if (object.animation->animation_list[i].type == type) {
-      object.animation->current_animation_id = i;
-    }
-  }
-}
-
-void AnimationEngine::PickAnimation(GameObject &object) {
-  switch (object.movement->current_direction) {
-  case MovementDirection::kUp:
-    object.animation->current_animation_id = 2;
-    break;
-  case MovementDirection::kDown:
-    object.animation->current_animation_id = 0;
-    break;
-  case MovementDirection::kDownLeft:
-  case MovementDirection::kDownRight:
-  case MovementDirection::kUpLeft:
-  case MovementDirection::kUpRight:
-  case MovementDirection::kRight:
-  case MovementDirection::kLeft:
-    object.animation->current_animation_id = 1;
-    break;
-  case MovementDirection::kNone:
-    if (object.animation->current_animation_id == 0) {
-      object.animation->current_animation_id = 3;
-    }
-    if (object.animation->current_animation_id == 1) {
-      object.animation->current_animation_id = 4;
-    }
-
-    if (object.animation->current_animation_id == 2) {
-      object.animation->current_animation_id = 5;
-    }
-    break;
-  default:
-    break;
   }
 }
