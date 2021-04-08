@@ -28,7 +28,7 @@ struct LonkAnimations {
     frames.push_back(frame);
 
     Animation animation =
-        Animation(AnimationType::kIdle, frames, 1, true, true);
+        Animation(AnimationType::kWalkDown, frames, 1, true, true);
     animations.push_back(animation);
 
     frames.clear();
@@ -79,7 +79,7 @@ struct LonkAnimations {
 
     // Down idle
     frame = AnimationFrame({.x = 159, .y = 400, .w = 17, .h = 18},
-                           Vector2(0, 0), 150);
+                           Vector2(0, 0), 1000);
     frames.push_back(frame);
 
     animation = Animation(AnimationType::kIdle, frames, 0, true, true);
@@ -90,7 +90,7 @@ struct LonkAnimations {
 
     // Side idle
     frame = AnimationFrame({.x = 159, .y = 448, .w = 17, .h = 18},
-                           Vector2(0, 0), 150);
+                           Vector2(0, 0), 1000);
     frames.push_back(frame);
 
     animation = Animation(AnimationType::kIdle, frames, 0, true, true);
@@ -101,7 +101,7 @@ struct LonkAnimations {
 
     // Up idle
     frame = AnimationFrame({.x = 159, .y = 496, .w = 17, .h = 18},
-                           Vector2(0, 0), 150);
+                           Vector2(0, 0), 1000);
     frames.push_back(frame);
 
     animation = Animation(AnimationType::kIdle, frames, 0, true, true);
@@ -126,7 +126,7 @@ struct LonkAnimations {
                            Vector2(8, 3), 100);
     frames.push_back(frame);
 
-    animation = Animation(AnimationType::kWalkUp, frames, 2, false, false);
+    animation = Animation(AnimationType::kAttack, frames, 2, false, false);
 
     animations.push_back(animation);
 
