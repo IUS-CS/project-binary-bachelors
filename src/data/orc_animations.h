@@ -78,7 +78,7 @@ struct OrcAnimations {
 
     // Down idle
     frame = AnimationFrame({.x = 160, .y = 398, .w = 16, .h = 18},
-                           Vector2(0, 0), 1000);
+                           Vector2(0, 0), 100);
     frames.push_back(frame);
 
     animation = Animation(AnimationType::kIdle, frames, 0, true, true);
@@ -89,7 +89,7 @@ struct OrcAnimations {
 
     // Side idle
     frame = AnimationFrame({.x = 160, .y = 446, .w = 16, .h = 18},
-                           Vector2(0, 0), 1000);
+                           Vector2(0, 0), 100);
     frames.push_back(frame);
 
     animation = Animation(AnimationType::kIdle, frames, 0, true, true);
@@ -100,7 +100,7 @@ struct OrcAnimations {
 
     // Up idle
     frame = AnimationFrame({.x = 160, .y = 494, .w = 16, .h = 18},
-                           Vector2(0, 0), 1000);
+                           Vector2(0, 0), 100);
     frames.push_back(frame);
 
     animation = Animation(AnimationType::kIdle, frames, 0, true, true);
