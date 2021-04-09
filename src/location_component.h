@@ -3,6 +3,8 @@
 
 #include "vector2.h"
 
+enum class DirectionFaced { kUp, kDown, kLeft, kRight };
+
 // This component is just the coordinates of where the game object is on the
 // screen.
 struct LocationComponent {
@@ -14,6 +16,7 @@ struct LocationComponent {
     coordinates.x = x;
     coordinates.y = y;
   }
+  DirectionFaced direction_faced = DirectionFaced::kDown;
   bool flip = false;
   Vector2 coordinates;
 };

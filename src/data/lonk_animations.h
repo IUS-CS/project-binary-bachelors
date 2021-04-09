@@ -20,11 +20,11 @@ struct LonkAnimations {
     frames.push_back(frame);
 
     frame = AnimationFrame({.x = 112, .y = 112, .w = 17, .h = 18},
-                           Vector2(0, 0), 150);
+                           Vector2(2, 0), 150);
     frames.push_back(frame);
 
     frame = AnimationFrame({.x = 160, .y = 112, .w = 17, .h = 18},
-                           Vector2(0, 0), 150);
+                           Vector2(2, 0), 150);
     frames.push_back(frame);
 
     Animation animation =
@@ -79,7 +79,7 @@ struct LonkAnimations {
 
     // Down idle
     frame = AnimationFrame({.x = 159, .y = 400, .w = 17, .h = 18},
-                           Vector2(0, 0), 100);
+                           Vector2(0, 0), 1000);
     frames.push_back(frame);
 
     animation = Animation(AnimationType::kIdle, frames, 0, true, true);
@@ -90,7 +90,7 @@ struct LonkAnimations {
 
     // Side idle
     frame = AnimationFrame({.x = 159, .y = 448, .w = 17, .h = 18},
-                           Vector2(0, 0), 100);
+                           Vector2(0, 0), 1000);
     frames.push_back(frame);
 
     animation = Animation(AnimationType::kIdle, frames, 0, true, true);
@@ -101,7 +101,7 @@ struct LonkAnimations {
 
     // Up idle
     frame = AnimationFrame({.x = 159, .y = 496, .w = 17, .h = 18},
-                           Vector2(0, 0), 100);
+                           Vector2(0, 0), 1000);
     frames.push_back(frame);
 
     animation = Animation(AnimationType::kIdle, frames, 0, true, true);
@@ -110,20 +110,87 @@ struct LonkAnimations {
 
     frames.clear();
 
-    // Attack
-    frame = AnimationFrame({.x = 15, .y = 258, .w = 17, .h = 18}, Vector2(1, 6),
-                           100);
+    // Attack Down
+    frame = AnimationFrame({.x = 15, .y = 258, .w = 17, .h = 18},
+                           Vector2(-3, 6), 100); // 100
     frames.push_back(frame);
-    frame = AnimationFrame({.x = 63, .y = 256, .w = 17, .h = 27}, Vector2(0, 0),
-                           150);
+    frame = AnimationFrame({.x = 63, .y = 256, .w = 17, .h = 27},
+                           Vector2(-3, 0), 150); // 150
     frames.push_back(frame);
 
     frame = AnimationFrame({.x = 113, .y = 257, .w = 16, .h = 26},
-                           Vector2(8, 3), 150);
+                           Vector2(3, 3), 150); // 150
     frames.push_back(frame);
 
     frame = AnimationFrame({.x = 161, .y = 257, .w = 15, .h = 19},
-                           Vector2(8, 3), 100);
+                           Vector2(3, 3), 100); // 100
+    frames.push_back(frame);
+
+    animation = Animation(AnimationType::kAttack, frames, 2, false, false);
+
+    animations.push_back(animation);
+
+    frames.clear();
+
+    // Attack Down flipped
+    frame = AnimationFrame({.x = 15, .y = 258, .w = 17, .h = 18}, Vector2(3, 6),
+                           100); // 100
+    frames.push_back(frame);
+    frame = AnimationFrame({.x = 63, .y = 256, .w = 17, .h = 27}, Vector2(3, 0),
+                           150); // 150
+    frames.push_back(frame);
+
+    frame = AnimationFrame({.x = 113, .y = 257, .w = 16, .h = 26},
+                           Vector2(0, 3), 150); // 150
+    frames.push_back(frame);
+
+    frame = AnimationFrame({.x = 161, .y = 257, .w = 15, .h = 19},
+                           Vector2(3, 3), 100); // 100
+    frames.push_back(frame);
+
+    animation = Animation(AnimationType::kAttack, frames, 2, false, false);
+
+    animations.push_back(animation);
+
+    frames.clear();
+
+    // Attack right
+    frame = AnimationFrame({.x = 16, .y = 306, .w = 13, .h = 14}, Vector2(3, 6),
+                           100); // 100
+    frames.push_back(frame);
+    frame = AnimationFrame({.x = 66, .y = 304, .w = 27, .h = 16}, Vector2(9, 0),
+                           150); // 150
+    frames.push_back(frame);
+
+    frame = AnimationFrame({.x = 114, .y = 304, .w = 27, .h = 16},
+                           Vector2(9, 0), 150); // 150
+    frames.push_back(frame);
+
+    frame = AnimationFrame({.x = 162, .y = 304, .w = 18, .h = 16},
+                           Vector2(9, 0), 100); // 100
+    frames.push_back(frame);
+
+    animation = Animation(AnimationType::kAttack, frames, 2, false, false);
+
+    animations.push_back(animation);
+
+    frames.clear();
+
+    // Attack left
+    frame = AnimationFrame({.x = 16, .y = 306, .w = 13, .h = 14}, Vector2(9, 6),
+                           100); // 100
+    frames.push_back(frame);
+    frame =
+        AnimationFrame({.x = 66, .y = 304, .w = 27, .h = 16}, Vector2(-39, 0),
+                       150); // 150
+    frames.push_back(frame);
+
+    frame = AnimationFrame({.x = 114, .y = 304, .w = 27, .h = 16},
+                           Vector2(-39, 0), 150); // 150
+    frames.push_back(frame);
+
+    frame = AnimationFrame({.x = 162, .y = 304, .w = 18, .h = 16},
+                           Vector2(-12, 0), 100); // 100
     frames.push_back(frame);
 
     animation = Animation(AnimationType::kAttack, frames, 2, false, false);

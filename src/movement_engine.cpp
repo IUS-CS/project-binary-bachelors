@@ -53,109 +53,112 @@ void MovementEngine::Run(GameObject &object) {
     }
   }
 
-  auto &ic = InputComponent::Get();
-  if (object.location && object.movement) {
-    if (object.type == ObjectType::kPlayer) {
-      if (ic.up) {
-        object.movement->current_direction = MovementDirection::kUp;
-      } else if (ic.down) {
-        object.movement->current_direction = MovementDirection::kDown;
+  if (!object.animation->is_attacking) {
+    auto &ic = InputComponent::Get();
+    if (object.location && object.movement) {
+      if (object.type == ObjectType::kPlayer) {
+        if (ic.up) {
+          object.movement->current_direction = MovementDirection::kUp;
+        } else if (ic.down) {
+          object.movement->current_direction = MovementDirection::kDown;
+        }
+        if (ic.right) {
+          object.movement->current_direction = MovementDirection::kRight;
+          if (ic.up) {
+            object.movement->current_direction = MovementDirection::kUpRight;
+          } else if (ic.down) {
+            object.movement->current_direction = MovementDirection::kDownRight;
+          }
+        } else if (ic.left) {
+          object.movement->current_direction = MovementDirection::kLeft;
+          if (ic.up) {
+            object.movement->current_direction = MovementDirection::kUpLeft;
+          } else if (ic.down) {
+            object.movement->current_direction = MovementDirection::kDownLeft;
+          }
+        }
+        if (object.movement->current_direction == MovementDirection::kLeft ||
+            object.movement->current_direction == MovementDirection::kUpLeft ||
+            object.movement->current_direction ==
+                MovementDirection::kDownLeft) {
+          object.location->flip = true;
+        }
       }
-      if (ic.right) {
-        object.movement->current_direction = MovementDirection::kRight;
-        if (ic.up) {
-          object.movement->current_direction = MovementDirection::kUpRight;
-        } else if (ic.down) {
-          object.movement->current_direction = MovementDirection::kDownRight;
+
+      if (object.movement->current_direction == MovementDirection::kLeft) {
+        if (!object.movement->lock_left) {
+          object.location->coordinates.x =
+              object.location->coordinates.x - object.movement->speed;
         }
-      } else if (ic.left) {
-        object.movement->current_direction = MovementDirection::kLeft;
-        if (ic.up) {
-          object.movement->current_direction = MovementDirection::kUpLeft;
-        } else if (ic.down) {
-          object.movement->current_direction = MovementDirection::kDownLeft;
+      }
+      if (object.movement->current_direction == MovementDirection::kRight) {
+        if (!object.movement->lock_right) {
+          object.location->coordinates.x =
+              object.location->coordinates.x + object.movement->speed;
         }
+      }
+      if (object.movement->current_direction == MovementDirection::kDown) {
+        if (!object.movement->lock_down) {
+          object.location->coordinates.y =
+              object.location->coordinates.y + object.movement->speed;
+        }
+      }
+      if (object.movement->current_direction == MovementDirection::kUp) {
+        if (!object.movement->lock_up) {
+          object.location->coordinates.y =
+              object.location->coordinates.y - object.movement->speed;
+        }
+      }
+      if (object.movement->current_direction == MovementDirection::kUpRight) {
+        if (!object.movement->lock_right) {
+          object.location->coordinates.x =
+              object.location->coordinates.x + object.movement->speed;
+        }
+        if (!object.movement->lock_up) {
+          object.location->coordinates.y =
+              object.location->coordinates.y - object.movement->speed;
+        }
+      }
+      if (object.movement->current_direction == MovementDirection::kUpLeft) {
+        if (!object.movement->lock_left) {
+          object.location->coordinates.x =
+              object.location->coordinates.x - object.movement->speed;
+        }
+        if (!object.movement->lock_up) {
+          object.location->coordinates.y =
+              object.location->coordinates.y - object.movement->speed;
+        }
+      }
+      if (object.movement->current_direction == MovementDirection::kDownRight) {
+        if (!object.movement->lock_right) {
+          object.location->coordinates.x =
+              object.location->coordinates.x + object.movement->speed;
+        }
+        if (!object.movement->lock_down) {
+          object.location->coordinates.y =
+              object.location->coordinates.y + object.movement->speed;
+        }
+      }
+      if (object.movement->current_direction == MovementDirection::kDownLeft) {
+        if (!object.movement->lock_left) {
+          object.location->coordinates.x =
+              object.location->coordinates.x - object.movement->speed;
+        }
+        if (!object.movement->lock_down) {
+          object.location->coordinates.y =
+              object.location->coordinates.y + object.movement->speed;
+        }
+      }
+      if (object.movement->current_direction == MovementDirection::kRight ||
+          object.movement->current_direction == MovementDirection::kUpRight ||
+          object.movement->current_direction == MovementDirection::kDownRight) {
+        object.location->flip = false;
       }
       if (object.movement->current_direction == MovementDirection::kLeft ||
           object.movement->current_direction == MovementDirection::kUpLeft ||
           object.movement->current_direction == MovementDirection::kDownLeft) {
         object.location->flip = true;
       }
-    }
-
-    if (object.movement->current_direction == MovementDirection::kLeft) {
-      if (!object.movement->lock_left) {
-        object.location->coordinates.x =
-            object.location->coordinates.x - object.movement->speed;
-      }
-    }
-    if (object.movement->current_direction == MovementDirection::kRight) {
-      if (!object.movement->lock_right) {
-        object.location->coordinates.x =
-            object.location->coordinates.x + object.movement->speed;
-      }
-    }
-    if (object.movement->current_direction == MovementDirection::kDown) {
-      if (!object.movement->lock_down) {
-        object.location->coordinates.y =
-            object.location->coordinates.y + object.movement->speed;
-      }
-    }
-    if (object.movement->current_direction == MovementDirection::kUp) {
-      if (!object.movement->lock_up) {
-        object.location->coordinates.y =
-            object.location->coordinates.y - object.movement->speed;
-      }
-    }
-    if (object.movement->current_direction == MovementDirection::kUpRight) {
-      if (!object.movement->lock_right) {
-        object.location->coordinates.x =
-            object.location->coordinates.x + object.movement->speed;
-      }
-      if (!object.movement->lock_up) {
-        object.location->coordinates.y =
-            object.location->coordinates.y - object.movement->speed;
-      }
-    }
-    if (object.movement->current_direction == MovementDirection::kUpLeft) {
-      if (!object.movement->lock_left) {
-        object.location->coordinates.x =
-            object.location->coordinates.x - object.movement->speed;
-      }
-      if (!object.movement->lock_up) {
-        object.location->coordinates.y =
-            object.location->coordinates.y - object.movement->speed;
-      }
-    }
-    if (object.movement->current_direction == MovementDirection::kDownRight) {
-      if (!object.movement->lock_right) {
-        object.location->coordinates.x =
-            object.location->coordinates.x + object.movement->speed;
-      }
-      if (!object.movement->lock_down) {
-        object.location->coordinates.y =
-            object.location->coordinates.y + object.movement->speed;
-      }
-    }
-    if (object.movement->current_direction == MovementDirection::kDownLeft) {
-      if (!object.movement->lock_left) {
-        object.location->coordinates.x =
-            object.location->coordinates.x - object.movement->speed;
-      }
-      if (!object.movement->lock_down) {
-        object.location->coordinates.y =
-            object.location->coordinates.y + object.movement->speed;
-      }
-    }
-    if (object.movement->current_direction == MovementDirection::kRight ||
-        object.movement->current_direction == MovementDirection::kUpRight ||
-        object.movement->current_direction == MovementDirection::kDownRight) {
-      object.location->flip = false;
-    }
-    if (object.movement->current_direction == MovementDirection::kLeft ||
-        object.movement->current_direction == MovementDirection::kUpLeft ||
-        object.movement->current_direction == MovementDirection::kDownLeft) {
-      object.location->flip = true;
     }
   }
 }

@@ -1,6 +1,7 @@
 #include "graphics_engine.h"
 #include "graphics_component.h"
 
+#include <iostream>
 #include <string>
 
 constexpr char kGameTitle[] = "Legend of Zordo";
