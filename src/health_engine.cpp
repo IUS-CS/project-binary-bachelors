@@ -1,4 +1,5 @@
 #include "health_engine.h"
+#include <iostream>
 
 HealthEngine::HealthEngine() {}
 
@@ -13,7 +14,22 @@ void HealthEngine::Run(GameObject &object) {
         if (hit_object->type == ObjectType::kEnemy &&
             object.type == ObjectType::kPlayer &&
             !object.hit_box->is_invincible) {
-          object.health->health = object.health->health - 1;
+          if (!object.animation->is_attacking) {
+            object.health->health -= 1;
+            if (object.health->health == 0) {
+              object.is_active = false;
+            } else {
+              object.hit_box->is_invincible = true;
+              object.hit_box->time_since_last_hit_ms = SDL_GetTicks();
+            }
+          }
+        }
+        if (hit_object->type == ObjectType::kPlayer &&
+            object.type == ObjectType::kEnemy &&
+            !object.hit_box->is_invincible &&
+            hit_object->animation->is_attacking) {
+          object.health->health -= 1;
+          std::cout << "Monster Hit!!!!" << std::endl;
           if (object.health->health == 0) {
             object.is_active = false;
           } else {

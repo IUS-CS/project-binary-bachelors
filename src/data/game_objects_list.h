@@ -113,6 +113,7 @@ struct GameObjectsList {
     monster.is_active = true;
     monster.ai->time_of_last_decision_ms = -6000;
     OrcAnimations a_orc;
+    monster.health = HealthComponent();
     monster.animation = AnimationComponent(a_orc.animations);
     monster.movement = MovementComponent(2);
 
@@ -125,6 +126,7 @@ struct GameObjectsList {
     monster2.location = LocationComponent(300, 400);
     monster2.hit_box = HitBoxComponent();
     monster2.is_active = true;
+    monster2.health = HealthComponent();
     monster2.animation = AnimationComponent(a_orc.animations);
     monster2.movement = MovementComponent(2);
 
