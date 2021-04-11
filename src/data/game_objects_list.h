@@ -95,7 +95,7 @@ struct GameObjectsList {
     lonk.type = ObjectType::kPlayer;
     lonk.sprite = SpriteComponent(
         "lonk_sprite", {.x = 16, .y = 16, .w = 16, .h = 16}, 3, {0, 0});
-    lonk.location = LocationComponent(0, 100);
+    lonk.location = LocationComponent(300, 100);
     lonk.hit_box = HitBoxComponent();
     lonk.is_active = true;
     lonk.health = HealthComponent(6);

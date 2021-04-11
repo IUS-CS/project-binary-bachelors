@@ -45,7 +45,10 @@ void PickAnimation(GameObject &object) {
   auto &animation_id = GetAnimationId(object);
   auto &frame_id = GetFrameId(object);
   auto &animation_list = object.animation->animation_list;
-  if (InputComponent::Get().attack && object.type == ObjectType::kPlayer) {
+  if (object.hit_box->is_hit) {
+    UpdateAnimationId(animation_id, frame_id, 11, object);
+  } else if (InputComponent::Get().attack &&
+             object.type == ObjectType::kPlayer) {
     object.animation->is_attacking = true;
     if (object.location->direction_faced == DirectionFaced::kDown) {
       if (object.location->flip) {
@@ -61,6 +64,7 @@ void PickAnimation(GameObject &object) {
       UpdateAnimationId(animation_id, frame_id, 9, object);
     }
     if (object.location->direction_faced == DirectionFaced::kUp) {
+      UpdateAnimationId(animation_id, frame_id, 10, object);
     }
   } else {
     int current_priority = animation.priority;
@@ -136,6 +140,10 @@ void AnimationEngine::Run(GameObject &object) {
             object.location->direction_faced == DirectionFaced::kLeft) {
           object.animation->is_attacking = false;
           GetAnimationId(object) = 4;
+        }
+        if (object.location->direction_faced == DirectionFaced::kUp) {
+          object.animation->is_attacking = false;
+          GetAnimationId(object) = 5;
         }
         PickAnimation(object);
       }

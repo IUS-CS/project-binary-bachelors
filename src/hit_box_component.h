@@ -8,6 +8,7 @@ struct HitBoxComponent {
   HitBoxComponent() {}
   ~HitBoxComponent() {}
 
+  bool is_hit = false;
   bool is_invincible = false;
   int time_since_last_hit_ms;
 };
