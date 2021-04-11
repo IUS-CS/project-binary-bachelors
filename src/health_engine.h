@@ -7,7 +7,7 @@ class HealthEngine {
 public:
   HealthEngine();
   ~HealthEngine();
-  void Run(GameObject &object);
+  void Run(GameObject &object, std::vector<GameObject> &object_list);
 
   // This CheckInvincibility function is required; otherwise, an unintended
   // amount of health will be immediately depleted upon collision.

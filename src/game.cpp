@@ -1,3 +1,4 @@
+#include <iostream>
 #include <vector>
 
 #include "ai_component.h"
@@ -37,13 +38,18 @@ void Game::Run() {
     if (InputComponent::Get().quit) {
       return;
     }
-    for (auto &object : object_list) {
+    int size = object_list.size();
+    for (int i = 0; i < size; i++) {
+      auto &object = object_list[i];
       if (object.is_active) {
         // At the beginning of the loop, we run all of the engines that will
         // change data inside our game object.
         ai_engine.Run(object, player);
         collision_detection_engine.Run(object, object_list);
-        health_engine.Run(object);
+        health_engine.Run(object, object_list);
+        if (size != (int)object_list.size()) {
+          break;
+        }
         movement_engine.Run(object);
 
         // Then we draw the game object to the renderer.

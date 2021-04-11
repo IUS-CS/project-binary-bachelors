@@ -13,7 +13,7 @@ struct GameObjectsList {
   GameObject rupee;
   GameObject rupee2;
   GameObject monster;
-  GameObject monster2;
+  //  GameObject monster2;
   GameObject hud;
 
   /*
@@ -75,8 +75,6 @@ struct GameObjectsList {
     map.map = MapComponent(lvl1);
     map.is_active = true;
 
-    
-
     // Lonk
     lonk.type = ObjectType::kPlayer;
     lonk.sprite =
@@ -97,8 +95,10 @@ struct GameObjectsList {
     monster.is_active = true;
     monster.ai->time_of_last_decision_ms = -6000;
     monster.movement = MovementComponent(3);
+    monster.health = HealthComponent(3);
 
     // Monster2
+    /*
     monster2.type = ObjectType::kEnemy;
     monster2.ai = AIComponent();
     monster2.ai->time_of_last_decision_ms = -6000;
@@ -108,7 +108,8 @@ struct GameObjectsList {
     monster2.hit_box = HitBoxComponent();
     monster2.is_active = true;
     monster2.movement = MovementComponent(3);
-
+    monster2.health = HealthComponent(3);
+*/
     // Hud
     hud.type = ObjectType::kHud;
     hud.is_active = true;
@@ -124,7 +125,8 @@ struct GameObjectsList {
         SpriteComponent("attack_box", {.x = 0, .y = 0, .w = 1, .h = 1}, 1);
     attack.location = LocationComponent();
     // Creating object vector
-    objects = {map, monster, monster2, lonk, hud, attack};
+    //   objects = {map, monster, monster2, lonk, hud, attack};
+    objects = {map, monster, lonk, hud, attack};
     for (unsigned int i = 0; i < objects.size(); i++) {
       objects[i].id_num = i;
     }
