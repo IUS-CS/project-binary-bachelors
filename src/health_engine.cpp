@@ -25,12 +25,11 @@ void HealthEngine::Run(GameObject &object,
         if (object.type == ObjectType::kEnemy) {
           object.health->health = 0;
           object.is_active = false;
+          srand(time(NULL));
           int drop_chance = rand() % 100;
           if (drop_chance < 33) {
           } else if (drop_chance >= 33 && drop_chance < 66) {
             GameObject green_rupee;
-            std::cout << "List Size before: " << objects_list.size()
-                      << std::endl;
             green_rupee.type = ObjectType::kGreenRupee;
             green_rupee.is_active = true;
             green_rupee.sprite = SpriteComponent(

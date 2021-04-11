@@ -30,26 +30,23 @@ void Game::Run() {
   HudEngine hud_engine;
 
   GameObject &player = GetPlayer(object_list);
+  std::vector<GameObject> objects_to_add;
 
   while (true) {
+    objects_to_add.clear();
     frame_start_time_ms = SDL_GetTicks();
     // Gets user input once per frame. That's why it is outside the for loop.
     input_engine.Run();
     if (InputComponent::Get().quit) {
       return;
     }
-    int size = object_list.size();
-    for (int i = 0; i < size; i++) {
-      auto &object = object_list[i];
+    for (auto &object : object_list) {
       if (object.is_active) {
         // At the beginning of the loop, we run all of the engines that will
         // change data inside our game object.
         ai_engine.Run(object, player);
         collision_detection_engine.Run(object, object_list);
-        health_engine.Run(object, object_list);
-        if (size != (int)object_list.size()) {
-          break;
-        }
+        health_engine.Run(object, objects_to_add);
         movement_engine.Run(object);
 
         // Then we draw the game object to the renderer.
@@ -61,6 +58,9 @@ void Game::Run() {
           graphics_engine.Run(object);
         }
       }
+    }
+    for (auto &object : objects_to_add) {
+      object_list.push_back(object);
     }
     graphics_engine.DrawNextFrame();
     LimitFrameRate();
