@@ -13,7 +13,7 @@
 #include "movement_component.h"
 #include "sprite_component.h"
 
-enum struct ObjectType { kEnemy, kPlayer, kMap, kHud, kAttack, kDefault };
+enum struct ObjectType { kEnemy, kPlayer, kGreenRupee, kBlueRupee, kHeart, kMap, kHud, kAttack, kDefault };
 
 // A GameObject is anything that exists inside the game.
 struct GameObject {

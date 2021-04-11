@@ -10,8 +10,8 @@ struct GameObjectsList {
   GameObject map;
   GameObject lonk;
   GameObject attack;
-  // GameObject rupee;
-  // GameObject rupee2;
+  GameObject rupee;
+  GameObject rupee2;
   GameObject monster;
   GameObject monster2;
   GameObject hud;
@@ -75,19 +75,7 @@ struct GameObjectsList {
     map.map = MapComponent(lvl1);
     map.is_active = true;
 
-    /*
-        // Rupee
-        rupee.sprite =
-            SpriteComponent("item_sprite", {.x = 18, .y = 87, .w = 8, .h = 14},
-       2); rupee.location = LocationComponent(200, 500); rupee.hit_box =
-        rupee.is_active = true;
-
-        // Rupee2
-        rupee2.sprite =
-            SpriteComponent("item_sprite", {.x = 55, .y = 87, .w = 8, .h = 14},
-       2); rupee2.location = LocationComponent(600, 500); rupee2.hit_box =
-        rupee2.is_active = true;
-    */
+    
 
     // Lonk
     lonk.type = ObjectType::kPlayer;
