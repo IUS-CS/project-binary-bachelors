@@ -223,20 +223,21 @@ struct LonkAnimations {
     frames.clear();
 
     // Attack Up flipped
-    frame = AnimationFrame({.x = 18, .y = 354, .w = 15, .h = 14}, Vector2(9, 6),
-                           100); // 100
+    frame =
+        AnimationFrame({.x = 18, .y = 354, .w = 15, .h = 14}, Vector2(-3, 6),
+                       100); // 100
     frames.push_back(frame);
     frame =
-        AnimationFrame({.x = 63, .y = 341, .w = 18, .h = 27}, Vector2(0, -33),
+        AnimationFrame({.x = 63, .y = 341, .w = 18, .h = 27}, Vector2(-3, -33),
                        150); // 150
     frames.push_back(frame);
 
     frame = AnimationFrame({.x = 110, .y = 341, .w = 16, .h = 27},
-                           Vector2(-3, -33), 150); // 150
+                           Vector2(6, -33), 150); // 150
     frames.push_back(frame);
 
     frame = AnimationFrame({.x = 159, .y = 350, .w = 15, .h = 18},
-                           Vector2(0, -6), 100); // 100
+                           Vector2(6, -6), 100); // 100
     frames.push_back(frame);
 
     animation = Animation(AnimationType::kAttack, frames, 2, false, false);
