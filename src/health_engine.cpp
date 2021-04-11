@@ -35,6 +35,10 @@ void HealthEngine::Run(GameObject &object,
             green_rupee.sprite = SpriteComponent(
                 "item_sprite", {.x = 5, .y = 87, .w = 8, .h = 14}, 2);
             green_rupee.location = object.location;
+            green_rupee.location->coordinates.x +=
+                object.sprite->sprite_rect.w * object.sprite->scale / 2 - 8;
+            green_rupee.location->coordinates.y +=
+                object.sprite->sprite_rect.h * object.sprite->scale - 28;
             green_rupee.hit_box = HitBoxComponent();
             objects_list.push_back(green_rupee);
           } else if (drop_chance >= 66 && drop_chance < 85) {
@@ -44,6 +48,10 @@ void HealthEngine::Run(GameObject &object,
             blue_rupee.sprite = SpriteComponent(
                 "item_sprite", {.x = 42, .y = 87, .w = 8, .h = 14}, 2);
             blue_rupee.location = object.location;
+            blue_rupee.location->coordinates.x +=
+                object.sprite->sprite_rect.w * object.sprite->scale / 2 - 8;
+            blue_rupee.location->coordinates.y +=
+                object.sprite->sprite_rect.h * object.sprite->scale - 28;
             blue_rupee.hit_box = HitBoxComponent();
             objects_list.push_back(blue_rupee);
           } else {
@@ -53,6 +61,10 @@ void HealthEngine::Run(GameObject &object,
             heart.sprite = SpriteComponent(
                 "item_sprite", {.x = 124, .y = 88, .w = 14, .h = 13}, 2);
             heart.location = object.location;
+            heart.location->coordinates.x +=
+                object.sprite->sprite_rect.w * object.sprite->scale / 2 - 14;
+            heart.location->coordinates.y +=
+                object.sprite->sprite_rect.h * object.sprite->scale - 26;
             heart.hit_box = HitBoxComponent();
             objects_list.push_back(heart);
           }
