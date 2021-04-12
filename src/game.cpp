@@ -46,8 +46,8 @@ void Game::Run() {
         ai_engine.Run(object, player);
         collision_detection_engine.Run(object, object_list);
         health_engine.Run(object);
-        movement_engine.Run(object);
         animation_engine.Run(object);
+        movement_engine.Run(object);
         // Then we draw the game object to the renderer.
         if (object.type == ObjectType::kMap) {
           map_engine.Run(object, graphics_engine);

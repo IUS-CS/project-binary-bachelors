@@ -131,6 +131,8 @@ void AnimationEngine::Run(GameObject &object) {
     PickAnimation(object);
     auto &animation = GetAnimation(object);
     auto &frame_id = GetFrameId(object);
+    int new_frame_id;
+    Animation new_animation;
 
     if (IsItTimeToChangeFrames(object)) {
       frame_id = (frame_id + 1) % animation.animation_frames.size();
@@ -152,7 +154,10 @@ void AnimationEngine::Run(GameObject &object) {
       }
       object.animation->start_of_last_animation_frame_ms = SDL_GetTicks();
     }
+    new_animation = GetAnimation(object);
+    new_frame_id = GetFrameId(object);
     object.sprite->sprite_rect =
-        GetAnimation(object).animation_frames[frame_id].source;
+        new_animation.animation_frames[frame_id].source;
+    object.sprite->offset = new_animation.animation_frames[new_frame_id].offset;
   }
 }
