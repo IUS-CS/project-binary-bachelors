@@ -13,6 +13,7 @@
 #include "map_engine.h"
 #include "movement_engine.h"
 #include "utils.h"
+#include "wallet_engine.h"
 
 Game::Game() {}
 
@@ -27,6 +28,7 @@ void Game::Run() {
   MovementEngine movement_engine;
   HealthEngine health_engine;
   HudEngine hud_engine;
+  WalletEngine wallet_engine;
 
   GameObject &player = GetPlayer(object_list);
 
@@ -45,6 +47,7 @@ void Game::Run() {
         collision_detection_engine.Run(object, object_list);
         health_engine.Run(object);
         movement_engine.Run(object);
+        wallet_engine.Run(object);
 
         // Then we draw the game object to the renderer.
         if (object.type == ObjectType::kMap) {
