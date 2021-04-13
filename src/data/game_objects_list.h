@@ -77,7 +77,7 @@ struct GameObjectsList {
 
    
         // Rupee
-        rupee.type = ObjectType::kRupee;
+        rupee.type = ObjectType::kBlueRupee;
         rupee.sprite =
             SpriteComponent("item_sprite", {.x = 18, .y = 87, .w = 8, .h = 14}, 2);
         rupee.location = LocationComponent(200, 500); 
