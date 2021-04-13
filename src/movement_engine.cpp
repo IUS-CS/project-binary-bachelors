@@ -53,7 +53,7 @@ void MovementEngine::Run(GameObject &object) {
     }
   }
 
-  if (!object.animation->is_attacking) {
+  if (!object.animation->is_attacking && !object.hit_box->is_hit) {
     auto &ic = InputComponent::Get();
     if (object.location && object.movement) {
       if (object.type == ObjectType::kPlayer) {

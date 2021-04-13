@@ -7,7 +7,14 @@
 
 #include "animation_frame.h"
 
-enum class AnimationType { kIdle, kWalkUp, kWalkDown, kWalkSide, kAttack };
+enum class AnimationType {
+  kIdle,
+  kWalkUp,
+  kWalkDown,
+  kWalkSide,
+  kAttack,
+  kHit
+};
 
 // A wrapper struct holding all the info we need about an animation.
 struct Animation {

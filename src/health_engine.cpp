@@ -13,9 +13,11 @@ void HealthEngine::Run(GameObject &object) {
         // Checks that player is alive and not invincible on monster collision.
         if (hit_object->type == ObjectType::kEnemy &&
             object.type == ObjectType::kPlayer &&
+            // hit_object->animation->is_attacking &&
             !object.hit_box->is_invincible) {
           if (!object.animation->is_attacking) {
             object.health->health -= 1;
+            object.hit_box->is_hit = true;
             if (object.health->health == 0) {
               object.is_active = false;
             } else {

@@ -46,7 +46,26 @@ void PickAnimation(GameObject &object) {
   auto &frame_id = GetFrameId(object);
   auto &animation_list = object.animation->animation_list;
   if (object.hit_box->is_hit) {
-    UpdateAnimationId(animation_id, frame_id, 12, object);
+    if (object.location->direction_faced == DirectionFaced::kDown) {
+      if (object.location->flip) {
+        UpdateAnimationId(animation_id, frame_id, 13, object);
+      } else {
+        UpdateAnimationId(animation_id, frame_id, 12, object);
+      }
+    }
+    if (object.location->direction_faced == DirectionFaced::kRight) {
+      UpdateAnimationId(animation_id, frame_id, 14, object);
+    }
+    if (object.location->direction_faced == DirectionFaced::kLeft) {
+      UpdateAnimationId(animation_id, frame_id, 15, object);
+    }
+    if (object.location->direction_faced == DirectionFaced::kUp) {
+      if (object.location->flip) {
+        UpdateAnimationId(animation_id, frame_id, 17, object);
+      } else {
+        UpdateAnimationId(animation_id, frame_id, 16, object);
+      }
+    }
   } else if (InputComponent::Get().attack &&
              object.type == ObjectType::kPlayer) {
     object.animation->is_attacking = true;
@@ -137,18 +156,35 @@ void AnimationEngine::Run(GameObject &object) {
     if (IsItTimeToChangeFrames(object)) {
       frame_id = (frame_id + 1) % animation.animation_frames.size();
       if (!animation.loop && frame_id == 0) {
-        if (object.location->direction_faced == DirectionFaced::kDown) {
-          object.animation->is_attacking = false;
-          GetAnimationId(object) = 3;
+        if (object.animation->is_attacking) {
+          if (object.location->direction_faced == DirectionFaced::kDown) {
+            object.animation->is_attacking = false;
+            GetAnimationId(object) = 3;
+          }
+          if (object.location->direction_faced == DirectionFaced::kRight ||
+              object.location->direction_faced == DirectionFaced::kLeft) {
+            object.animation->is_attacking = false;
+            GetAnimationId(object) = 4;
+          }
+          if (object.location->direction_faced == DirectionFaced::kUp) {
+            object.animation->is_attacking = false;
+            GetAnimationId(object) = 5;
+          }
         }
-        if (object.location->direction_faced == DirectionFaced::kRight ||
-            object.location->direction_faced == DirectionFaced::kLeft) {
-          object.animation->is_attacking = false;
-          GetAnimationId(object) = 4;
-        }
-        if (object.location->direction_faced == DirectionFaced::kUp) {
-          object.animation->is_attacking = false;
-          GetAnimationId(object) = 5;
+        if (object.hit_box->is_hit) {
+          if (object.location->direction_faced == DirectionFaced::kDown) {
+            object.hit_box->is_hit = false;
+            GetAnimationId(object) = 3;
+          }
+          if (object.location->direction_faced == DirectionFaced::kRight ||
+              object.location->direction_faced == DirectionFaced::kLeft) {
+            object.hit_box->is_hit = false;
+            GetAnimationId(object) = 4;
+          }
+          if (object.location->direction_faced == DirectionFaced::kUp) {
+            object.hit_box->is_hit = false;
+            GetAnimationId(object) = 5;
+          }
         }
         PickAnimation(object);
       }
