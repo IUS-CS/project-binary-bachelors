@@ -1,7 +1,9 @@
+#include <iostream>
 #include <vector>
 
 #include "ai_component.h"
 #include "ai_engine.h"
+#include "animation_engine.h"
 #include "collision_detection_engine.h"
 #include "game.h"
 #include "graphics_component.h"
@@ -13,6 +15,7 @@
 #include "map_engine.h"
 #include "movement_engine.h"
 #include "utils.h"
+#include "wallet_engine.h"
 
 Game::Game() {}
 
@@ -20,6 +23,7 @@ Game::~Game() {}
 
 void Game::Run() {
   AIEngine ai_engine;
+  AnimationEngine animation_engine;
   CollisionDetectionEngine collision_detection_engine;
   GraphicsEngine graphics_engine;
   InputEngine input_engine;
@@ -27,37 +31,47 @@ void Game::Run() {
   MovementEngine movement_engine;
   HealthEngine health_engine;
   HudEngine hud_engine;
+  WalletEngine wallet_engine;
 
-  GameObject &player = GetPlayer(object_list);
+  std::vector<GameObject> objects_to_add;
 
   while (true) {
+    GameObject &player = GetPlayer(object_list);
+    objects_to_add.clear();
     frame_start_time_ms = SDL_GetTicks();
     // Gets user input once per frame. That's why it is outside the for loop.
     input_engine.Run();
     if (InputComponent::Get().quit) {
       return;
     }
-    for (auto &object : object_list) {
-      if (object.is_active) {
-        // At the beginning of the loop, we run all of the engines that will
-        // change data inside our game object.
-        ai_engine.Run(object, player);
-        collision_detection_engine.Run(object, object_list);
-        health_engine.Run(object);
-        movement_engine.Run(object);
+    if (!InputComponent::Get().pause) {
+      for (auto &object : object_list) {
+        if (object.is_active) {
+          // At the beginning of the loop, we run all of the engines that will
+          // change data inside our game object.
+          ai_engine.Run(object, player);
+          collision_detection_engine.Run(object, object_list);
+          health_engine.Run(object, objects_to_add);
+          animation_engine.Run(object);
+          movement_engine.Run(object);
+          wallet_engine.Run(object);
 
-        // Then we draw the game object to the renderer.
-        if (object.type == ObjectType::kMap) {
-          map_engine.Run(object, graphics_engine);
-        } else if (object.type == ObjectType::kHud) {
-          hud_engine.Run(object, graphics_engine, player);
-        } else {
-          graphics_engine.Run(object);
+          // Then we draw the game object to the renderer.
+          if (object.type == ObjectType::kMap) {
+            map_engine.Run(object, graphics_engine);
+          } else if (object.type == ObjectType::kHud) {
+            hud_engine.Run(object, graphics_engine, player);
+          } else {
+            graphics_engine.Run(object);
+          }
         }
       }
+      for (auto &object : objects_to_add) {
+        object_list.push_back(object);
+      }
+      graphics_engine.DrawNextFrame();
+      LimitFrameRate();
     }
-    graphics_engine.DrawNextFrame();
-    LimitFrameRate();
   }
 }
 

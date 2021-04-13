@@ -84,8 +84,9 @@ void AIEngine::CutOffPlayer(GameObject &object, GameObject &player) {
 void AIEngine::ChasePlayer(GameObject &object, GameObject &player) {
   if (object.movement) {
     object.movement->current_direction = MovementDirection::kNone;
-    BoundingBox player_box = GetBoundingBox(player);
+    HitBox player_box = GetHitBox(player);
     BoundingBox enemy_box = GetBoundingBox(object);
+    // std::cout << player_box.right << std::endl;
     if (enemy_box.left > player_box.right + 15) {
       object.movement->current_direction = MovementDirection::kLeft;
     } else if (enemy_box.right < player_box.left - 15) {
@@ -129,5 +130,11 @@ void AIEngine::NextMove(GameObject &object) {
     object.ai->current_action = ActionType::kChase;
   } else {
     object.ai->current_action = ActionType::kCutOffPlayer;
+  }
+  random_number = rand() % 100;
+  if (random_number < 60) {
+    object.movement->speed = 2;
+  } else {
+    object.movement->speed = 3;
   }
 }

@@ -28,9 +28,30 @@ void GraphicsEngine::Run(GameObject &object) {
     // This rect is where we want to display the source image on the renderer.
     // Sidenote: The width and height are multiplied by 2 to scale the image,
     // making it double its original size.
+    /*
+    if (object.animation) {
+      object.sprite->offset = Vector2(
+          object.animation
+              ->animation_list[object.animation->current_animation_id]
+              .animation_frames
+                  [object.animation
+                       ->animation_list[object.animation->current_animation_id]
+                       .current_frame_id]
+              .offset.x,
+          object.animation
+              ->animation_list[object.animation->current_animation_id]
+              .animation_frames
+                  [object.animation
+                       ->animation_list[object.animation->current_animation_id]
+                       .current_frame_id]
+              .offset.y);
+    }
+    */
+    int x = object.location->coordinates.x + object.sprite->offset.x;
+    int y = object.location->coordinates.y + object.sprite->offset.y;
     const SDL_Rect destination = {
-        .x = object.location->coordinates.x,
-        .y = object.location->coordinates.y,
+        .x = x,
+        .y = y,
         .w = object.sprite->sprite_rect.w * object.sprite->scale,
         .h = object.sprite->sprite_rect.h * object.sprite->scale};
 
