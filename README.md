@@ -12,6 +12,11 @@ The Legend of Zordo is a 2d action-adventure game with exciting adventure, terri
 ## Visuals
 ![Game Poster](https://user-images.githubusercontent.com/70461696/114615999-57e99f80-9c74-11eb-9e57-af826d2df065.png)
 
+## Controls
+W / A / S / D  -  Up / Left / Down / Right  
+   R     -  Attack  
+   P     -  Pause  
+
 ## Features
 --Interactive battle system
 --Free-roam movement system
