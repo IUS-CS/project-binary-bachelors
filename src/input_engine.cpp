@@ -7,6 +7,7 @@ void InputEngine::BeginNewFrame() {
   ic.right = false;
   ic.up = false;
   ic.down = false;
+  ic.attack = false;
   pressed_keys.clear();
   released_keys.clear();
 }
@@ -61,5 +62,9 @@ void InputEngine::Run() {
   if (pressed_keys[SDL_SCANCODE_W] == true ||
       held_keys[SDL_SCANCODE_W] == true) {
     InputComponent::Get().up = true;
+  }
+  if (pressed_keys[SDL_SCANCODE_R] == true ||
+      held_keys[SDL_SCANCODE_R] == true) {
+    InputComponent::Get().attack = true;
   }
 }

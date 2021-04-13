@@ -4,6 +4,7 @@
 #include <optional>
 
 #include "ai_component.h"
+#include "animation_component.h"
 #include "health_component.h"
 #include "hit_box_component.h"
 #include "hud_component.h"
@@ -37,6 +38,7 @@ public:
   std::optional<AIComponent> ai = std::nullopt;
   std::optional<MovementComponent> movement = std::nullopt;
   std::optional<HudComponent> hud = std::nullopt;
+  std::optional<AnimationComponent> animation = std::nullopt;
 
   bool is_active = false;
   int id_num;

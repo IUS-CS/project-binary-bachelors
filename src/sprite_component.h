@@ -4,14 +4,17 @@
 #include <SDL2/SDL.h>
 #include <string>
 
+#include "vector2.h"
 // A SpriteComponent is the image of a GameObject. Ex: The SpriteComponent for
 // Lonk (the knockoff of Link) will be the picture of his character.
 struct SpriteComponent {
   SpriteComponent() {}
-  SpriteComponent(std::string ssname, SDL_Rect rect, int num) {
+  SpriteComponent(std::string ssname, SDL_Rect rect, int num,
+                  Vector2 xyoffset) {
     sprite_sheet_name = ssname;
     sprite_rect = rect;
     scale = num;
+    offset = xyoffset;
   }
   // type = ComponentType::kSprite;
   // This is the string of the name of the spritesheet where this image exists.
@@ -22,6 +25,7 @@ struct SpriteComponent {
   // spritesheet. x and y establish where the top left corner of the rectangle
   // is located, and then the width and height help establish where the rest of
   // the corners are.
+  Vector2 offset;
   SDL_Rect sprite_rect;
   int scale;
 };

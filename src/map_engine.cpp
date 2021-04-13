@@ -1,9 +1,9 @@
 #include "map_engine.h"
+#include "graphics_engine.h"
 
-#include <iostream>
 MapEngine::MapEngine() {}
 MapEngine::~MapEngine() {}
-void MapEngine::Run(GameObject &object, GraphicsEngine &graphics_engine) {
+void MapEngine::Run(GameObject &object, GraphicsEngine &graphics) {
   if (object.map) {
     for (int i = 0; i < 20; i++) {
       for (int j = 0; j < 31; j++) {
@@ -46,7 +46,7 @@ void MapEngine::Run(GameObject &object, GraphicsEngine &graphics_engine) {
         }
         object.location->coordinates.x = j * 32;
         object.location->coordinates.y = i * 32;
-        graphics_engine.Run(object);
+        graphics.Run(object);
       }
     }
   }
