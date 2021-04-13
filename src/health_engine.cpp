@@ -22,6 +22,11 @@ void HealthEngine::Run(GameObject &object,
             object.is_active = false;
           }
         }
+        if (hit_object->type == ObjectType::kHeart &&
+            object.type == ObjectType::kPlayer) {
+          object.health->health += 1;
+          hit_object->is_active = false;
+        }
         if (object.type == ObjectType::kEnemy) {
           object.health->health = 0;
           object.is_active = false;

@@ -14,16 +14,17 @@ void HudEngine::Run(GameObject &object, GraphicsEngine &graphics,
     object.location->coordinates.x += 54;
     graphics.Run(object);
   }
- 
+
   object.sprite->sprite_sheet_name = object.hud->number_image;
   object.sprite->scale = 3;
   int count = 0;
   int temp = player.wallet->rupees;
   while (temp != 0) {
     int num_to_print = temp % 10;
-    object.sprite->sprite_rect = { .x = num_to_print*7, .y = 0, .w = 7, .h = 8 };
+    object.sprite->sprite_rect = {
+        .x = num_to_print * 7, .y = 0, .w = 7, .h = 8};
     object.location->coordinates.x = 952 - 20 * count;
-    temp = temp/10;
+    temp = temp / 10;
     graphics.Run(object);
     count++;
   }

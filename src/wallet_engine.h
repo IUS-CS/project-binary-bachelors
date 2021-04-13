@@ -8,8 +8,5 @@ public:
   WalletEngine();
   ~WalletEngine();
   void Run(GameObject &object);
-
 };
 #endif
-
-

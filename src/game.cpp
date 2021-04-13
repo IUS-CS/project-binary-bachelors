@@ -31,10 +31,10 @@ void Game::Run() {
   HudEngine hud_engine;
   WalletEngine wallet_engine;
 
-  GameObject &player = GetPlayer(object_list);
   std::vector<GameObject> objects_to_add;
 
   while (true) {
+    GameObject &player = GetPlayer(object_list);
     objects_to_add.clear();
     frame_start_time_ms = SDL_GetTicks();
     // Gets user input once per frame. That's why it is outside the for loop.
@@ -52,6 +52,8 @@ void Game::Run() {
         movement_engine.Run(object);
         wallet_engine.Run(object);
 
+        if (object.type == ObjectType::kPlayer) {
+        }
         // Then we draw the game object to the renderer.
         if (object.type == ObjectType::kMap) {
           map_engine.Run(object, graphics_engine);
