@@ -9,8 +9,9 @@ InputComponent &InputComponent::Get() {
     bool right = false;
     bool up = false;
     bool down = false;
+    bool pause = false;
     bool quit = false;
-    instance_ = new InputComponent{left, right, up, down, quit};
+    instance_ = new InputComponent{left, right, up, down, pause, quit};
   }
   return *instance_;
 }

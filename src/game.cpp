@@ -44,32 +44,34 @@ void Game::Run() {
     if (InputComponent::Get().quit) {
       return;
     }
-    for (auto &object : object_list) {
-      if (object.is_active) {
-        // At the beginning of the loop, we run all of the engines that will
-        // change data inside our game object.
-        ai_engine.Run(object, player);
-        collision_detection_engine.Run(object, object_list);
-        health_engine.Run(object, objects_to_add);
-        animation_engine.Run(object);
-        movement_engine.Run(object);
-        wallet_engine.Run(object);
+    if (!InputComponent::Get().pause) {
+      for (auto &object : object_list) {
+        if (object.is_active) {
+          // At the beginning of the loop, we run all of the engines that will
+          // change data inside our game object.
+          ai_engine.Run(object, player);
+          collision_detection_engine.Run(object, object_list);
+          health_engine.Run(object, objects_to_add);
+          animation_engine.Run(object);
+          movement_engine.Run(object);
+          wallet_engine.Run(object);
 
-        // Then we draw the game object to the renderer.
-        if (object.type == ObjectType::kMap) {
-          map_engine.Run(object, graphics_engine);
-        } else if (object.type == ObjectType::kHud) {
-          hud_engine.Run(object, graphics_engine, player);
-        } else {
-          graphics_engine.Run(object);
+          // Then we draw the game object to the renderer.
+          if (object.type == ObjectType::kMap) {
+            map_engine.Run(object, graphics_engine);
+          } else if (object.type == ObjectType::kHud) {
+            hud_engine.Run(object, graphics_engine, player);
+          } else {
+            graphics_engine.Run(object);
+          }
         }
       }
+      for (auto &object : objects_to_add) {
+        object_list.push_back(object);
+      }
+      graphics_engine.DrawNextFrame();
+      LimitFrameRate();
     }
-    for (auto &object : objects_to_add) {
-      object_list.push_back(object);
-    }
-    graphics_engine.DrawNextFrame();
-    LimitFrameRate();
   }
 }
 

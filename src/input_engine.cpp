@@ -67,4 +67,10 @@ void InputEngine::Run() {
       held_keys[SDL_SCANCODE_R] == true) {
     InputComponent::Get().attack = true;
   }
+  if (pressed_keys[SDL_SCANCODE_P] == true) {
+    InputComponent::Get().pause = true;
+  }
+  if (pressed_keys[SDL_SCANCODE_U] == true) {
+    InputComponent::Get().pause = false;
+  }
 }

@@ -115,15 +115,11 @@ struct GameObjectsList {
     monster.hit_box = HitBoxComponent();
     monster.is_active = true;
     monster.ai->time_of_last_decision_ms = -6000;
-<<<<<<< HEAD
-    monster.movement = MovementComponent(3);
     monster.health = HealthComponent(3);
-=======
     OrcAnimations a_orc;
     monster.health = HealthComponent();
     monster.animation = AnimationComponent(a_orc.animations);
     monster.movement = MovementComponent(2);
->>>>>>> animations
 
     // Monster2
     monster2.type = ObjectType::kEnemy;
@@ -134,14 +130,10 @@ struct GameObjectsList {
     monster2.location = LocationComponent(300, 400);
     monster2.hit_box = HitBoxComponent();
     monster2.is_active = true;
-<<<<<<< HEAD
-    monster2.movement = MovementComponent(3);
     monster2.health = HealthComponent(3);
-=======
     monster2.health = HealthComponent();
     monster2.animation = AnimationComponent(a_orc.animations);
     monster2.movement = MovementComponent(2);
->>>>>>> animations
 
     // Hud
     hud.type = ObjectType::kHud;
@@ -153,14 +145,6 @@ struct GameObjectsList {
                            {.x = 141, .y = 4, .w = 16, .h = 15}, "item_sprite",
                            "numbers");
 
-<<<<<<< HEAD
-=======
-    // Attack
-    attack.type = ObjectType::kAttack;
-    attack.sprite = SpriteComponent(
-        "attack_box", {.x = 0, .y = 0, .w = 1, .h = 1}, 1, {0, 0});
-    attack.location = LocationComponent();
->>>>>>> animations
     // Creating object vector
     objects = {map, monster, monster2, lonk, hud};
     for (unsigned int i = 0; i < objects.size(); i++) {

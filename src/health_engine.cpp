@@ -35,6 +35,9 @@ void HealthEngine::Run(GameObject &object,
           std::cout << "Monster Hit!!!!" << std::endl;
           if (object.health->health == 0) {
             object.is_active = false;
+          } else {
+            object.hit_box->is_invincible = true;
+            object.hit_box->time_since_last_hit_ms = SDL_GetTicks();
           }
         }
         if (hit_object->type == ObjectType::kHeart &&

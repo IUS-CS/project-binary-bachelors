@@ -13,6 +13,7 @@ struct InputComponent {
   bool up;
   bool attack;
   bool down;
+  bool pause;
   bool quit;
 
 private:
