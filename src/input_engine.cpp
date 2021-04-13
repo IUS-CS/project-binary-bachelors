@@ -43,6 +43,17 @@ void InputEngine::CheckForInput() {
 void InputEngine::Run() {
   BeginNewFrame();
   CheckForInput();
+
+  //A quick pause feature
+  while (pressed_keys[SDL_SCANCODE_P] == true && pressed_keys[SDL_SCANCODE_U] == false) {
+      InputComponent::Get().right = false;
+      InputComponent::Get().up = false;
+      InputComponent::Get().down = false;
+      InputComponent::Get().right = false;
+      InputComponent::Get().left = false;
+      CheckForInput();
+  }
+
   if (pressed_keys[SDL_SCANCODE_ESCAPE] == true) {
     InputComponent::Get().quit = true;
   }
