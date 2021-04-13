@@ -15,7 +15,7 @@ struct GameObjectsList {
   GameObject monster;
   GameObject monster2;
   GameObject hud;
-  
+
   /*
   GameObject health;
   GameObject health2;
@@ -75,23 +75,21 @@ struct GameObjectsList {
     map.map = MapComponent(lvl1);
     map.is_active = true;
 
-   
-        // Rupee
-        rupee.type = ObjectType::kBlueRupee;
-        rupee.sprite =
-            SpriteComponent("item_sprite", {.x = 18, .y = 87, .w = 8, .h = 14}, 2);
-        rupee.location = LocationComponent(200, 500); 
-        rupee.hit_box = HitBoxComponent();
-        rupee.is_active = true;
+    // Rupee
+    rupee.type = ObjectType::kRupee;
+    rupee.sprite =
+        SpriteComponent("item_sprite", {.x = 18, .y = 87, .w = 8, .h = 14}, 2);
+    rupee.location = LocationComponent(200, 500);
+    rupee.hit_box = HitBoxComponent();
+    rupee.is_active = true;
 
-        // Rupee2
-        rupee2.type = ObjectType::kBlueRupee;
-        rupee2.sprite =
-            SpriteComponent("item_sprite", {.x = 55, .y = 87, .w = 8, .h = 14}, 2);
-        rupee2.location = LocationComponent(500, 400); 
-        rupee2.hit_box = HitBoxComponent();
-        rupee2.is_active = true;
-    
+    // Rupee2
+    rupee2.type = ObjectType::kBlueRupee;
+    rupee2.sprite =
+        SpriteComponent("item_sprite", {.x = 55, .y = 87, .w = 8, .h = 14}, 2);
+    rupee2.location = LocationComponent(500, 400);
+    rupee2.hit_box = HitBoxComponent();
+    rupee2.is_active = true;
 
     // Lonk
     lonk.type = ObjectType::kPlayer;
@@ -133,9 +131,9 @@ struct GameObjectsList {
                                  {.x = 124, .y = 87, .w = 16, .h = 16}, 3);
     hud.location = LocationComponent(16, 16);
     hud.hud = HudComponent({.x = 124, .y = 87, .w = 16, .h = 16},
-                           {.x = 141, .y = 4, .w = 16, .h = 15},
-                           "item_sprite", "numbers");
-     
+                           {.x = 141, .y = 4, .w = 16, .h = 15}, "item_sprite",
+                           "numbers");
+
     // Attack
     attack.type = ObjectType::kAttack;
     attack.sprite =
