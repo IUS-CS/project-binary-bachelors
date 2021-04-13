@@ -8,14 +8,15 @@ The Legend of Zordo is a 2d action-adventure game with exciting adventure, terri
 -Christopher Pruett
 -Dylan Eversman
 -Joshua Carrier
+
 ## Visuals
-<img src="https://github.com/IUS-CS/project-binary-bachelors/blob/main/doc/images/Zordo.png?raw=true" alt="Zordo" style="height: 100px; width:100px;" />
+![Game Poster](https://user-images.githubusercontent.com/70461696/114615999-57e99f80-9c74-11eb-9e57-af826d2df065.png)
 
 ## Features
 --Interactive battle system
 --Free-roam movement system
 --Pixel art
---Classic 8 and 16-bit audio
+--Unlimited fun
 
 ## Usage
 --Download the git repository
