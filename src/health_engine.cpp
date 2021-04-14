@@ -1,4 +1,6 @@
 #include "health_engine.h"
+#include "data/blue_rupee_animations.h"
+#include "data/green_rupee_animations.h"
 #include <iostream>
 
 HealthEngine::HealthEngine() {}
@@ -46,6 +48,7 @@ void HealthEngine::Run(GameObject &object,
           hit_object->is_active = false;
         }
         if (object.type == ObjectType::kEnemy && object.health->health == 0) {
+          object.location->flip = false;
           srand(time(NULL));
           int drop_chance = rand() % 100;
           if (drop_chance < 33) {
@@ -53,9 +56,11 @@ void HealthEngine::Run(GameObject &object,
             GameObject green_rupee;
             green_rupee.type = ObjectType::kGreenRupee;
             green_rupee.is_active = true;
+            GreenRupeeAnimations a_grupee;
             green_rupee.sprite = SpriteComponent(
                 "item_sprite", {.x = 5, .y = 87, .w = 8, .h = 14}, 2,
                 Vector2(0, 0));
+            green_rupee.animation = AnimationComponent(a_grupee.animations);
             green_rupee.location = object.location;
             green_rupee.location->coordinates.x +=
                 object.sprite->sprite_rect.w * object.sprite->scale / 2 - 8;
@@ -67,9 +72,11 @@ void HealthEngine::Run(GameObject &object,
             GameObject blue_rupee;
             blue_rupee.type = ObjectType::kBlueRupee;
             blue_rupee.is_active = true;
+            BlueRupeeAnimations a_brupee;
             blue_rupee.sprite = SpriteComponent(
                 "item_sprite", {.x = 42, .y = 87, .w = 8, .h = 14}, 2,
                 Vector2(0, 0));
+            blue_rupee.animation = AnimationComponent(a_brupee.animations);
             blue_rupee.location = object.location;
             blue_rupee.location->coordinates.x +=
                 object.sprite->sprite_rect.w * object.sprite->scale / 2 - 8;

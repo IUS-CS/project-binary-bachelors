@@ -3,6 +3,7 @@
 
 #include "../game_object.h"
 
+#include "green_rupee_animations.h"
 #include "lonk_animations.h"
 #include "orc_animations.h"
 #include <vector>
@@ -11,17 +12,9 @@ struct GameObjectsList {
   // Create Objects.
   GameObject map;
   GameObject lonk;
-  GameObject rupee;
-  GameObject rupee2;
   GameObject monster;
   GameObject monster2;
   GameObject hud;
-
-  /*
-  GameObject health;
-  GameObject health2;
-  GameObject health3;
-  */
 
   // Vector that will hold all of the objects.
   std::vector<GameObject> objects;
@@ -78,9 +71,11 @@ struct GameObjectsList {
 
     /*
     // Rupee
-    rupee.type = ObjectType::kRupee;
-    rupee.sprite =
-        SpriteComponent("item_sprite", {.x = 18, .y = 87, .w = 8, .h = 14}, 2);
+    rupee.type = ObjectType::kGreenRupee;
+    GreenRupeeAnimations a_grupee;
+    rupee.sprite = SpriteComponent(
+        "item_sprite", {.x = 18, .y = 87, .w = 8, .h = 14}, 2, Vector2(0, 0));
+    rupee.animation = AnimationComponent(a_grupee.animations);
     rupee.location = LocationComponent(200, 500);
     rupee.hit_box = HitBoxComponent();
     rupee.is_active = true;
