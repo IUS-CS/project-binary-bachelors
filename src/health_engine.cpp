@@ -54,6 +54,7 @@ void HealthEngine::Run(GameObject &object,
           if (drop_chance < 33) {
           } else if (drop_chance >= 33 && drop_chance < 66) {
             GameObject green_rupee;
+            GreenRupeeAnimations a_grupee;
             green_rupee.type = ObjectType::kGreenRupee;
             green_rupee.is_active = true;
             GreenRupeeAnimations a_grupee;
@@ -70,6 +71,7 @@ void HealthEngine::Run(GameObject &object,
             objects_list.push_back(green_rupee);
           } else if (drop_chance >= 66 && drop_chance < 85) {
             GameObject blue_rupee;
+            BlueRupeeAnimations a_brupee;
             blue_rupee.type = ObjectType::kBlueRupee;
             blue_rupee.is_active = true;
             BlueRupeeAnimations a_brupee;
