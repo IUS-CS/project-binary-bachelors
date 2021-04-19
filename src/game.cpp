@@ -1,4 +1,3 @@
-#include <iostream>
 #include <vector>
 
 #include "ai_component.h"
@@ -22,7 +21,6 @@ Game::Game() {}
 Game::~Game() {}
 
 void Game::Run() {
-  SDL_Init(SDL_INIT_EVERYTHING);
   AIEngine ai_engine;
   AnimationEngine animation_engine;
   CollisionDetectionEngine collision_detection_engine;
