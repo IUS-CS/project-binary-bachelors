@@ -3,6 +3,7 @@
 #include "data/green_rupee.h"
 #include "data/heart.h"
 #include <iostream>
+#include <random>
 
 HealthEngine::HealthEngine() {}
 
@@ -52,8 +53,10 @@ void HealthEngine::Run(GameObject &object,
         }
         if (object.type == ObjectType::kEnemy && object.health->health == 0) {
           object.location->flip = false;
-          srand(time(NULL));
-          int drop_chance = rand() % 100;
+          std::random_device generator;
+          std::mt19937 mt(generator());
+          std::uniform_int_distribution<int> distribution(0, 99);
+          int drop_chance = distribution(mt);
           if (drop_chance < 33) {
           } else if (drop_chance >= 33 && drop_chance < 66) {
             GreenRupee grupee;
