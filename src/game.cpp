@@ -4,6 +4,7 @@
 #include "ai_component.h"
 #include "ai_engine.h"
 #include "animation_engine.h"
+//#include "audio.h"
 #include "collision_detection_engine.h"
 #include "game.h"
 #include "graphics_component.h"
@@ -22,6 +23,7 @@ Game::Game() {}
 Game::~Game() {}
 
 void Game::Run() {
+  SDL_Init(SDL_INIT_EVERYTHING);
   AIEngine ai_engine;
   AnimationEngine animation_engine;
   CollisionDetectionEngine collision_detection_engine;
@@ -33,6 +35,15 @@ void Game::Run() {
   HudEngine hud_engine;
   WalletEngine wallet_engine;
 
+  /*
+  Mix_Init(MIX_INIT_MP3);
+  std::cout << "Breaking???" << std::endl;
+  if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+    std::cout << "RUH ROH RAGGY!" << std::endl;
+  }
+  Audio sound;
+  sound.Play();
+*/
   std::vector<GameObject> objects_to_add;
 
   while (true) {

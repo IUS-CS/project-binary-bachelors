@@ -57,6 +57,7 @@ void HealthEngine::Run(GameObject &object,
             GreenRupeeAnimations a_grupee;
             green_rupee.type = ObjectType::kGreenRupee;
             green_rupee.is_active = true;
+            GreenRupeeAnimations a_grupee;
             green_rupee.sprite = SpriteComponent(
                 "item_sprite", {.x = 5, .y = 87, .w = 8, .h = 14}, 2,
                 Vector2(0, 0));
@@ -73,6 +74,7 @@ void HealthEngine::Run(GameObject &object,
             BlueRupeeAnimations a_brupee;
             blue_rupee.type = ObjectType::kBlueRupee;
             blue_rupee.is_active = true;
+            BlueRupeeAnimations a_brupee;
             blue_rupee.sprite = SpriteComponent(
                 "item_sprite", {.x = 42, .y = 87, .w = 8, .h = 14}, 2,
                 Vector2(0, 0));
