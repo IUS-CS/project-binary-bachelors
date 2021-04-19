@@ -54,6 +54,7 @@ void MovementEngine::Run(GameObject &object) {
   }
 
   if (!object.animation->is_attacking && !object.hit_box->is_hit) {
+    std::cout << "About to move" << std::endl;
     auto &ic = InputComponent::Get();
     if (object.location && object.movement) {
       if (object.type == ObjectType::kPlayer) {
@@ -87,44 +88,52 @@ void MovementEngine::Run(GameObject &object) {
 
       if (object.movement->current_direction == MovementDirection::kLeft) {
         if (!object.movement->lock_left) {
+          std::cout << "We schmovin left" << std::endl;
           object.location->coordinates.x =
               object.location->coordinates.x - object.movement->speed;
         }
       }
       if (object.movement->current_direction == MovementDirection::kRight) {
         if (!object.movement->lock_right) {
+          std::cout << "We schmovin right" << std::endl;
           object.location->coordinates.x =
               object.location->coordinates.x + object.movement->speed;
         }
       }
       if (object.movement->current_direction == MovementDirection::kDown) {
         if (!object.movement->lock_down) {
+          std::cout << "down" << std::endl;
           object.location->coordinates.y =
               object.location->coordinates.y + object.movement->speed;
         }
       }
       if (object.movement->current_direction == MovementDirection::kUp) {
         if (!object.movement->lock_up) {
+          std::cout << "up" << std::endl;
           object.location->coordinates.y =
               object.location->coordinates.y - object.movement->speed;
         }
       }
       if (object.movement->current_direction == MovementDirection::kUpRight) {
         if (!object.movement->lock_right) {
+          std::cout << "upright right" << std::endl;
           object.location->coordinates.x =
               object.location->coordinates.x + object.movement->speed;
         }
         if (!object.movement->lock_up) {
+          std::cout << "upright up" << std::endl;
           object.location->coordinates.y =
               object.location->coordinates.y - object.movement->speed;
         }
       }
       if (object.movement->current_direction == MovementDirection::kUpLeft) {
         if (!object.movement->lock_left) {
+          std::cout << "upleft left" << std::endl;
           object.location->coordinates.x =
               object.location->coordinates.x - object.movement->speed;
         }
         if (!object.movement->lock_up) {
+          std::cout << "upleft up" << std::endl;
           object.location->coordinates.y =
               object.location->coordinates.y - object.movement->speed;
         }

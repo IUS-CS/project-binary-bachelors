@@ -16,7 +16,7 @@ struct GameObjectsList {
 
   // Create Game Objects.
   GameObject map = map_data.LoadMap();
-  GameObject lonk = lonk_data.LoadLonk();
+  GameObject lonk = lonk_data.LoadLonk({300, 100});
   GameObject orc1 = orc_data.LoadOrc({500, 100});
   GameObject orc2 = orc_data.LoadOrc({300, 400});
   GameObject hud = hud_data.LoadHud();
