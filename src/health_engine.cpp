@@ -1,6 +1,7 @@
 #include "health_engine.h"
-#include "data/blue_rupee_animations.h"
-#include "data/green_rupee_animations.h"
+#include "data/blue_rupee.h"
+#include "data/green_rupee.h"
+#include "data/heart.h"
 #include <iostream>
 
 HealthEngine::HealthEngine() {}
@@ -44,7 +45,9 @@ void HealthEngine::Run(GameObject &object,
         }
         if (hit_object->type == ObjectType::kHeart &&
             object.type == ObjectType::kPlayer) {
-          object.health->health += 1;
+          if (object.health->health < 6) {
+            object.health->health += 1;
+          }
           hit_object->is_active = false;
         }
         if (object.type == ObjectType::kEnemy && object.health->health == 0) {
@@ -53,31 +56,20 @@ void HealthEngine::Run(GameObject &object,
           int drop_chance = rand() % 100;
           if (drop_chance < 33) {
           } else if (drop_chance >= 33 && drop_chance < 66) {
-            GameObject green_rupee;
-            green_rupee.type = ObjectType::kGreenRupee;
-            green_rupee.is_active = true;
-            GreenRupeeAnimations a_grupee;
-            green_rupee.sprite = SpriteComponent(
-                "item_sprite", {.x = 5, .y = 87, .w = 8, .h = 14}, 2,
-                Vector2(0, 0));
-            green_rupee.animation = AnimationComponent(a_grupee.animations);
+            GreenRupee grupee;
+            GameObject green_rupee =
+                grupee.LoadGreenRupee(object.location->coordinates);
             green_rupee.location = object.location;
             green_rupee.location->coordinates.x +=
                 object.sprite->sprite_rect.w * object.sprite->scale / 2 - 8;
             green_rupee.location->coordinates.y +=
                 object.sprite->sprite_rect.h * object.sprite->scale - 28;
-            green_rupee.hit_box = HitBoxComponent();
+
             objects_list.push_back(green_rupee);
           } else if (drop_chance >= 66 && drop_chance < 85) {
-            GameObject blue_rupee;
-            BlueRupeeAnimations a_brupee;
-            blue_rupee.type = ObjectType::kBlueRupee;
-            blue_rupee.is_active = true;
-            blue_rupee.sprite = SpriteComponent(
-                "item_sprite", {.x = 42, .y = 87, .w = 8, .h = 14}, 2,
-                Vector2(0, 0));
-            blue_rupee.animation = AnimationComponent(a_brupee.animations);
-            blue_rupee.location = object.location;
+            BlueRupee brupee;
+            GameObject blue_rupee =
+                brupee.LoadBlueRupee(object.location->coordinates);
             blue_rupee.location->coordinates.x +=
                 object.sprite->sprite_rect.w * object.sprite->scale / 2 - 8;
             blue_rupee.location->coordinates.y +=
@@ -85,13 +77,9 @@ void HealthEngine::Run(GameObject &object,
             blue_rupee.hit_box = HitBoxComponent();
             objects_list.push_back(blue_rupee);
           } else {
-            GameObject heart;
-            heart.type = ObjectType::kHeart;
-            heart.is_active = true;
-            heart.sprite = SpriteComponent(
-                "item_sprite", {.x = 124, .y = 88, .w = 14, .h = 13}, 2,
-                Vector2(0, 0));
-            heart.location = object.location;
+            Heart heart_data;
+            GameObject heart =
+                heart_data.LoadHeart(object.location->coordinates);
             heart.location->coordinates.x +=
                 object.sprite->sprite_rect.w * object.sprite->scale / 2 - 14;
             heart.location->coordinates.y +=

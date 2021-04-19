@@ -206,6 +206,7 @@ TEST_CASE("AI move down", "[ai_down]") {
 }
 
 TEST_CASE("Lonk loses heart", "[lose_heart]") {
+  std::vector<GameObject> objects_to_add;
   GameObject lonk;
   GameObject enemy;
   lonk.type = ObjectType::kPlayer;
@@ -227,7 +228,7 @@ TEST_CASE("Lonk loses heart", "[lose_heart]") {
   CollisionDetectionEngine collision_detection_engine;
   HealthEngine health_engine;
   collision_detection_engine.Run(lonk, objects);
-  health_engine.Run(lonk);
+  health_engine.Run(lonk, objects_to_add);
   REQUIRE(lonk.health->health == 2);
 }
 
