@@ -13,6 +13,7 @@
 #include "input_engine.h"
 #include "map_engine.h"
 #include "movement_engine.h"
+#include "spawn_engine.h"
 #include "utils.h"
 #include "wallet_engine.h"
 
@@ -30,6 +31,7 @@ void Game::Run() {
   MovementEngine movement_engine;
   HealthEngine health_engine;
   HudEngine hud_engine;
+  SpawnEngine spawn_engine;
   WalletEngine wallet_engine;
 
   std::vector<GameObject> objects_to_add;
@@ -65,6 +67,7 @@ void Game::Run() {
           }
         }
       }
+      spawn_engine.Run(objects_to_add);
       for (auto &object : objects_to_add) {
         object_list.push_back(object);
       }
