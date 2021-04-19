@@ -48,12 +48,13 @@ void HealthEngine::Run(GameObject &object,
           hit_object->is_active = false;
         }
         if (object.type == ObjectType::kEnemy && object.health->health == 0) {
+          object.location->flip = false;
           srand(time(NULL));
           int drop_chance = rand() % 100;
           if (drop_chance < 33) {
           } else if (drop_chance >= 33 && drop_chance < 66) {
             GameObject green_rupee;
-            GreenRupeeAnimations a_grupee = GreenRupeeAnimations();
+            GreenRupeeAnimations a_grupee;
             green_rupee.type = ObjectType::kGreenRupee;
             green_rupee.is_active = true;
             green_rupee.sprite = SpriteComponent(
@@ -69,7 +70,7 @@ void HealthEngine::Run(GameObject &object,
             objects_list.push_back(green_rupee);
           } else if (drop_chance >= 66 && drop_chance < 85) {
             GameObject blue_rupee;
-            BlueRupeeAnimations a_brupee = BlueRupeeAnimations();
+            BlueRupeeAnimations a_brupee;
             blue_rupee.type = ObjectType::kBlueRupee;
             blue_rupee.is_active = true;
             blue_rupee.sprite = SpriteComponent(
