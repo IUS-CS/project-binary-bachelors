@@ -242,19 +242,27 @@ struct OrcAnimations {
     frames.clear();
 
     // Hit Down
-    frame = AnimationFrame({.x = 16, .y = 400, .w = 15, .h = 16}, Vector2(0, 0),
-                           100);
+    frame = AnimationFrame({.x = 16, .y = 400, .w = 16, .h = 16}, Vector2(0, 6),
+                           150);
     frames.push_back(frame);
     frame = AnimationFrame({.x = 64, .y = 397, .w = 19, .h = 18}, Vector2(0, 0),
-                           90);
+                           200);
     frames.push_back(frame);
 
     frame = AnimationFrame({.x = 112, .y = 398, .w = 18, .h = 18},
-                           Vector2(0, 0), 90);
+                           Vector2(0, 0), 200);
+    frames.push_back(frame);
+
+    frame = AnimationFrame({.x = 64, .y = 397, .w = 19, .h = 18}, Vector2(0, 0),
+                           200);
+    frames.push_back(frame);
+
+    frame = AnimationFrame({.x = 112, .y = 398, .w = 18, .h = 18},
+                           Vector2(0, 0), 200);
     frames.push_back(frame);
 
     frame = AnimationFrame({.x = 160, .y = 398, .w = 16, .h = 18},
-                           Vector2(0, 0), 100);
+                           Vector2(0, 0), 150);
     frames.push_back(frame);
 
     animation = Animation(AnimationType::kWalkUp, frames, 1, false, false);
@@ -264,19 +272,28 @@ struct OrcAnimations {
     frames.clear();
 
     // Hit Down Flipped
-    frame = AnimationFrame({.x = 16, .y = 400, .w = 15, .h = 16}, Vector2(0, 0),
-                           100);
+    frame = AnimationFrame({.x = 16, .y = 400, .w = 16, .h = 16}, Vector2(0, 6),
+                           150);
     frames.push_back(frame);
-    frame = AnimationFrame({.x = 64, .y = 397, .w = 19, .h = 18}, Vector2(0, 0),
-                           90);
+
+    frame = AnimationFrame({.x = 64, .y = 397, .w = 19, .h = 18},
+                           Vector2(-9, 0), 200);
     frames.push_back(frame);
 
     frame = AnimationFrame({.x = 112, .y = 398, .w = 18, .h = 18},
-                           Vector2(0, 0), 90);
+                           Vector2(-6, 0), 200);
+    frames.push_back(frame);
+
+    frame = AnimationFrame({.x = 64, .y = 397, .w = 19, .h = 18},
+                           Vector2(-9, 0), 200);
+    frames.push_back(frame);
+
+    frame = AnimationFrame({.x = 112, .y = 398, .w = 18, .h = 18},
+                           Vector2(-6, 0), 200);
     frames.push_back(frame);
 
     frame = AnimationFrame({.x = 160, .y = 398, .w = 16, .h = 18},
-                           Vector2(0, 0), 100);
+                           Vector2(0, 0), 150);
     frames.push_back(frame);
 
     animation = Animation(AnimationType::kWalkUp, frames, 1, false, false);
@@ -286,19 +303,28 @@ struct OrcAnimations {
     frames.clear();
 
     // Hit Right
-    frame = AnimationFrame({.x = 16, .y = 447, .w = 16, .h = 17}, Vector2(0, 0),
-                           100);
+    frame = AnimationFrame({.x = 16, .y = 447, .w = 16, .h = 17}, Vector2(0, 3),
+                           150);
     frames.push_back(frame);
-    frame = AnimationFrame({.x = 62, .y = 445, .w = 16, .h = 19}, Vector2(0, 0),
-                           90);
+
+    frame = AnimationFrame({.x = 62, .y = 445, .w = 16, .h = 19},
+                           Vector2(-3, -3), 200);
     frames.push_back(frame);
 
     frame = AnimationFrame({.x = 111, .y = 445, .w = 16, .h = 19},
-                           Vector2(0, 0), 90);
+                           Vector2(-3, -3), 200);
+    frames.push_back(frame);
+
+    frame = AnimationFrame({.x = 62, .y = 445, .w = 16, .h = 19},
+                           Vector2(-3, -3), 200);
+    frames.push_back(frame);
+
+    frame = AnimationFrame({.x = 111, .y = 445, .w = 16, .h = 19},
+                           Vector2(-3, -3), 200);
     frames.push_back(frame);
 
     frame = AnimationFrame({.x = 160, .y = 446, .w = 16, .h = 18},
-                           Vector2(0, 0), 100);
+                           Vector2(0, 0), 150);
     frames.push_back(frame);
 
     animation = Animation(AnimationType::kWalkUp, frames, 1, false, false);
@@ -308,19 +334,28 @@ struct OrcAnimations {
     frames.clear();
 
     // Hit Left
-    frame = AnimationFrame({.x = 16, .y = 447, .w = 16, .h = 17}, Vector2(0, 0),
-                           100);
+    frame = AnimationFrame({.x = 16, .y = 447, .w = 16, .h = 17}, Vector2(0, 3),
+                           150);
     frames.push_back(frame);
-    frame = AnimationFrame({.x = 62, .y = 445, .w = 16, .h = 19}, Vector2(0, 0),
-                           90);
+
+    frame = AnimationFrame({.x = 62, .y = 445, .w = 16, .h = 19},
+                           Vector2(3, -3), 200);
     frames.push_back(frame);
 
     frame = AnimationFrame({.x = 111, .y = 445, .w = 16, .h = 19},
-                           Vector2(0, 0), 90);
+                           Vector2(3, -3), 200);
+    frames.push_back(frame);
+
+    frame = AnimationFrame({.x = 62, .y = 445, .w = 16, .h = 19},
+                           Vector2(3, -3), 200);
+    frames.push_back(frame);
+
+    frame = AnimationFrame({.x = 111, .y = 445, .w = 16, .h = 19},
+                           Vector2(3, -3), 200);
     frames.push_back(frame);
 
     frame = AnimationFrame({.x = 160, .y = 446, .w = 16, .h = 18},
-                           Vector2(0, 0), 100);
+                           Vector2(0, 0), 150);
     frames.push_back(frame);
 
     animation = Animation(AnimationType::kWalkUp, frames, 1, false, false);
@@ -331,18 +366,27 @@ struct OrcAnimations {
 
     // Hit Up
     frame = AnimationFrame({.x = 16, .y = 494, .w = 16, .h = 18}, Vector2(0, 0),
-                           100);
+                           150);
     frames.push_back(frame);
-    frame = AnimationFrame({.x = 62, .y = 499, .w = 17, .h = 14}, Vector2(0, 0),
-                           90);
+
+    frame = AnimationFrame({.x = 62, .y = 499, .w = 17, .h = 14},
+                           Vector2(-6, 12), 200);
     frames.push_back(frame);
 
     frame = AnimationFrame({.x = 110, .y = 498, .w = 17, .h = 14},
-                           Vector2(0, 0), 90);
+                           Vector2(-6, 12), 200);
+    frames.push_back(frame);
+
+    frame = AnimationFrame({.x = 62, .y = 499, .w = 17, .h = 14},
+                           Vector2(-6, 12), 200);
+    frames.push_back(frame);
+
+    frame = AnimationFrame({.x = 110, .y = 498, .w = 17, .h = 14},
+                           Vector2(-6, 12), 200);
     frames.push_back(frame);
 
     frame = AnimationFrame({.x = 160, .y = 494, .w = 16, .h = 18},
-                           Vector2(0, 0), 100);
+                           Vector2(0, 0), 200);
     frames.push_back(frame);
 
     animation = Animation(AnimationType::kWalkUp, frames, 1, false, false);
@@ -353,18 +397,27 @@ struct OrcAnimations {
 
     // Hit Up Flipped
     frame = AnimationFrame({.x = 16, .y = 494, .w = 16, .h = 18}, Vector2(0, 0),
-                           100);
+                           150);
     frames.push_back(frame);
-    frame = AnimationFrame({.x = 62, .y = 499, .w = 17, .h = 14}, Vector2(0, 0),
-                           90);
+
+    frame = AnimationFrame({.x = 62, .y = 499, .w = 17, .h = 14},
+                           Vector2(3, 12), 200);
     frames.push_back(frame);
 
     frame = AnimationFrame({.x = 110, .y = 498, .w = 17, .h = 14},
-                           Vector2(0, 0), 90);
+                           Vector2(3, 12), 200);
+    frames.push_back(frame);
+
+    frame = AnimationFrame({.x = 62, .y = 499, .w = 17, .h = 14},
+                           Vector2(3, 12), 200);
+    frames.push_back(frame);
+
+    frame = AnimationFrame({.x = 110, .y = 498, .w = 17, .h = 14},
+                           Vector2(3, 12), 200);
     frames.push_back(frame);
 
     frame = AnimationFrame({.x = 160, .y = 494, .w = 16, .h = 18},
-                           Vector2(0, 0), 100);
+                           Vector2(0, 0), 150);
     frames.push_back(frame);
 
     animation = Animation(AnimationType::kWalkUp, frames, 1, false, false);

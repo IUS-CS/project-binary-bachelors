@@ -38,7 +38,7 @@ void HealthEngine::Run(GameObject &object,
             hit_object->animation->is_attacking &&
             hit_object->hit_box->is_invincible) {
           object.health->health -= 1;
-          std::cout << "Monster Hit!!!!" << std::endl;
+          object.hit_box->is_hit = true;
           if (object.health->health == 0) {
             object.is_active = false;
           } else {
