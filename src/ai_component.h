@@ -3,7 +3,7 @@
 
 #include <SDL2/SDL.h>
 
-enum class ActionType { kCutOffPlayer, kChase, kDefault };
+enum class ActionType { kCutOffPlayer, kChase, kAttackPlayer, kDefault };
 
 struct AIComponent {
   AIComponent() {
@@ -13,6 +13,7 @@ struct AIComponent {
   AIComponent(SDL_Rect hit) {}
   ~AIComponent() {}
 
+  bool in_attack_range = false;
   SDL_Rect attack;
   int time_of_last_decision_ms;
   ActionType current_action;

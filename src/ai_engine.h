@@ -12,6 +12,8 @@ public:
   void CutOffPlayer(GameObject &object, GameObject &player);
   void Run(GameObject &object, GameObject &player);
   bool TimeForNewDecision(GameObject &object);
+  //  void AttackPlayer(GameObject &object, GameObject &player);
+  void InAttackRangeCheck(GameObject &object, GameObject &player);
 
   bool start_of_new_action = true;
 };

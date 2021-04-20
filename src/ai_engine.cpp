@@ -9,7 +9,10 @@ AIEngine::~AIEngine() {}
 void AIEngine::Run(GameObject &object, GameObject &player) {
   if (object.ai) {
     object.movement->current_direction = MovementDirection::kNone;
-    if (TimeForNewDecision(object)) {
+    InAttackRangeCheck(object, player);
+    if (object.ai->in_attack_range == true) {
+      NextMove(object);
+    } else if (TimeForNewDecision(object)) {
       NextMove(object);
     }
     if (object.ai->current_action == ActionType::kDefault) {
@@ -86,7 +89,6 @@ void AIEngine::ChasePlayer(GameObject &object, GameObject &player) {
     object.movement->current_direction = MovementDirection::kNone;
     HitBox player_box = GetHitBox(player);
     BoundingBox enemy_box = GetBoundingBox(object);
-    // std::cout << player_box.right << std::endl;
     if (enemy_box.left > player_box.right + 15) {
       object.movement->current_direction = MovementDirection::kLeft;
     } else if (enemy_box.right < player_box.left - 15) {
@@ -126,15 +128,32 @@ bool AIEngine::TimeForNewDecision(GameObject &object) {
 void AIEngine::NextMove(GameObject &object) {
   object.ai->time_of_last_decision_ms = SDL_GetTicks();
   int random_number = rand() % 100;
-  if (random_number < 40) {
-    object.ai->current_action = ActionType::kChase;
+  if (object.ai->in_attack_range) {
+    object.ai->current_action = ActionType::kAttackPlayer;
   } else {
-    object.ai->current_action = ActionType::kCutOffPlayer;
+    if (random_number < 40) {
+      object.ai->current_action = ActionType::kChase;
+    } else {
+      object.ai->current_action = ActionType::kCutOffPlayer;
+    }
+    random_number = rand() % 100;
+    if (random_number < 60) {
+      object.movement->speed = 2;
+    } else {
+      object.movement->speed = 3;
+    }
   }
-  random_number = rand() % 100;
-  if (random_number < 60) {
-    object.movement->speed = 2;
+}
+
+void AIEngine::InAttackRangeCheck(GameObject &object, GameObject &player) {
+  HitBox player_hb = GetHitBox(player);
+  BoundingBox object_bb = GetBoundingBox(object);
+  if ((player_hb.left <= object_bb.right + 15) &&
+      (player_hb.right >= object_bb.left - 15) &&
+      (player_hb.top <= object_bb.bottom + 15) &&
+      (player_hb.bottom >= object_bb.top - 15)) {
+    object.ai->in_attack_range = true;
   } else {
-    object.movement->speed = 3;
+    object.ai->in_attack_range = false;
   }
 }
