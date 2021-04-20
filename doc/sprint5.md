@@ -10,6 +10,12 @@ Members present:
 * Dylan Eversman
   
   ## Demo
+  ![fullhealth](/images/full_health.png)
+  ![losthearts](/images/lose_hearts.png)
+  ![lonkattacking](/images/lonk_attacking.png)
+  ![lonnkhit](/images/lonk_hit.png)
+  ![getthecoin](/images/get_the_coin!.png)
+  ![walletwithcash](/images/wallte_with_cash.png)
   
   #Sprint 5
   
