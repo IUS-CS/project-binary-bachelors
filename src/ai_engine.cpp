@@ -1,5 +1,6 @@
 #include "ai_engine.h"
 #include "utils.h"
+#include <random>
 
 #include <iostream>
 AIEngine::AIEngine() {}
@@ -10,7 +11,13 @@ void AIEngine::Run(GameObject &object, GameObject &player) {
   if (object.ai) {
     object.movement->current_direction = MovementDirection::kNone;
     InAttackRangeCheck(object, player);
-    if (object.ai->in_attack_range == true) {
+    std::random_device generator;
+    std::mt19937 mt(generator());
+    std::uniform_int_distribution<int> distribution(0, 500);
+    int random_num = distribution(generator);
+    if (object.ai->in_attack_range == true &&
+        SDL_GetTicks() - object.ai->entered_attack_range_ms >
+            (unsigned)(300 + random_num)) {
       NextMove(object);
     } else if (TimeForNewDecision(object)) {
       NextMove(object);
@@ -152,6 +159,9 @@ void AIEngine::InAttackRangeCheck(GameObject &object, GameObject &player) {
       (player_hb.right >= object_bb.left - 15) &&
       (player_hb.top <= object_bb.bottom + 15) &&
       (player_hb.bottom >= object_bb.top - 15)) {
+    if (object.ai->in_attack_range == false) {
+      object.ai->entered_attack_range_ms = SDL_GetTicks();
+    }
     object.ai->in_attack_range = true;
   } else {
     object.ai->in_attack_range = false;

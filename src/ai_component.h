@@ -16,6 +16,7 @@ struct AIComponent {
   bool in_attack_range = false;
   SDL_Rect attack;
   int time_of_last_decision_ms;
+  int entered_attack_range_ms = 0;
   ActionType current_action;
 };
 

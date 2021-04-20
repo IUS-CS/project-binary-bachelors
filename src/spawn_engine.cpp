@@ -12,7 +12,7 @@ bool IsItTimeToSpawnEnemies(int last_spawn_time_ms) {
   std::mt19937 mt(generator());
   std::uniform_int_distribution<int> distribution(0, 5000);
   int random_num = distribution(generator);
-  if (elapsed_time_ms >= 8000 + random_num) {
+  if (elapsed_time_ms >= 12000 + random_num) {
     return true;
   } else {
     return false;
@@ -84,10 +84,8 @@ void PickEnemiesToSpawn(std::vector<GameObject> &objects_to_add) {
 SpawnEngine::SpawnEngine() {}
 SpawnEngine::~SpawnEngine() {}
 void SpawnEngine::Run(std::vector<GameObject> &objects_to_add) {
-  /*
   if (IsItTimeToSpawnEnemies(last_spawn_time_ms)) {
     last_spawn_time_ms = SDL_GetTicks();
     PickEnemiesToSpawn(objects_to_add);
-}
-*/
+  }
 }
