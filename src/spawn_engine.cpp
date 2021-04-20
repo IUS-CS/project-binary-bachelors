@@ -84,8 +84,10 @@ void PickEnemiesToSpawn(std::vector<GameObject> &objects_to_add) {
 SpawnEngine::SpawnEngine() {}
 SpawnEngine::~SpawnEngine() {}
 void SpawnEngine::Run(std::vector<GameObject> &objects_to_add) {
+  /*
   if (IsItTimeToSpawnEnemies(last_spawn_time_ms)) {
     last_spawn_time_ms = SDL_GetTicks();
     PickEnemiesToSpawn(objects_to_add);
-  }
+}
+*/
 }

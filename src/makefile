@@ -6,7 +6,7 @@ CC = g++
 
 .PHONY: all clean test
 
-all: zordo.out test
+all: zordo.out
 
 unit_tests.out: ${TEST_OBJS}
 	      ${CC} ${CFLAGS} ${TEST_OBJS} ${LIBS} -o $@

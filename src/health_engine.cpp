@@ -18,8 +18,9 @@ void HealthEngine::Run(GameObject &object,
         // Checks that player is alive and not invincible on monster collision.
         if (hit_object->type == ObjectType::kEnemy &&
             object.type == ObjectType::kPlayer &&
-            // hit_object->animation->is_attacking &&
-            !object.hit_box->is_invincible) {
+            hit_object->animation->is_attacking &&
+            !object.hit_box->is_invincible &&
+            hit_object->hit_box->is_invincible) {
           if (!object.animation->is_attacking) {
             object.health->health -= 1;
             object.hit_box->is_hit = true;
@@ -34,7 +35,8 @@ void HealthEngine::Run(GameObject &object,
         if (hit_object->type == ObjectType::kPlayer &&
             object.type == ObjectType::kEnemy &&
             !object.hit_box->is_invincible &&
-            hit_object->animation->is_attacking) {
+            hit_object->animation->is_attacking &&
+            hit_object->hit_box->is_invincible) {
           object.health->health -= 1;
           std::cout << "Monster Hit!!!!" << std::endl;
           if (object.health->health == 0) {

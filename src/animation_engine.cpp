@@ -67,8 +67,9 @@ void PickAnimation(GameObject &object) {
           UpdateAnimationId(animation_id, frame_id, 16, object);
         }
       }
-    } else if (InputComponent::Get().attack &&
-               object.type == ObjectType::kPlayer) {
+    } else if ((InputComponent::Get().attack &&
+                object.type == ObjectType::kPlayer) ||
+               (object.ai->current_action == ActionType::kAttackPlayer)) {
       object.animation->is_attacking = true;
       if (object.location->direction_faced == DirectionFaced::kDown) {
         if (object.location->flip) {
@@ -163,18 +164,22 @@ void AnimationEngine::Run(GameObject &object) {
         if (object.type == ObjectType::kPlayer ||
             object.type == ObjectType::kEnemy) {
           if (object.animation->is_attacking) {
+            object.animation->is_attacking = false;
+            if (object.type == ObjectType::kEnemy) {
+              object.ai->current_action = ActionType::kDefault;
+            }
             if (object.location->direction_faced == DirectionFaced::kDown) {
-              object.animation->is_attacking = false;
               GetAnimationId(object) = 3;
             }
             if (object.location->direction_faced == DirectionFaced::kRight ||
                 object.location->direction_faced == DirectionFaced::kLeft) {
-              object.animation->is_attacking = false;
               GetAnimationId(object) = 4;
             }
             if (object.location->direction_faced == DirectionFaced::kUp) {
-              object.animation->is_attacking = false;
               GetAnimationId(object) = 5;
+            }
+            if (object.type == ObjectType::kEnemy) {
+              object.ai->time_of_last_decision_ms -= 8000;
             }
           }
           if (object.hit_box->is_hit) {
@@ -196,6 +201,15 @@ void AnimationEngine::Run(GameObject &object) {
         }
       }
       object.animation->start_of_last_animation_frame_ms = SDL_GetTicks();
+    }
+    if (SDL_GetTicks() - object.hit_box->time_since_last_hit_ms > 2000) {
+      if (object.animation->is_attacking) {
+        if (frame_id == 1 || frame_id == 2) {
+          object.hit_box->is_invincible = true;
+        } else {
+          object.hit_box->is_invincible = false;
+        }
+      }
     }
     new_animation = GetAnimation(object);
     new_frame_id = GetFrameId(object);

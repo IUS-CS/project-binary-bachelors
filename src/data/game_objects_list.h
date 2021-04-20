@@ -18,7 +18,7 @@ struct GameObjectsList {
   GameObject map = map_data.LoadMap();
   GameObject lonk = lonk_data.LoadLonk({300, 100});
   GameObject orc1 = orc_data.LoadOrc({500, 100});
-  GameObject orc2 = orc_data.LoadOrc({300, 400});
+  //  GameObject orc2 = orc_data.LoadOrc({300, 400});
   GameObject hud = hud_data.LoadHud();
 
   // Vector that will hold all of the objects.
@@ -26,7 +26,8 @@ struct GameObjectsList {
 
   GameObjectsList() {
     // Creating object list.
-    objects = {map, orc1, orc2, lonk, hud};
+    // objects = {map, orc1, orc2, lonk, hud};
+    objects = {map, orc1, lonk, hud};
     for (unsigned int i = 0; i < objects.size(); i++) {
       objects[i].id_num = i;
     }
