@@ -67,7 +67,7 @@ void Game::Run() {
           }
         }
       }
-      spawn_engine.Run(objects_to_add);
+      spawn_engine.Run(objects_to_add, object_list);
       for (auto &object : objects_to_add) {
         object_list.push_back(object);
       }

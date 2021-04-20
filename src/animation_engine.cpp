@@ -47,6 +47,11 @@ void PickAnimation(GameObject &object) {
   auto &animation_list = object.animation->animation_list;
   if (object.type == ObjectType::kPlayer || object.type == ObjectType::kEnemy) {
     if (object.hit_box->is_hit) {
+      object.animation->is_attacking = false;
+      if (object.type == ObjectType::kEnemy) {
+        object.ai->current_action = ActionType::kDefault;
+        object.ai->time_of_last_decision_ms -= 8000;
+      }
       if (object.location->direction_faced == DirectionFaced::kDown) {
         if (object.location->flip) {
           UpdateAnimationId(animation_id, frame_id, 13, object);
@@ -183,17 +188,15 @@ void AnimationEngine::Run(GameObject &object) {
             }
           }
           if (object.hit_box->is_hit) {
+            object.hit_box->is_hit = false;
             if (object.location->direction_faced == DirectionFaced::kDown) {
-              object.hit_box->is_hit = false;
               GetAnimationId(object) = 3;
             }
             if (object.location->direction_faced == DirectionFaced::kRight ||
                 object.location->direction_faced == DirectionFaced::kLeft) {
-              object.hit_box->is_hit = false;
               GetAnimationId(object) = 4;
             }
             if (object.location->direction_faced == DirectionFaced::kUp) {
-              object.hit_box->is_hit = false;
               GetAnimationId(object) = 5;
             }
           }

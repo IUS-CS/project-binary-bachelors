@@ -20,7 +20,8 @@ bool IsItTimeToSpawnEnemies(int last_spawn_time_ms) {
 }
 
 void SpawnEnemies(GameObject enemy, int num_of_enemies_to_spawn,
-                  std::vector<GameObject> &objects_to_add) {
+                  std::vector<GameObject> &objects_to_add,
+                  std::vector<GameObject> &objects_list) {
   for (int i = 0; i < num_of_enemies_to_spawn; i++) {
     std::random_device generator;
     std::mt19937 mt(generator());
@@ -50,12 +51,13 @@ void SpawnEnemies(GameObject enemy, int num_of_enemies_to_spawn,
       enemy.location->coordinates.x = random_num;
       enemy.location->coordinates.y = 700;
     }
-    enemy.id_num = objects_to_add.size();
+    enemy.id_num = objects_list.size() + i;
     objects_to_add.push_back(enemy);
   }
 }
 
-void PickEnemiesToSpawn(std::vector<GameObject> &objects_to_add) {
+void PickEnemiesToSpawn(std::vector<GameObject> &objects_to_add,
+                        std::vector<GameObject> &objects_list) {
   std::random_device generator;
   std::mt19937 mt(generator());
   std::uniform_int_distribution<int> distribution(0, 99);
@@ -63,7 +65,7 @@ void PickEnemiesToSpawn(std::vector<GameObject> &objects_to_add) {
   int num_of_enemies_to_spawn;
   if (random_num < 45) {
     num_of_enemies_to_spawn = 1;
-  } else if (random_num >= 45 && random_num < 90) {
+  } else if (random_num >= 45 && random_num < 80) {
     num_of_enemies_to_spawn = 2;
   } else {
     num_of_enemies_to_spawn = 3;
@@ -75,7 +77,7 @@ void PickEnemiesToSpawn(std::vector<GameObject> &objects_to_add) {
   if (random_num >= 0 && random_num < 95) {
     Orc orc_data;
     GameObject orc = orc_data.LoadOrc({0, 0});
-    SpawnEnemies(orc, num_of_enemies_to_spawn, objects_to_add);
+    SpawnEnemies(orc, num_of_enemies_to_spawn, objects_to_add, objects_list);
   } else {
     std::cout << "Not Spawning" << std::endl;
   }
@@ -83,9 +85,10 @@ void PickEnemiesToSpawn(std::vector<GameObject> &objects_to_add) {
 } // namespace
 SpawnEngine::SpawnEngine() {}
 SpawnEngine::~SpawnEngine() {}
-void SpawnEngine::Run(std::vector<GameObject> &objects_to_add) {
+void SpawnEngine::Run(std::vector<GameObject> &objects_to_add,
+                      std::vector<GameObject> &objects_list) {
   if (IsItTimeToSpawnEnemies(last_spawn_time_ms)) {
     last_spawn_time_ms = SDL_GetTicks();
-    PickEnemiesToSpawn(objects_to_add);
+    PickEnemiesToSpawn(objects_to_add, objects_list);
   }
 }

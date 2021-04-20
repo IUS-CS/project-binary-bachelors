@@ -9,7 +9,8 @@ class SpawnEngine {
 public:
   SpawnEngine();
   ~SpawnEngine();
-  void Run(std::vector<GameObject> &objects_to_add);
+  void Run(std::vector<GameObject> &objects_to_add,
+           std::vector<GameObject> &objects_list);
 
   int last_spawn_time_ms = -10000;
 };
